@@ -1,0 +1,127 @@
+@use "../../base.scss";
+@import "../../breakpoints/breakpoints.scss";
+
+.footer {
+  .downloadContainer {
+    background-color: base.$form-color;
+
+    .groupDownloadLeft {
+      position: absolute;
+      left: 0px;
+    }
+
+    .groupDownloadRight {
+      position: absolute;
+      right: 0px;
+    }
+
+    .downloadHead {
+      padding: 56px 400px;
+      text-align: center;
+
+      .downloadTitle {
+        font: base.$content-24;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .downloadParagraph {
+        font: base.$content-24;
+      }
+
+      .logoContainer {
+        justify-content: center;
+        display: flex;
+        flex-direction: row;
+
+        img {
+          margin-top: 48px;
+          height: 48px;
+          cursor: pointer;
+        }
+
+        .googlePlayLogo {
+          margin-right: 32px;
+        }
+      }
+    }
+  }
+
+  .detailContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: base.$black-color;
+    padding: 64px 148px;
+    color: base.$white-color;
+
+    .firstSide {
+      width: 336px;
+
+      .brandLogo {
+        border-radius: 8px;
+      }
+
+      .brandParagraph {
+        font: base.$content-16;
+        margin-top: 24px;
+        margin-bottom: 32px;
+      }
+
+      .iconsContainer {
+        display: flex;
+        width: 200px;
+        justify-content: space-between;
+
+        .iconContainer {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background-color: base.$white-color;
+          color: base.$black-color;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .secondSide {
+      .linkHead {
+        font: base.$content-20;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      ul {
+        display: flex;
+        flex-direction: column;
+      }
+
+      li {
+        cursor: pointer;
+        list-style: none;
+        margin-bottom: 16px;
+      }
+
+      .linkList {
+        text-decoration: none;
+        font: base.$content-16;
+        color: base.$white-color;
+      }
+    }
+
+    .thirdSide {
+      .contactHead {
+        font: base.$content-20;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .contactList {
+        font: base.$content-16;
+        line-height: 24px;
+      }
+    }
+  }
+}
