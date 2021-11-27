@@ -1,0 +1,62 @@
+@use "../../base";
+@import "../../breakpoints/breakpoints.scss";
+
+.button {
+  font: base.$content-16;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 40px;
+  padding: 1rem 2.5rem;
+  margin: 0 1rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 3;
+
+  @include media("<=desktop") {
+    padding: 0.5rem;
+  }
+
+  &:hover::before {
+    height: 150%;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background-color: base.$light-green-color;
+    border-radius: 0 0 50% 50%;
+    transition: all 0.5s;
+    z-index: 4;
+  }
+
+  &:hover:after {
+    color: base.$primary-color;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    transition: all 0.5s;
+  }
+
+  &Green {
+    @include base.theme;
+  }
+
+  &White {
+    @include base.theme;
+    background-color: base.$white-color;
+    color: base.$primary-color;
+    border: 1px solid base.$primary-color;
+  }
+}

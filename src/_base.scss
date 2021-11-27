@@ -31,3 +31,23 @@ $head-24: 600 24px "Montserrat", sans-serif;
 $body-12: 400 12px "Montserrat", sans-serif;
 $body-14: 400 14px "Montserrat", sans-serif;
 $body-16: 400 16px "Montserrat", sans-serif;
+
+@mixin theme($bg: $primary-color, $color: $white-color, $border: $white-color) {
+  background-color: $bg;
+  color: $color;
+  border: 1px solid $border;
+}
+
+%avatarContainer {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+}
+
+%avatarPicture {
+  width: 3rem;
+  position: absolute;
+  transform: translate(-15%, -10%);
+}
