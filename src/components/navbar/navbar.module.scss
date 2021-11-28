@@ -8,6 +8,8 @@
   justify-content: center;
   position: fixed;
   padding: 1rem 0;
+  background-color: base.$white-color;
+  z-index: 1000;
 
   &Logo {
     height: 3.25rem;
@@ -22,12 +24,79 @@
     padding: 0 3rem 0;
     cursor: pointer;
 
-    &:hover {
-      color: base.$primary-color;
+    &Text {
+      width: 100%;
+      line-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &Arrow {
+        margin-left: 0.25rem;
+      }
+
+      &:hover {
+        color: base.$primary-color;
+      }
     }
 
-    &Arrow {
-      margin-left: 0.25rem;
+    &Dropdown {
+      position: absolute;
+      top: 85%;
+      left: 25%;
+      color: base.$black-color;
+      background-color: base.$white-color;
+      box-shadow: 0 0 10px 2px #0000001a;
+      border-radius: 20px;
+      padding: 1rem 1rem;
+
+      ul {
+        list-style-type: none;
+        position: relative;
+
+        li {
+          padding: 0.5rem 1rem;
+
+          &:hover {
+            color: base.$secondary-color;
+          }
+        }
+      }
+
+      &Status {
+        font-weight: 600;
+        padding-right: 1rem;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 100%;
+          width: 1px;
+          height: 100%;
+          background-color: base.$secondary-color;
+        }
+      }
+
+      &Category {
+        padding-left: 1rem;
+        display: flex;
+
+        div {
+          li {
+            padding: 0.5rem 1rem;
+
+            &:hover {
+              background-color: base.$grey-color;
+            }
+          }
+
+          .links {
+            text-decoration: none;
+            color: base.$black-color;
+          }
+        }
+      }
     }
   }
 

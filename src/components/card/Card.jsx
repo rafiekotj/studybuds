@@ -29,9 +29,6 @@ function Card() {
         </div>
         <Link to="#" className={cardstyle.cardLink}>
           <ButtonGreen name="ㅤ" />
-          {/* <button>
-            <span>Join Room</span>
-          </button> */}
         </Link>
       </div>
     </div>
