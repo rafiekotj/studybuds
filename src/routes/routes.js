@@ -7,7 +7,7 @@ function createRoutes() {
     <Router>
       <Navbar />
       <Routes>
-        <Route exact path="/" element={<Card />} />
+        {/* <Route exact path="/" element={<Home />} /> */}
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       {/* <Footer /> */}

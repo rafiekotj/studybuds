@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import navbarstyle from "./navbar.module.scss";
 import brandLogo from "../../assets/img/brandLogo.png";
 import ButtonGreen from "../buttons/ButtonGreen";
@@ -8,7 +8,118 @@ import { BsSearch } from "react-icons/bs";
 import { RiNotification2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
 
+// Loop Categories
+const categories = [
+  {
+    link: "#",
+    category: "Art",
+  },
+  {
+    link: "#",
+    category: "Biology",
+  },
+  {
+    link: "#",
+    category: "Business",
+  },
+  {
+    link: "#",
+    category: "Cooking",
+  },
+  {
+    link: "#",
+    category: "Fashion",
+  },
+  {
+    link: "#",
+    category: "Geography",
+  },
+  {
+    link: "#",
+    category: "Geology",
+  },
+  {
+    link: "#",
+    category: "Health",
+  },
+  {
+    link: "#",
+    category: "History",
+  },
+  {
+    link: "#",
+    category: "Hobbies",
+  },
+  {
+    link: "#",
+    category: "Literature",
+  },
+  {
+    link: "#",
+    category: "Love Class",
+  },
+  {
+    link: "#",
+    category: "Math",
+  },
+  {
+    link: "#",
+    category: "Physics",
+  },
+  {
+    link: "#",
+    category: "Research",
+  },
+  {
+    link: "#",
+    category: "Romance",
+  },
+  {
+    link: "#",
+    category: "Sport",
+  },
+  {
+    link: "#",
+    category: "Tech",
+  },
+  {
+    link: "#",
+    category: "Uncategorized",
+  },
+];
+
+const loopNav = () => {
+  const elements = [];
+
+  for (let i = 0; i < Math.ceil(categories.length / 8); i++) {
+    elements.push(
+      <div>
+        {categories.slice(i * 8, i * 8 + 8).map((category, key) => (
+          <li key={key}>
+            <Link className={navbarstyle.links} to={category.link}>
+              {category.category}
+            </Link>
+          </li>
+        ))}
+      </div>
+    );
+  }
+
+  return <>{elements.map((element) => element)}</>;
+};
+// End Loop Categories
+
 function Navbar() {
+  // Show hide dropdown
+  const [show, setShow] = useState(false);
+  const [status, setStatus] = useState("All Status");
+
+  const handleShow = () => {
+    setShow(!show);
+  };
+
+  // End Show hide dropdown
+
   return (
     <nav className={navbarstyle.navbar}>
       <Link to="#">
@@ -19,10 +130,58 @@ function Navbar() {
         />
       </Link>
       <div className={navbarstyle.navbarBrowse}>
-        <p>Browse</p>
-        <IoIosArrowDown className={navbarstyle.navbarBrowseArrow} />
+        <div
+          className={navbarstyle.navbarBrowseText}
+          onClick={() => {
+            handleShow();
+          }}
+        >
+          <p>Browse</p>
+          <IoIosArrowDown className={navbarstyle.navbarBrowseTextArrow} />
+        </div>
+        <div
+          className={navbarstyle.navbarBrowseDropdown}
+          style={
+            show && status !== "" ? { display: "flex" } : { display: "none" }
+          }
+        >
+          <ul className={navbarstyle.navbarBrowseDropdownStatus}>
+            <li
+              onClick={() => setStatus("All Status")}
+              style={
+                status === "All Status"
+                  ? { backgroundColor: "#c1e5c0" }
+                  : { backgroundColor: "inherit" }
+              }
+            >
+              All Status
+            </li>
+            <li
+              onClick={() => setStatus("Open")}
+              style={
+                status === "Open"
+                  ? { backgroundColor: "#c1e5c0" }
+                  : { backgroundColor: "inherit" }
+              }
+            >
+              Status: Open
+            </li>
+            <li
+              onClick={() => setStatus("Restricted")}
+              style={
+                status === "Restricted"
+                  ? { backgroundColor: "#c1e5c0" }
+                  : { backgroundColor: "inherit" }
+              }
+            >
+              Status: Restricted
+            </li>
+          </ul>
+          <ul className={navbarstyle.navbarBrowseDropdownCategory}>
+            {loopNav()}
+          </ul>
+        </div>
       </div>
-      <div></div>
       <div className={navbarstyle.navbarSearch}>
         <BsSearch className={navbarstyle.navbarSearchIcon} />
         <input

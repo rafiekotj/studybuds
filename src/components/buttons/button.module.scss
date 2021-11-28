@@ -51,6 +51,7 @@
 
   &Green {
     @include base.theme;
+    border: 1px solid base.$primary-color;
   }
 
   &White {
