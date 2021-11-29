@@ -1,0 +1,248 @@
+@use "../../base";
+@import "../../breakpoints/breakpoints.scss";
+
+.hero {
+  overflow: hidden;
+  &Top {
+    padding: 7rem;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: base.$form-color;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/img/ellipseLeft.svg") no-repeat;
+      background-position: left bottom;
+      transform: translateY(5rem);
+      background-attachment: fixed;
+      z-index: 0;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/img/ellipseRight.svg") no-repeat;
+      background-position: right top;
+      z-index: 0;
+    }
+
+    &TitleContainer {
+      width: 40%;
+      z-index: 1;
+
+      h1 {
+        font: base.$content-40;
+        font-weight: 700;
+        color: base.$primary-color;
+        padding: 1rem 0;
+      }
+
+      p {
+        font: base.$content-24;
+        color: base.$black-color;
+        padding: 1rem 0;
+      }
+
+      .button {
+        width: 30%;
+        height: 3rem;
+
+        button {
+          width: 100%;
+          height: 100%;
+          margin: 0;
+
+          &::after {
+            content: "Join Now";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-8.74px);
+            left: 0;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+
+    &Image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/img/hero.svg") no-repeat;
+      background-position: 85% center;
+      z-index: 0;
+    }
+
+    &DecorLeft {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/img/groupDownloadLeft.svg") no-repeat;
+      background-position: 85% left;
+      z-index: 0;
+    }
+
+    &DecorRight {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: translate(50px, 100px);
+      background: url("../../assets/img/groupDownloadLeft.svg") no-repeat;
+      background-position: bottom right;
+      z-index: 0;
+      overflow: hidden;
+      // animation: slideshow 50s linear infinite;
+
+      // @keyframes slideshow {
+      //   0% {
+      //     top: 0;
+      //   }
+      //   100% {
+      //     top: -200%;
+      //   }
+      // }
+    }
+  }
+
+  &Main {
+    height: 100vh;
+    z-index: 100;
+    position: relative;
+    z-index: 35;
+    background: base.$white-color;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(
+        to top,
+        transparent,
+        transparent,
+        transparent,
+        base.$form-color
+      );
+      z-index: 0;
+    }
+
+    &Container {
+      padding: 0 7rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      color: base.$black-color;
+      z-index: 1;
+
+      h2 {
+        font: base.$content-40;
+        font-weight: 700;
+        color: base.$black-color;
+        padding: 1rem;
+      }
+
+      ul {
+        display: flex;
+        list-style-type: none;
+        padding: 1rem;
+        text-align: center;
+
+        li {
+          font: base.$content-24;
+          font-weight: 700;
+          padding: 1rem;
+          color: base.$black-color;
+          cursor: pointer;
+          border-bottom: 5px solid transparent;
+
+          &:hover {
+            color: base.$primary-color;
+            border-bottom: 5px solid base.$primary-color;
+          }
+        }
+      }
+
+      &Cards {
+        width: 100%;
+        padding: 2.5rem;
+      }
+
+      &Button {
+        all: unset;
+        background-color: base.$white-color;
+        border: 1px solid base.$primary-color;
+        color: base.$primary-color;
+        font-weight: 600;
+        padding: 1rem;
+        margin-top: 2.5rem;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.5s;
+        width: 25%;
+        text-align: center;
+        position: relative;
+
+        &:hover {
+          background-color: base.$light-green-color;
+          color: base.$primary-color;
+        }
+
+        .arrows {
+          position: absolute;
+          right: 5%;
+        }
+      }
+    }
+
+    &DecorLeft {
+      position: absolute;
+      top: -25%;
+      left: -25%;
+      width: 500%;
+      height: 250%;
+      background: url("../../assets/img/backgroundDecoration.png") no-repeat;
+      background-position: top left;
+      z-index: 0;
+      animation: slide 25s linear infinite;
+
+      @keyframes slide {
+        0%,
+        100% {
+          background-position-x: 0;
+          background-position-y: 0;
+        }
+        50% {
+          background-position-x: 250px;
+          background-position-y: 250px;
+        }
+      }
+    }
+  }
+}
