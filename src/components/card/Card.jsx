@@ -28,7 +28,7 @@ function Card() {
           <p className={cardstyle.cardTextInfoMembers}>15/50</p>
         </div>
         <Link to="#" className={cardstyle.cardLink}>
-          <ButtonGreen name="ㅤ" />
+          <ButtonGreen name="Join Room" />
         </Link>
       </div>
     </div>

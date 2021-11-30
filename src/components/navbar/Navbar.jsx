@@ -122,7 +122,7 @@ function Navbar() {
 
   return (
     <nav className={navbarstyle.navbar}>
-      <Link to="#">
+      <Link to="/">
         <img
           src={brandLogo}
           alt="Brand Logo"
@@ -196,8 +196,8 @@ function Navbar() {
         <li>My Class</li>
       </ul>
       <div className={navbarstyle.navbarButtons}>
-        <ButtonWhite name="ㅤ" />
-        <ButtonGreen name="ㅤ" />
+        <ButtonWhite name="Sign Up" />
+        <ButtonGreen name="Sign In" />
       </div>
       <div className={navbarstyle.navbarNotif}>
         <RiNotification2Line className={navbarstyle.navbarNotifIcon} />

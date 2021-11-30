@@ -4,7 +4,7 @@ import buttonstyle from "./button.module.scss";
 function ButtonWhite(props) {
   return (
     <button className={`${buttonstyle.button} ${buttonstyle.buttonWhite}`}>
-      {props.name}
+      <span> {props.name}</span>
     </button>
   );
 }
