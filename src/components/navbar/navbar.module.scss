@@ -147,37 +147,13 @@
   &Buttons {
     // display: none;
     display: flex;
-    width: 15%;
+    width: 18%;
 
     button {
       width: 50%;
+      height: 3.5rem;
       margin: 0.5rem;
-
-      &:nth-of-type(1) {
-        &::after {
-          content: "Sign Up";
-          position: absolute;
-          top: 50%;
-          transform: translateY(-8.74px);
-          left: 0;
-          z-index: 10;
-          width: 100%;
-          height: 100%;
-        }
-      }
-
-      &:nth-of-type(2) {
-        &::after {
-          content: "Sign In";
-          position: absolute;
-          top: 50%;
-          transform: translateY(-8.74px);
-          left: 0;
-          z-index: 10;
-          width: 100%;
-          height: 100%;
-        }
-      }
+      padding: 0.25rem;
     }
   }
 
