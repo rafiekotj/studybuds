@@ -8,11 +8,7 @@ function createRoutes() {
     <Router>
       <Navbar />
       <Routes>
-<<<<<<< HEAD
         <Route exact path="/" element={<Home />} />
-=======
-        {/* <Route exact path="/" element={<Home />} /> */}
->>>>>>> 2b0aea4da6d0b45c8b3ee2d1f77cf9e2075353cc
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
       <Footer />
