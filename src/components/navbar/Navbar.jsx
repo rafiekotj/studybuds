@@ -93,7 +93,7 @@ const loopNav = () => {
 
   for (let i = 0; i < Math.ceil(categories.length / 8); i++) {
     elements.push(
-      <>
+      <div>
         {categories.slice(i * 8, i * 8 + 8).map((category, key) => (
           <li key={key}>
             <Link className={navbarstyle.links} to={category.link}>
@@ -101,7 +101,7 @@ const loopNav = () => {
             </Link>
           </li>
         ))}
-      </>
+      </div>
     );
   }
 
