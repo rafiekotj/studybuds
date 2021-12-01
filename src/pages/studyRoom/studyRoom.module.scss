@@ -1,0 +1,279 @@
+@use "../../base";
+@import "../../breakpoints/breakpoints.scss";
+
+.studyRoom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10rem 10rem 0;
+  background-color: base.$form-color;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/ellipseLeft.svg") no-repeat;
+    background-position: left bottom;
+    transform: translateY(5rem);
+    background-attachment: fixed;
+    z-index: 0;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/ellipseRight.svg") no-repeat;
+    background-position: right top;
+    z-index: 0;
+  }
+
+  @include media("<=desktop") {
+    padding: 12rem 7rem 5rem;
+  }
+
+  &DecorLeft {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/groupDownloadLeft.svg") no-repeat;
+    background-position: 85% left;
+    z-index: 0;
+  }
+
+  &DecorRight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/groupDownloadLeft.svg") no-repeat;
+    background-position: bottom right;
+    z-index: 0;
+  }
+
+  &Top {
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      padding: 1rem 0;
+      color: base.$black-color;
+      font: base.$content-40;
+      font-weight: 700;
+    }
+
+    &Title {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: -15rem;
+        display: block;
+        height: 100%;
+        border-bottom: 1px solid #9fa3a0;
+        width: calc(100% + 30rem);
+        z-index: 0;
+      }
+
+      &Left {
+        display: flex;
+        list-style-type: none;
+        padding: 1rem 0 0;
+        font: base.$content-20;
+        font-weight: 600;
+        z-index: 1;
+
+        li {
+          padding: 0.75rem 1rem;
+          cursor: pointer;
+          border-bottom: 3px solid transparent;
+          color: base.$secondary-color;
+
+          &:hover {
+            color: base.$primary-color;
+            border-bottom: 3px solid base.$primary-color;
+          }
+        }
+      }
+
+      &Right {
+        margin-top: 0.75rem;
+        display: flex;
+        justify-content: center;
+        height: fit-content;
+        max-height: 2.8rem;
+        width: 35%;
+        min-width: 10rem;
+        z-index: 1;
+        position: relative;
+
+        &Filter {
+          background-color: base.$white-color;
+          border: 1px solid base.$primary-color;
+          border-radius: 40px;
+          padding: 0.75rem;
+          width: 12rem;
+          text-align: center;
+          font: base.$content-16;
+          color: base.$primary-color;
+          transition: all 0.5s;
+          cursor: pointer;
+          display: flex;
+          justify-content: center;
+          position: relative;
+          margin-right: 1rem;
+
+          &:hover {
+            background-color: rgba($color: #000000, $alpha: 0.1);
+          }
+
+          span:last-child {
+            position: absolute;
+            right: 10%;
+            top: 50%;
+            transform: translateY(-35%);
+          }
+        }
+
+        &Options {
+          position: absolute;
+          top: 120%;
+          background-color: base.$white-color;
+          box-shadow: 0 0 10px 2px #0000001a;
+          border-radius: 20px;
+          width: 12rem;
+          font: base.$content-16;
+          color: base.$black-color;
+          max-height: 19rem;
+          overflow-y: scroll;
+          overflow-x: hidden;
+
+          ul {
+            list-style-type: none;
+          }
+
+          li {
+            cursor: pointer;
+            padding: 0.75rem 1rem;
+            width: 100%;
+
+            &:nth-of-type(1) {
+              border-radius: 20px 0px 0 0;
+            }
+
+            &:last-child {
+              border-radius: 0 0 0px 20px;
+            }
+
+            &:hover {
+              background-color: base.$light-green-color;
+            }
+          }
+        }
+
+        ::-webkit-scrollbar {
+          width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+          -webkit-box-shadow: inset 0 0 6px base.$white-color;
+          background-color: base.$white-color;
+          border: 1px solid base.$grey-color;
+          border-radius: 0px 20px 20px 0;
+        }
+
+        ::-webkit-scrollbar-thumb {
+          border-radius: 20px;
+          -webkit-box-shadow: inset 0 0 6px base.$grey-color;
+          background-color: base.$grey-color;
+          background-image: none;
+        }
+
+        &AddClass {
+          background-color: base.$primary-color;
+          border: 1px solid base.$primary-color;
+          border-radius: 40px;
+          padding: 0.75rem 0.35rem;
+          width: 8rem;
+          font: base.$content-16;
+          color: base.$white-color;
+          display: flex;
+          justify-content: space-evenly;
+          cursor: pointer;
+          transition: all 0.5s;
+
+          &:hover {
+            background-color: base.$light-green-color;
+            color: base.$primary-color;
+          }
+
+          span:last-child {
+            transform: translateY(-5%);
+            font-size: 1.35rem;
+          }
+        }
+      }
+    }
+  }
+
+  &Main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem 0;
+    z-index: 1;
+
+    @include media("<=desktop") {
+      padding: 3rem 0;
+    }
+
+    &Cards {
+      padding: 0 0 5rem;
+      width: 100%;
+
+      @include media("<=desktop") {
+        padding: 0 0 3rem;
+      }
+    }
+
+    &Pagination {
+      display: flex;
+      list-style-type: none;
+
+      &List {
+        padding: 0 0.35rem 0.25rem;
+        margin: 0 0.25rem;
+        cursor: pointer;
+        font: base.$content-20;
+        border-bottom: 1px solid transparent;
+
+        &:hover {
+          color: base.$secondary-color;
+          border-bottom: 1px solid base.$secondary-color;
+        }
+      }
+
+      &DisplayNone {
+        display: none;
+      }
+
+      &Active {
+        color: base.$primary-color;
+        border-bottom: 1px solid base.$primary-color;
+      }
+    }
+  }
+}
