@@ -117,7 +117,7 @@
         max-height: 2.8rem;
         width: 35%;
         min-width: 10rem;
-        z-index: 1;
+        z-index: 2;
         position: relative;
 
         &Filter {
@@ -151,6 +151,7 @@
         &Options {
           position: absolute;
           top: 120%;
+          transform: translateX(-50%);
           background-color: base.$white-color;
           box-shadow: 0 0 10px 2px #0000001a;
           border-radius: 20px;
@@ -202,28 +203,8 @@
           background-image: none;
         }
 
-        &AddClass {
-          background-color: base.$primary-color;
-          border: 1px solid base.$primary-color;
-          border-radius: 40px;
-          padding: 0.75rem 0.35rem;
-          width: 8rem;
-          font: base.$content-16;
-          color: base.$white-color;
-          display: flex;
-          justify-content: space-evenly;
-          cursor: pointer;
-          transition: all 0.5s;
-
-          &:hover {
-            background-color: base.$light-green-color;
-            color: base.$primary-color;
-          }
-
-          span:last-child {
-            transform: translateY(-5%);
-            font-size: 1.35rem;
-          }
+        .plusIcon {
+          font-size: 1.35rem;
         }
       }
     }
