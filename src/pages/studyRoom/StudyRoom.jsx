@@ -4,7 +4,7 @@ import Card from "../../components/card/Card";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import ReactPaginate from "react-paginate";
-import ButtonGreen from "../../components/buttons/ButtonGreen";
+import Button from "../../components/buttons/Button";
 
 function StudyRoom() {
   // Parallax
@@ -95,12 +95,12 @@ function StudyRoom() {
                 <li>Art</li>
               </ul>
             </div>
-            <button className={studyroomstyle.studyRoomTopTitleRightAddClass}>
-              <span>Add Class</span>
-              <span>
+            <Button classStyle={"addClass"}>
+              Add Class
+              <span className={studyroomstyle.plusIcon}>
                 <AiFillPlusCircle />
               </span>
-            </button>
+            </Button>
           </div>
         </div>
       </div>

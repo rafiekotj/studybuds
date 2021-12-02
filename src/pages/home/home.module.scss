@@ -57,23 +57,14 @@
       }
 
       .button {
-        width: 30%;
+        width: 40%;
         height: 3rem;
 
-        button {
-          width: 100%;
-          height: 100%;
-          margin: 0;
-
-          &::after {
-            content: "Join Now";
-            position: absolute;
-            top: 50%;
-            transform: translateY(-8.74px);
-            left: 0;
-            z-index: 10;
+        @include media("<=desktop") {
+          button {
             width: 100%;
             height: 100%;
+            margin: 0;
           }
         }
       }
@@ -189,31 +180,10 @@
       .links {
         all: unset;
 
-        .heroMainContainerButton {
-          all: unset;
-          background-color: base.$white-color;
-          border: 1px solid base.$primary-color;
-          color: base.$primary-color;
-          font-weight: 600;
-          padding: 1rem;
-          margin-top: 1rem;
-          border-radius: 10px;
-          cursor: pointer;
-          transition: all 0.5s;
-          width: 100%;
-          text-align: center;
-          position: relative;
-
-          &:hover {
-            background-color: base.$light-green-color;
-            color: base.$primary-color;
-          }
-
-          .arrows {
-            position: absolute;
-            right: 5%;
-            top: 36%;
-          }
+        .arrows {
+          position: absolute;
+          right: 5%;
+          top: 36%;
         }
       }
     }

@@ -1,6 +1,6 @@
 import React from "react";
 import cardstyle from "./card.module.scss";
-import ButtonGreen from "../buttons/ButtonGreen";
+import Button from "../buttons/Button";
 import { Link } from "react-router-dom";
 import { RiCalendar2Fill, RiGroupFill } from "react-icons/ri";
 
@@ -28,7 +28,7 @@ function Card() {
           <p className={cardstyle.cardTextInfoMembers}>15/50</p>
         </div>
         <Link to="#" className={cardstyle.cardLink}>
-          <ButtonGreen name="Join Room" />
+          <Button classStyle="buttonGreen">Join Room</Button>
         </Link>
       </div>
     </div>

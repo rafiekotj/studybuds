@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import navbarstyle from "./navbar.module.scss";
 import brandLogo from "../../assets/img/brandLogo.png";
-import ButtonGreen from "../buttons/ButtonGreen";
-import ButtonWhite from "../buttons/ButtonWhite";
+import Button from "../buttons/Button";
 import { IoIosArrowDown } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
 import { RiNotification2Line } from "react-icons/ri";
@@ -196,8 +195,8 @@ function Navbar() {
         <li>My Class</li>
       </ul>
       <div className={navbarstyle.navbarButtons}>
-        <ButtonWhite name="Sign Up" />
-        <ButtonGreen name="Sign In" />
+        <Button classStyle="buttonWhite">Sign Up</Button>
+        <Button classStyle="buttonGreen">Sign Up</Button>
       </div>
       <div className={navbarstyle.navbarNotif}>
         <RiNotification2Line className={navbarstyle.navbarNotifIcon} />
