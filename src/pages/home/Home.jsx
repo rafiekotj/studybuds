@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import homestyle from "./home.module.scss";
-import ButtonGreen from "../../components/buttons/ButtonGreen";
+import Button from "../../components/buttons/Button";
 import Card from "../../components/card/Card";
 import { HiChevronDoubleRight } from "react-icons/hi";
 
@@ -44,7 +44,7 @@ function Home() {
             available classes for you!
           </p>
           <div className={homestyle.button}>
-            <ButtonGreen />
+            <Button classStyle={`buttonGreen`}>Join Now</Button>
           </div>
         </div>
         <div
@@ -77,13 +77,13 @@ function Home() {
           <div className={homestyle.heroMainContainerCards}>
             <Card />
           </div>
-          <Link to="/studyroom" className={homestyle.links}>
-            <button className={homestyle.heroMainContainerButton}>
+          <Link to="/study-room" className={homestyle.links}>
+            <Button classStyle={"heroMainContainerButton"}>
               See All Available Study Room
               <span className={homestyle.arrows}>
                 <HiChevronDoubleRight className={homestyle.arrow} />
               </span>
-            </button>
+            </Button>
           </Link>
         </div>
       </section>
