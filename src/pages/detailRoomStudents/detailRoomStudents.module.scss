@@ -1,0 +1,189 @@
+@use "../../base.scss";
+@import "../../breakpoints/breakpoints.scss";
+
+.detailRoom {
+  .groupDownloadLeft {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    left: 0px;
+  }
+
+  .ellipseRight {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    right: 0px;
+    margin-top: -100px;
+  }
+
+  .groupDownloadRight {
+    position: absolute;
+    z-index: -1;
+    top: 580px;
+    right: 0;
+  }
+
+  .ellipseLeft {
+    position: absolute;
+    z-index: -1;
+    top: 708px;
+    left: 0px;
+    margin-top: -100px;
+  }
+
+  .containerLine {
+    position: absolute;
+    content: "";
+    top: 69.6%;
+    background-color: #9fa3a0;
+    width: 100%;
+    height: 1px;
+  }
+
+  .detailTitle {
+    padding: 176px 198px 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .titleHead {
+      .titleName {
+        font: base.$content-40;
+        font-weight: 700;
+        color: base.$primary-color;
+        margin-bottom: 16px;
+      }
+
+      .titleDate {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 16px;
+      }
+
+      .titleNumber {
+        display: flex;
+        flex-direction: row;
+      }
+
+      .icon {
+        font-size: 30px;
+        color: base.$primary-color;
+        margin-right: 16px;
+      }
+
+      .info {
+        font: base.$content-24;
+      }
+    }
+
+    .joinRoomBtn {
+      padding: 56px 0;
+      display: flex;
+      width: 25%;
+
+      button {
+        font: base.$content-20;
+        font-weight: 600;
+        width: 100%;
+        height: 57px;
+      }
+    }
+  }
+
+  .detailContainer {
+    padding: 0 198px 72px;
+
+    .containerTitle {
+      .containerAbout {
+        text-decoration: none;
+        color: base.$primary-color;
+        font: base.$content-20;
+        font-weight: 600;
+        border-bottom: 4px solid base.$primary-color;
+        padding-bottom: 16px;
+      }
+    }
+
+    .containerMaterial {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-top: 44px;
+
+      .materialDescription {
+        border: 1px solid base.$light-green-color;
+        border-radius: 12px;
+        padding: 24px;
+        margin-right: 30px;
+        width: 70%;
+
+        .descriptionTitle {
+          font: base.$content-20;
+          font-weight: 600;
+          margin-bottom: 24px;
+        }
+
+        img {
+          width: 512px;
+          display: flex;
+          margin: auto;
+          padding-bottom: 40px;
+        }
+
+        .descriptionNarration {
+          font: base.$content-16;
+          line-height: 20.11px;
+
+          span {
+            font-weight: 700;
+          }
+
+          ul {
+            list-style-position: inside;
+            padding-left: 10px;
+          }
+        }
+      }
+
+      .materialHost {
+        border: 1px solid base.$light-green-color;
+        border-radius: 12px;
+        padding: 24px 32px 32px;
+        width: 30%;
+        height: 40%;
+
+        .hostTitle {
+          font: base.$content-20;
+          font-weight: 600;
+          margin-bottom: 24px;
+        }
+
+        .hostProfile {
+          display: flex;
+          margin-bottom: 32px;
+
+          .hostName {
+            font: base.$content-14;
+            margin-left: 16px;
+            font-weight: 600;
+            height: 48px;
+            line-height: 48px;
+          }
+        }
+
+        .hostClassStatus1 {
+          font: base.$content-20;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
+
+        .hostClassStatus2 {
+          font: base.$content-20;
+          font-weight: 600;
+          color: base.$primary-color;
+        }
+      }
+    }
+  }
+}
