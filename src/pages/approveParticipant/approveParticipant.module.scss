@@ -1,0 +1,212 @@
+@use "../../base.scss";
+@import "../../breakpoints/breakpoints.scss";
+
+.approveParticipant {
+  .groupDownloadLeft {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    left: 0px;
+  }
+
+  .ellipseRight {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    right: 0px;
+    margin-top: -100px;
+  }
+
+  .groupDownloadRight {
+    position: absolute;
+    z-index: -1;
+    top: 580px;
+    right: 0;
+  }
+
+  .ellipseLeft {
+    position: absolute;
+    z-index: -1;
+    top: 708px;
+    left: 0px;
+    margin-top: -100px;
+  }
+
+  .approveContainer {
+    padding: 193px 198px 80px;
+
+    .approveTitle {
+      font: base.$content-40;
+      font-weight: 700;
+    }
+
+    .limitContainer {
+      margin: 40px 20%;
+      padding: 20px;
+      font: base.$content-16;
+      font-weight: 400;
+
+      .limitTitle {
+        font: base.$content-20;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      .limitBox {
+        border: 1px solid base.$primary-color;
+        border-radius: 12px;
+        height: 500px;
+
+        .limitHeader {
+          padding: 16px;
+          display: flex;
+          justify-content: space-between;
+
+          .participantSearch {
+            font: base.$content-14;
+            height: 34px;
+            width: 45%;
+            color: base.$secondary-color;
+            border: 1px solid base.$primary-color;
+            border-radius: 24px;
+            padding: 6.5px 13.5px;
+
+            .participantSearchIcon {
+              color: base.$primary-color;
+              margin-right: 1rem;
+              transform: translateY(2px);
+            }
+
+            .participantSearchInput {
+              all: unset;
+              width: calc(100% - 3rem);
+
+              &:focus {
+                color: base.$black-color;
+              }
+            }
+          }
+
+          .participantSelAll {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+
+            .checkboxContainer {
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+
+              h3 {
+                font: base.$content-16;
+                font-weight: 400;
+                margin-right: 8px;
+              }
+
+              input {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+              }
+
+              label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 14px;
+                height: 14px;
+                border-radius: 2px;
+                cursor: pointer;
+                transition: all 0.2s ease;
+                background-color: #c4dbc3;
+                color: base.$white-color;
+
+                .icon {
+                  color: rgb(223, 223, 223);
+                  cursor: pointer;
+                }
+
+                &.checked {
+                  background-color: base.$primary-color;
+
+                  .icon {
+                    color: base.$white-color;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .limitLine {
+          background-color: #9fa3a0;
+          width: 100%;
+          height: 1px;
+        }
+
+        .limitBody {
+          padding: 16px;
+          display: flex;
+          flex-direction: column;
+
+          .checkboxContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+
+            h3 {
+              font: base.$content-16;
+              font-weight: 400;
+            }
+
+            input {
+              position: absolute;
+              opacity: 0;
+              cursor: pointer;
+            }
+
+            label {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 14px;
+              height: 14px;
+              border-radius: 2px;
+              cursor: pointer;
+              transition: all 0.2s ease;
+              background-color: base.$light-green-color;
+              color: base.$white-color;
+
+              .icon {
+                color: rgb(223, 223, 223);
+                cursor: pointer;
+              }
+
+              &.checked {
+                background-color: base.$primary-color;
+
+                .icon {
+                  color: base.$white-color;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .buttonBox {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: 10px;
+
+        button {
+          text-align: center;
+          height: 42px;
+          padding: 8px 64px;
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+}
