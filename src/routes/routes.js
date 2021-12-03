@@ -6,6 +6,8 @@ import StudyRoom from "../pages/studyRoom/StudyRoom";
 import DetailRoomStudents from "../pages/detailRoomStudents/DetailRoomStudents";
 import DetailRoomHost from "../pages/detailRoomHost/DetailRoomHost";
 import ApproveParticipant from "../pages/approveParticipant/ApproveParticipant";
+import MyClass from "../pages/myClass/MyClass";
+import ClassForm from "../pages/classForm/ClassForm";
 
 function createRoutes() {
   return (
@@ -17,6 +19,8 @@ function createRoutes() {
         <Route path="/room" element={<DetailRoomStudents />} />
         <Route path="/host" element={<DetailRoomHost />} />
         <Route path="/approve" element={<ApproveParticipant />} />
+        <Route path="/new-class" element={<ClassForm />} />
+        <Route path="/class" element={<MyClass />} />
         {/* <Route path="*" element={<NotFound />} /> */}
         <Route path="/room" element={<DetailRoomStudents />} />
         <Route path="/host" element={<DetailRoomHost />} />

@@ -1,0 +1,125 @@
+@use "../../base.scss";
+@import "../../breakpoints/breakpoints.scss";
+
+.detailRoom {
+  .groupDownloadLeft {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    left: 0px;
+  }
+
+  .ellipseRight {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    right: 0px;
+    margin-top: -100px;
+  }
+
+  .groupDownloadRight {
+    position: absolute;
+    z-index: -1;
+    top: 580px;
+    right: 0;
+  }
+
+  .ellipseLeft {
+    position: absolute;
+    z-index: -1;
+    top: 708px;
+    left: 0px;
+    margin-top: -100px;
+  }
+
+  .detailTitle {
+    padding: 176px 198px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .titleHead {
+      .titleName {
+        font: base.$content-40;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+    }
+  }
+
+  .containerMenu {
+    display: flex;
+    justify-content: space-between;
+
+    .containerTitle {
+      padding: 20px 198px 20px;
+
+      .containerCreate {
+        text-decoration: none;
+        color: base.$secondary-color;
+        font: base.$content-20;
+        font-weight: 600;
+        padding-bottom: 16px;
+        margin-right: 48px;
+        border-bottom: 3px solid transparent;
+
+        &:hover {
+          color: base.$primary-color;
+          border-bottom: 4px solid base.$primary-color;
+        }
+
+        &:focus {
+          color: base.$primary-color;
+          border-bottom: 4px solid base.$primary-color;
+        }
+      }
+
+      .containerJoin {
+        text-decoration: none;
+        color: base.$secondary-color;
+        font: base.$content-20;
+        font-weight: 600;
+        padding-bottom: 16px;
+        border-bottom: 3px solid transparent;
+
+        &:hover {
+          color: base.$primary-color;
+          border-bottom: 4px solid base.$primary-color;
+        }
+
+        &:focus {
+          color: base.$primary-color;
+          border-bottom: 4px solid base.$primary-color;
+        }
+      }
+    }
+
+    .addClassBtn {
+      display: flex;
+      width: 20%;
+      padding-top: 10px;
+
+      button {
+        text-align: center;
+        height: 42px;
+
+        .addBtn {
+          text-decoration: none;
+          color: base.$white-color;
+
+          .plusIcon {
+            margin-left: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .containerLine {
+    position: absolute;
+    top: 327px;
+    background-color: #9fa3a0;
+    width: 100%;
+    height: 1px;
+  }
+}

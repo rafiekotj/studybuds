@@ -1,0 +1,448 @@
+@use "../../base.scss";
+@import "../../breakpoints/breakpoints.scss";
+
+.detailRoom {
+  .groupDownloadLeft {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    left: 0px;
+  }
+
+  .ellipseRight {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    right: 0px;
+    margin-top: -100px;
+  }
+
+  .groupDownloadRight {
+    position: absolute;
+    z-index: -1;
+    top: 580px;
+    right: 0;
+  }
+
+  .ellipseLeft {
+    position: absolute;
+    z-index: -1;
+    top: 708px;
+    left: 0px;
+    margin-top: -100px;
+  }
+
+  .detailTitle {
+    padding: 177px 150px 80px;
+
+    .titlePage {
+      font: base.$content-40;
+      font-weight: 700;
+    }
+
+    .formBox {
+      margin: 56px 46px 0;
+      padding: 40px;
+      border: 1px solid base.$light-green-color;
+      border-radius: 12px;
+
+      .classImg {
+        display: flex;
+        margin-bottom: 40px;
+
+        .titleAct {
+          width: 25%;
+          padding: 58px 0;
+          font: base.$content-16;
+          font-weight: 600;
+        }
+
+        .uploadPlace {
+          display: flex;
+          overflow: hidden;
+
+          .uploadBox {
+            color: transparent;
+            width: 120px;
+            margin-right: 16px;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+
+            &::-webkit-file-upload-button {
+              visibility: hidden;
+            }
+
+            &::before {
+              content: "";
+              color: black;
+              display: flex;
+              justify-content: center;
+              text-align: center;
+              border: 1px dashed #dcdcdc;
+              border-radius: 12px;
+              cursor: pointer;
+              width: 116px;
+              height: 116px;
+            }
+          }
+
+          .uploadIcon {
+            position: absolute;
+            height: 28.5px;
+            width: 28.5px;
+            top: 59%;
+            left: 37.25%;
+            z-index: 10;
+            color: base.$secondary-color;
+          }
+
+          .uploadWarn {
+            font: base.$content-14;
+            width: 150px;
+            margin: auto;
+          }
+        }
+      }
+
+      .classTitle {
+        display: flex;
+        margin-bottom: 40px;
+
+        .titleAct {
+          width: 25%;
+          padding: 16px 0;
+          font: base.$content-16;
+          font-weight: 600;
+        }
+
+        .titleBox {
+          width: 75%;
+          padding: 16px;
+          border: 1px solid #dcdcdc;
+          border-radius: 8px;
+        }
+      }
+
+      .classTopic {
+        display: flex;
+        margin-bottom: 40px;
+
+        .titleAct {
+          width: 25%;
+          padding: 16px 0;
+          font: base.$content-16;
+          font-weight: 600;
+        }
+
+        .topicBox {
+          width: 40%;
+          display: flex;
+          justify-content: center;
+          height: fit-content;
+          max-height: 2.8rem;
+          min-width: 10rem;
+          z-index: 2;
+          position: relative;
+
+          &Filter {
+            background-color: base.$white-color;
+            border: 1px solid base.$grey-color;
+            border-radius: 8px;
+            padding: 16px;
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            font: base.$content-14;
+            transition: all 0.5s;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-right: 1rem;
+
+            &:hover {
+              background-color: rgba($color: #000000, $alpha: 0.1);
+            }
+
+            span:last-child {
+              position: absolute;
+              right: 10%;
+              top: 50%;
+              transform: translateY(-35%);
+            }
+          }
+
+          &Options {
+            position: absolute;
+            top: 120%;
+            // transform: translateX(-50%);
+            background-color: base.$white-color;
+            box-shadow: 0 0 10px 2px #0000001a;
+            border-radius: 20px;
+            width: 100%;
+            font: base.$content-16;
+            color: base.$black-color;
+            max-height: 19rem;
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            ul {
+              list-style-type: none;
+            }
+
+            li {
+              cursor: pointer;
+              padding: 0.75rem 1rem;
+              width: 100%;
+
+              &:nth-of-type(1) {
+                border-radius: 20px 0px 0 0;
+              }
+
+              &:last-child {
+                border-radius: 0 0 0px 20px;
+              }
+
+              &:hover {
+                background-color: base.$light-green-color;
+              }
+            }
+          }
+
+          ::-webkit-scrollbar {
+            width: 12px;
+          }
+
+          ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px base.$white-color;
+            background-color: base.$white-color;
+            border: 1px solid base.$grey-color;
+            border-radius: 0px 20px 20px 0;
+          }
+
+          ::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            -webkit-box-shadow: inset 0 0 6px base.$grey-color;
+            background-color: base.$grey-color;
+            background-image: none;
+          }
+        }
+      }
+
+      .classParty {
+        display: flex;
+        margin-bottom: 40px;
+
+        .titleAct {
+          width: 25%;
+          padding: 16px 0;
+          font: base.$content-16;
+          font-weight: 600;
+        }
+
+        .partyBox {
+          width: 40%;
+          padding: 16px;
+          border: 1px solid #dcdcdc;
+          border-radius: 8px;
+        }
+      }
+
+      .classDate {
+        display: flex;
+        margin-bottom: 40px;
+
+        .titleAct {
+          width: 25%;
+          padding: 16px 0;
+          font: base.$content-16;
+          font-weight: 600;
+        }
+
+        .dateBox {
+          width: 25%;
+          padding: 16px;
+          border: 1px solid #dcdcdc;
+          border-radius: 8px;
+          cursor: pointer;
+        }
+
+        // input[type="date"]::-webkit-calendar-picker-indicator {
+        //   display: none;
+        //   -webkit-appearance: none;
+        //   width: 15px;
+        //   padding: 0px;
+        //   margin: 0px;
+        //   margin-top: 10px;
+        //   color: base.$primary-color;
+        // }
+      }
+
+      .classTime {
+        display: flex;
+        margin-bottom: 40px;
+
+        .titleAct {
+          width: 25%;
+          padding: 16px 0;
+          font: base.$content-16;
+          font-weight: 600;
+        }
+
+        .timeBox {
+          width: 25%;
+          padding: 16px;
+          border: 1px solid #dcdcdc;
+          border-radius: 8px;
+        }
+      }
+
+      .classDesc {
+        display: flex;
+        margin-bottom: 40px;
+
+        .titleAct {
+          width: 25%;
+          padding: 16px 0;
+          font: base.$content-16;
+          font-weight: 600;
+        }
+
+        .descBox {
+          width: 75%;
+          height: 200px;
+          resize: none;
+          padding: 16px;
+          border: 1px solid #dcdcdc;
+          border-radius: 8px;
+        }
+      }
+
+      .classStatus {
+        display: flex;
+
+        .titleAct {
+          width: 25%;
+          padding: 16px 0;
+          font: base.$content-20;
+          font-weight: 600;
+        }
+
+        .statusBox {
+          width: 40%;
+          display: flex;
+          justify-content: center;
+          height: fit-content;
+          max-height: 2.8rem;
+          min-width: 10rem;
+          z-index: 10;
+          position: relative;
+
+          &Filter {
+            background-color: base.$white-color;
+            border: 1px solid base.$grey-color;
+            border-radius: 8px;
+            padding: 16px;
+            width: 100%;
+            height: 50px;
+            text-align: center;
+            font: base.$content-14;
+            transition: all 0.5s;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-right: 1rem;
+
+            &:hover {
+              background-color: rgba($color: #000000, $alpha: 0.1);
+            }
+
+            span:last-child {
+              position: absolute;
+              right: 10%;
+              top: 50%;
+              transform: translateY(-35%);
+            }
+          }
+
+          &Options {
+            position: absolute;
+            top: 120%;
+
+            // transform: translateX(-50%);
+            background-color: base.$white-color;
+            box-shadow: 0 0 10px 2px #0000001a;
+            border-radius: 20px;
+            width: 100%;
+            font: base.$content-16;
+            color: base.$black-color;
+            max-height: 19rem;
+            overflow-y: scroll;
+            overflow-x: hidden;
+
+            ul {
+              list-style-type: none;
+            }
+
+            li {
+              cursor: pointer;
+              padding: 0.75rem 1rem;
+              width: 100%;
+
+              &:nth-of-type(1) {
+                border-radius: 20px 0px 0 0;
+              }
+
+              &:last-child {
+                border-radius: 0 0 0px 20px;
+              }
+
+              &:hover {
+                background-color: base.$light-green-color;
+              }
+            }
+          }
+
+          ::-webkit-scrollbar {
+            width: 12px;
+          }
+
+          ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px base.$white-color;
+            background-color: base.$white-color;
+            border: 1px solid base.$grey-color;
+            border-radius: 0px 20px 20px 0;
+          }
+
+          ::-webkit-scrollbar-thumb {
+            border-radius: 20px;
+            -webkit-box-shadow: inset 0 0 6px base.$grey-color;
+            background-color: base.$grey-color;
+            background-image: none;
+          }
+        }
+      }
+    }
+
+    .buttonBox {
+      display: flex;
+      justify-content: flex-end;
+      margin: 0 46px;
+      padding-top: 10px;
+
+      button {
+        text-align: center;
+        height: 42px;
+        padding: 8px 64px;
+        margin-left: 16px;
+
+        .cancelBtn {
+          text-decoration: none;
+          color: base.$primary-color;
+        }
+      }
+    }
+  }
+}
