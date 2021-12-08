@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Register from "../pages/register/Register";
+import Login from "../components/Login/Login";
 import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import Home from "../pages/home/Home";
@@ -12,8 +14,12 @@ import ClassForm from "../pages/classForm/ClassForm";
 function createRoutes() {
   return (
     <Router>
-      <Navbar />
+      {/* <Navbar />  */}
       <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/Login" element={<Login />} />
+        {/* <Route exact path="/" element={<Home />} />
+        <Route path="*" element={<NotFound />} /> */}
         <Route exact path="/" element={<Home />} />
         <Route exact path="/study-room" element={<StudyRoom />} />
         <Route path="/room" element={<DetailRoomStudents />} />
@@ -22,11 +28,8 @@ function createRoutes() {
         <Route path="/new-class" element={<ClassForm />} />
         <Route path="/class" element={<MyClass />} />
         {/* <Route path="*" element={<NotFound />} /> */}
-        <Route path="/room" element={<DetailRoomStudents />} />
-        <Route path="/host" element={<DetailRoomHost />} />
-        <Route path="/approve" element={<ApproveParticipant />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }
