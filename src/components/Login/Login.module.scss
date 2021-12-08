@@ -1,0 +1,134 @@
+@use "../../base";
+@import "../../breakpoints/breakpoints.scss";
+
+.loginContainer {
+  display: flex;
+  z-index: 5;
+  justify-content: space-evenly;
+  overflow: hidden;
+  padding: 10rem;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/ellipseLeft.svg") no-repeat;
+    background-position: left bottom;
+    transform: translateY(5rem);
+    z-index: -1;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/ellipseRight.svg") no-repeat;
+    background-position: right top;
+    z-index: -1;
+  }
+  .loginButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    .loginButton {
+      color: #395185;
+      font-size: 1.25rem;
+      margin-right: 0.5rem;
+    }
+  }
+  .loginFormLink {
+    text-align: center;
+    margin-top: 1rem;
+    .loginLink {
+      font-weight: 700;
+      color: base.$primary-color;
+      cursor: pointer;
+      z-index: 100;
+    }
+  }
+
+  .imageLeft {
+    .imageLeftHero {
+      width: 100%;
+      height: 80%;
+    }
+    .imageLeftLoad {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/img/groupDownloadLeft.svg") no-repeat;
+      background-position: 85% left;
+      z-index: -1;
+    }
+
+    .imageLeftLogo {
+      position: absolute;
+      left: 0%;
+      top: 0%;
+      transform: translate(50%, 100%);
+    }
+    .imageRightLoad {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../../assets/img/groupDownloadLeft.svg") no-repeat;
+      background-position: bottom right;
+      z-index: -1;
+    }
+  }
+  .login {
+    width: 419px;
+    height: 697px;
+    top: 105px;
+    left: 845px;
+
+    &Form {
+      float: initial;
+      &Label {
+        display: block;
+        font: base.$content-16;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      &Input {
+        margin-bottom: 2rem;
+        border: 1px solid base.$primary-color;
+        border-radius: 8px;
+        padding: 1rem;
+        width: 417px;
+        height: 52px;
+        top: 614px;
+        left: 847px;
+        font: base.$content-16;
+      }
+      button {
+        width: 100%;
+        margin: 0.5rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+      &Sign {
+        width: 417px;
+        height: 40px;
+        top: 698px;
+        left: 847px;
+        border: none;
+        background-color: base.$primary-color;
+        border-radius: 40px;
+        text-align: center;
+        padding: 10px 0;
+      }
+    }
+  }
+}
