@@ -95,14 +95,9 @@
     }
 
     .addClassBtn {
-      display: flex;
       width: 20%;
-      padding-top: 10px;
 
       button {
-        text-align: center;
-        height: 42px;
-
         .addBtn {
           text-decoration: none;
           color: base.$white-color;
@@ -117,9 +112,29 @@
 
   .containerLine {
     position: absolute;
-    top: 327px;
     background-color: #9fa3a0;
     width: 100%;
     height: 1px;
+  }
+
+  .detailContainer {
+    .containerDesc {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 48px 198px 184px;
+
+      .hero {
+        display: flex;
+        height: 178px;
+        margin: auto;
+      }
+
+      .containerExplain {
+        font: base.$content-20;
+        margin: auto;
+        margin-top: 16px;
+      }
+    }
   }
 }

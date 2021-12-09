@@ -15,9 +15,14 @@ function ClassForm() {
   }, []);
 
   const [show, setShow] = useState(false);
+  const [drop, setDrop] = useState(false);
 
   const handleShow = () => {
     setShow(!show);
+  };
+
+  const handleDrop = () => {
+    setDrop(!drop);
   };
 
   return (
@@ -50,18 +55,21 @@ function ClassForm() {
             <div className={classFormStyle.classImg}>
               <div className={classFormStyle.titleAct}>Upload Photo</div>
               <div className={classFormStyle.uploadPlace}>
-                <div className={classFormStyle.uploadBoxFirst}>
+                <div className={classFormStyle.uploadBox}>
+                  <label htmlFor="firstimg" className={classFormStyle.pictBox}>
+                    <span>
+                      <MdAddPhotoAlternate
+                        className={classFormStyle.pictIcon}
+                      />
+                    </span>
+                  </label>
                   <input
                     type="file"
-                    className={classFormStyle.uploadBox}
-                  ></input>
-                  <span>
-                    <MdAddPhotoAlternate
-                      className={classFormStyle.uploadIcon}
-                    />
-                  </span>
+                    name=""
+                    id="firstimg"
+                    className={classFormStyle.inputPict}
+                  />
                 </div>
-
                 <p className={classFormStyle.uploadWarn}>
                   Format image .jpg .jpeg .png, maximum 3 MB
                 </p>
@@ -73,7 +81,7 @@ function ClassForm() {
                 type="text"
                 className={classFormStyle.titleBox}
                 placeholder="Input title, e.g. Yoga Class"
-              ></input>
+              />
             </div>
             <div className={classFormStyle.classTopic}>
               <div className={classFormStyle.titleAct}>Topic</div>
@@ -84,7 +92,7 @@ function ClassForm() {
                     handleShow();
                   }}
                 >
-                  <span>All Topic</span>
+                  <span>Select Topic</span>
                   <span>
                     <IoIosArrowDown />
                   </span>
@@ -95,20 +103,23 @@ function ClassForm() {
                 >
                   <ul>
                     <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
+                    <li>Biology</li>
+                    <li>Business</li>
+                    <li>Cooking</li>
+                    <li>Fashion</li>
+                    <li>Geography</li>
+                    <li>Geology</li>
+                    <li>Health</li>
+                    <li>History</li>
+                    <li>Hobbies</li>
+                    <li>Literature</li>
+                    <li>Love Class</li>
+                    <li>Math</li>
+                    <li>Physics</li>
+                    <li>Research</li>
+                    <li>Romance</li>
+                    <li>Sport</li>
+                    <li>Tech</li>
                   </ul>
                 </div>
               </div>
@@ -121,15 +132,17 @@ function ClassForm() {
                 type="text"
                 className={classFormStyle.partyBox}
                 placeholder="Input number of participants, e.g. 100"
-              ></input>
+              />
             </div>
             <div className={classFormStyle.classDate}>
               <div className={classFormStyle.titleAct}>Date</div>
-              <input type="date" className={classFormStyle.dateBox}></input>
+              <input type="date" className={classFormStyle.dateBox} />
             </div>
             <div className={classFormStyle.classTime}>
               <div className={classFormStyle.titleAct}>Time</div>
-              <input type="time" className={classFormStyle.timeBox}></input>
+              <input type="time" className={classFormStyle.timeBox} />
+              <p>to</p>
+              <input type="time" className={classFormStyle.timeBox} />
             </div>
             <div className={classFormStyle.classDesc}>
               <div className={classFormStyle.titleAct}>Description</div>
@@ -148,34 +161,21 @@ function ClassForm() {
                 <div
                   className={classFormStyle.statusBoxFilter}
                   onClick={() => {
-                    handleShow();
+                    handleDrop();
                   }}
                 >
-                  <span>All Topic</span>
+                  <span>Select Class Status</span>
                   <span>
                     <IoIosArrowDown />
                   </span>
                 </div>
                 <div
                   className={classFormStyle.statusBoxOptions}
-                  style={show ? { display: "block" } : { display: "none" }}
+                  style={drop ? { display: "block" } : { display: "none" }}
                 >
                   <ul>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
-                    <li>Art</li>
+                    <li>Open</li>
+                    <li>Restricted</li>
                   </ul>
                 </div>
               </div>
@@ -188,7 +188,9 @@ function ClassForm() {
               </Link>
             </Button>
             <Button classStyle="buttonWhite">Save as Draft</Button>
-            <Button classStyle="buttonGreen">Publish</Button>
+            <Link to="/host">
+              <Button classStyle="buttonGreen">Publish</Button>
+            </Link>
           </div>
         </div>
       </div>
