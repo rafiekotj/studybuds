@@ -10,7 +10,7 @@ function Card() {
       <div className={cardstyle.cardImageContainer}>
         <span className={cardstyle.cardImageChip}>Open</span>
         <img
-          src={`https://s3-alpha-sig.figma.com/img/23b7/c6c2/1bd5d79ffd92520592b15c880189c9ac?Expires=1638748800&Signature=I8BTcFazz4QqS6RikWAQqqVt2JgWBbgMcHnrJ5loQkPqxaNaupwTr3DaXdD4SXhaZvFOWoGedqE2qIXzLX3K-QnSb2sBDJiE~9vckIMmf9sCcEPY7fyRwe0V6dr~jKW5Lp8dwtHy8B66FcxPfn1HoPwf7KPhhgfNfbJvQichhFiFjgR0vPLH5s1Y3jN3L-REgtRjp-y8s2VxJvUEcOaR2t3tin4-XKaSlG12CyB2SWkaEGeYQlciwf9uyXI5FD2uUJ32DFYtlmbJjraH69tbyRzeV5zs0NBHk0adlIF8nW6~ya522sk4--Z0YgVEk6TUwMTiU-qsPNhxnjPIT8KtRg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA`}
+          src={`https://s3-alpha-sig.figma.com/img/1e06/85b9/639c3e6dd91aa6fbaa3fa83553182dd8?Expires=1639958400&Signature=WMzY6Gf2n28YT9JqM-MHXkKdiOB~Cw7Yll0R9xnZBVzOLl3bigx7repAjgDzkmUKn0nNDwSoxhZs6X92WLUrr9AOOWLWaGcuJ0kV0M~YBevASoeTJ9SEWqMXVF~tsbose8O8uSlJxgLr2TR7X8ayiGihLMYHYtyMWNKpKGJfRbUyjc~7Zd3k2BZD6MefCGYz1aipkDcZzHAWh~4UiC3o~1Z43UbIGkgb7wgSIAsnDYWRJafGtIPIo-~VurNTv9MCJaKh-lAlTU8r7kJXgHpyE68N-1MjkRAW-C8APuQGzxo5JP0cyllaZzbKz~cqeNJg4nVr3lyL5WSQyvZsVSvmuw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA`}
           alt={`alt`}
           className={cardstyle.cardImage}
         />
@@ -27,7 +27,7 @@ function Card() {
           <RiGroupFill className={cardstyle.cardIcon} />
           <p className={cardstyle.cardTextInfoMembers}>15/50</p>
         </div>
-        <Link to="#" className={cardstyle.cardLink}>
+        <Link to="/room" className={cardstyle.cardLink}>
           <Button classStyle="buttonGreen">Join Room</Button>
         </Link>
       </div>

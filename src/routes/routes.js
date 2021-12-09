@@ -14,12 +14,10 @@ import ClassForm from "../pages/classForm/ClassForm";
 function createRoutes() {
   return (
     <Router>
-      {/* <Navbar />  */}
+      <Navbar />
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/Login" element={<Login />} />
-        {/* <Route exact path="/" element={<Home />} />
-        <Route path="*" element={<NotFound />} /> */}
         <Route exact path="/" element={<Home />} />
         <Route exact path="/study-room" element={<StudyRoom />} />
         <Route path="/room" element={<DetailRoomStudents />} />
@@ -29,7 +27,7 @@ function createRoutes() {
         <Route path="/class" element={<MyClass />} />
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
-      {/* <Footer /> */}
+      <Footer />
     </Router>
   );
 }

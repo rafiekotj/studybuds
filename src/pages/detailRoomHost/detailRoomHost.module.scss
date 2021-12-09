@@ -32,31 +32,22 @@
     margin-top: -100px;
   }
 
-  .containerLine {
-    position: absolute;
-    content: "";
-    top: 404px;
-    background-color: #9fa3a0;
-    width: 100%;
-    height: 1px;
-  }
-
-  .detailTitle {
+  .roomTitle {
     padding: 176px 198px 38px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
-    .titleHead {
-      .titleName {
+    &Top {
+      &Name {
         font: base.$content-40;
         font-weight: 700;
         color: base.$primary-color;
         margin-bottom: 16px;
       }
 
-      .titleStory {
-        .titleDate {
+      &Story {
+        &Date {
           display: flex;
           flex-direction: row;
           margin-bottom: 16px;
@@ -73,10 +64,9 @@
           }
         }
 
-        .titleNumber {
+        &Number {
           display: flex;
           flex-direction: row;
-          text-align: end;
 
           .icon {
             font-size: 30px;
@@ -94,26 +84,27 @@
             }
           }
 
-          button {
-            display: flex;
-            justify-content: center;
-            text-align: center;
-            width: 25%;
-            height: 24px;
-            font: base.$content-14;
-            margin: 7px 0 0 0;
-            padding: 1.5px;
+          &Approve {
+            text-decoration: none;
 
-            .approveBtn {
-              text-decoration: none;
+            &Btn {
+              display: flex;
+              background-color: base.$primary-color;
+              font: base.$content-16;
+              font-weight: 600;
               color: base.$white-color;
+              border: none;
+              border-radius: 40px;
+              height: 35px;
+              padding: 8px 16px;
+              cursor: pointer;
             }
           }
         }
       }
     }
 
-    .edDeBtn {
+    &Btn {
       display: flex;
       flex-direction: column;
       width: 25%;
@@ -131,10 +122,10 @@
   }
 
   .detailContainer {
-    padding: 0 198px 72px;
+    padding: 0 198px 19px;
 
-    .containerTitle {
-      .containerAbout {
+    &Name {
+      &About {
         text-decoration: none;
         color: base.$primary-color;
         font: base.$content-20;
@@ -143,35 +134,46 @@
         padding-bottom: 16px;
       }
     }
+  }
 
-    .containerMaterial {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      margin-top: 44px;
+  .containerLine {
+    position: absolute;
+    background-color: #9fa3a0;
+    width: 100%;
+    height: 1px;
+  }
 
-      .materialDescription {
-        border: 1px solid base.$light-green-color;
-        border-radius: 12px;
-        padding: 24px;
-        margin-right: 30px;
-        width: 70%;
+  .containerMaterial {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 44px;
+    padding: 0 198px 72px;
 
-        .descriptionTitle {
-          font: base.$content-20;
-          font-weight: 600;
-          margin-bottom: 24px;
-        }
+    &Description {
+      border: 1px solid base.$light-green-color;
+      border-radius: 12px;
+      padding: 24px;
+      margin-right: 30px;
+      width: 70%;
 
-        img {
-          width: 512px;
-          display: flex;
-          margin: auto;
-          padding-bottom: 40px;
-        }
+      &Name {
+        font: base.$content-20;
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
 
-        .descriptionNarration {
+      img {
+        width: 85%;
+        display: flex;
+        margin: auto;
+        padding-bottom: 40px;
+      }
+
+      &Narration {
+        h5 {
           font: base.$content-16;
+          font-weight: 400;
           line-height: 20.11px;
 
           span {
@@ -184,60 +186,60 @@
           }
         }
       }
+    }
 
-      .hostSection {
-        width: 30%;
+    &Host {
+      width: 30%;
 
-        .materialHost {
-          border: 1px solid base.$light-green-color;
-          border-radius: 12px;
-          padding: 24px 32px 32px;
-          margin-bottom: 16px;
+      &Square {
+        border: 1px solid base.$light-green-color;
+        border-radius: 12px;
+        padding: 24px 32px 32px;
+        margin-bottom: 16px;
 
-          .hostTitle {
-            font: base.$content-20;
+        &Name {
+          font: base.$content-20;
+          font-weight: 600;
+          margin-bottom: 24px;
+        }
+
+        &Profile {
+          display: flex;
+          margin-bottom: 32px;
+
+          &Name {
+            font: base.$content-14;
+            margin-left: 16px;
             font-weight: 600;
-            margin-bottom: 24px;
-          }
-
-          .hostProfile {
-            display: flex;
-            margin-bottom: 32px;
-
-            .hostName {
-              font: base.$content-14;
-              margin-left: 16px;
-              font-weight: 600;
-              height: 48px;
-              line-height: 48px;
-            }
-          }
-
-          .hostClassStatus1 {
-            font: base.$content-20;
-            font-weight: 600;
-            margin-bottom: 8px;
-          }
-
-          .hostClassStatus2 {
-            font: base.$content-20;
-            font-weight: 600;
-            color: base.$warning-color;
+            height: 48px;
+            line-height: 48px;
           }
         }
 
-        .startBtn {
-          display: flex;
-          justify-content: center;
-          text-align: center;
-          width: 100%;
+        &Status {
+          font: base.$content-20;
+          font-weight: 600;
+          margin-bottom: 8px;
+        }
 
-          button {
-            width: 100%;
-            height: 57px;
-            font: base.$content-20;
-            font-weight: 600;
-          }
+        &Exp {
+          font: base.$content-20;
+          font-weight: 600;
+          color: base.$warning-color;
+        }
+      }
+
+      &Btn {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+
+        button {
+          width: 100%;
+          height: 57px;
+          font: base.$content-20;
+          font-weight: 600;
         }
       }
     }

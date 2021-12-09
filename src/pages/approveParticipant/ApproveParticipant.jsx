@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import approveParticipantStyle from "./approveParticipant.module.scss";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
@@ -65,6 +66,26 @@ function ApproveParticipant() {
       title: "Sugoi Desu",
       completed: false,
     },
+    {
+      id: 8,
+      title: "Nobitakun Desu Ne",
+      completed: false,
+    },
+    {
+      id: 9,
+      title: "Nobitakun",
+      completed: false,
+    },
+    {
+      id: 10,
+      title: "Doraemon to Nani",
+      completed: false,
+    },
+    {
+      id: 11,
+      title: "Sugoi Desu",
+      completed: false,
+    },
   ]);
 
   const [selectAll, setSelectAll] = useState(false);
@@ -102,7 +123,7 @@ function ApproveParticipant() {
           </div>
           <div className={approveParticipantStyle.limitContainer}>
             <div className={approveParticipantStyle.limitTitle}>
-              <p>Limit Participants (4/50)</p>
+              <p>Limit Participants (0/50)</p>
             </div>
 
             <div className={approveParticipantStyle.limitBox}>
@@ -190,8 +211,12 @@ function ApproveParticipant() {
               </div>
             </div>
             <div className={approveParticipantStyle.buttonBox}>
-              <Button classStyle="buttonWhite">Cancel</Button>
-              <Button classStyle="buttonGreen">Approve</Button>
+              <Link to="/host">
+                <Button classStyle="buttonWhite">Cancel</Button>
+              </Link>
+              <Link to="/host">
+                <Button classStyle="buttonGreen">Approve</Button>
+              </Link>
             </div>
           </div>
         </div>
