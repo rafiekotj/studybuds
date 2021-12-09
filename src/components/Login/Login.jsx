@@ -1,9 +1,5 @@
 import React from "react";
 import hero from "../../assets/img/hero.svg";
-import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
-import ellipseRight from "../../assets/img/ellipseRight.svg";
-import ellipseLeft from "../../assets/img/ellipseLeft.svg";
-import groupDownloadRight from "../../assets/img/groupDownloadRight.svg";
 import logo from "../../assets/img/logo.png";
 import loginStyle from "./Login.module.scss";
 import Button from "../../components/buttons/Button";
@@ -12,9 +8,9 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 export default function Login() {
-  const successLogin = () => {
-    localStorage.setItem("fakeToken", "this is token");
-  };
+  // const successLogin = () => {
+  //   localStorage.setItem("fakeToken", "this is token");
+  // };
   return (
     <div className={loginStyle.loginContainer}>
       <div className={loginStyle.imageLeft}>

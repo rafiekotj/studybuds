@@ -7,7 +7,7 @@ import ellipseLeft from "../../assets/img/ellipseLeft.svg";
 import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
 import CreatedClassS from "../createdClassS/CreatedClassS";
 import Button from "../../components/buttons/Button";
-import hero from "../../assets/img/hero.svg";
+// import hero from "../../assets/img/hero.svg";
 import { AiFillPlusCircle } from "react-icons/ai";
 
 function MyClass() {

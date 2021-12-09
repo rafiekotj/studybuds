@@ -1,9 +1,9 @@
 import React from "react";
 import hero from "../../assets/img/hero.svg";
-import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
-import ellipseRight from "../../assets/img/ellipseRight.svg";
-import ellipseLeft from "../../assets/img/ellipseLeft.svg";
-import groupDownloadRight from "../../assets/img/groupDownloadRight.svg";
+// import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
+// import ellipseRight from "../../assets/img/ellipseRight.svg";
+// import ellipseLeft from "../../assets/img/ellipseLeft.svg";
+// import groupDownloadRight from "../../assets/img/groupDownloadRight.svg";
 import logo from "../../assets/img/logo.png";
 import registerStyle from "./register.module.scss";
 import Button from "../../components/buttons/Button";
@@ -12,9 +12,9 @@ import { FcGoogle } from "react-icons/fc";
 import { Link } from "react-router-dom";
 
 export default function Register() {
-  const successRegister = () => {
-    localStorage.setItem("fakeToken", "this is token");
-  };
+  // const successRegister = () => {
+  //   localStorage.setItem("fakeToken", "this is token");
+  // };
   return (
     <div className={registerStyle.registerContainer}>
       <div className={registerStyle.imageLeft}>
