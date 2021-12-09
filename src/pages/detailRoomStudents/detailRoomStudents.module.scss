@@ -1,0 +1,193 @@
+@use "../../base.scss";
+@import "../../breakpoints/breakpoints.scss";
+
+.detailRoom {
+  .groupDownloadLeft {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    left: 0px;
+  }
+
+  .ellipseRight {
+    position: absolute;
+    z-index: -1;
+    top: 96px;
+    right: 0px;
+    margin-top: -100px;
+  }
+
+  .groupDownloadRight {
+    position: absolute;
+    z-index: -1;
+    top: 580px;
+    right: 0;
+  }
+
+  .ellipseLeft {
+    position: absolute;
+    z-index: -1;
+    top: 708px;
+    left: 0px;
+    margin-top: -100px;
+  }
+
+  .roomTitle {
+    padding: 176px 198px 45px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &Top {
+      &Name {
+        font: base.$content-40;
+        font-weight: 700;
+        color: base.$primary-color;
+        margin-bottom: 16px;
+      }
+
+      &Story {
+        &Date {
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 16px;
+        }
+
+        &Number {
+          display: flex;
+          flex-direction: row;
+        }
+
+        .icon {
+          font-size: 30px;
+          color: base.$primary-color;
+          margin-right: 16px;
+        }
+
+        .info {
+          font: base.$content-24;
+        }
+      }
+    }
+
+    &Btn {
+      padding: 56px 0;
+      display: flex;
+      width: 25%;
+
+      button {
+        font: base.$content-20;
+        font-weight: 600;
+        width: 100%;
+        height: 57px;
+      }
+    }
+  }
+
+  .detailContainer {
+    padding: 0 198px 19px;
+
+    &Name {
+      &About {
+        text-decoration: none;
+        color: base.$primary-color;
+        font: base.$content-20;
+        font-weight: 600;
+        border-bottom: 4px solid base.$primary-color;
+        padding-bottom: 16px;
+      }
+    }
+  }
+
+  .containerLine {
+    position: absolute;
+    background-color: #9fa3a0;
+    width: 100%;
+    height: 1px;
+  }
+
+  .containerMaterial {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 44px;
+    padding: 0 198px 72px;
+
+    &Description {
+      border: 1px solid base.$light-green-color;
+      border-radius: 12px;
+      padding: 24px;
+      margin-right: 30px;
+      width: 70%;
+
+      &Name {
+        font: base.$content-20;
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
+
+      img {
+        width: 85%;
+        display: flex;
+        margin: auto;
+        padding-bottom: 40px;
+      }
+
+      &Narration {
+        h5 {
+          font: base.$content-16;
+          font-weight: 400;
+          line-height: 20.11px;
+
+          span {
+            font-weight: 700;
+          }
+
+          ul {
+            list-style-position: inside;
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+
+    &Host {
+      border: 1px solid base.$light-green-color;
+      border-radius: 12px;
+      padding: 24px 32px 32px;
+      width: 30%;
+      height: 40%;
+
+      &Name {
+        font: base.$content-20;
+        font-weight: 600;
+        margin-bottom: 24px;
+      }
+
+      &Profile {
+        display: flex;
+        margin-bottom: 32px;
+
+        &Name {
+          font: base.$content-14;
+          margin-left: 16px;
+          font-weight: 600;
+          height: 48px;
+          line-height: 48px;
+        }
+      }
+
+      &Status {
+        font: base.$content-20;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+
+      &Exp {
+        font: base.$content-20;
+        font-weight: 600;
+        color: base.$primary-color;
+      }
+    }
+  }
+}

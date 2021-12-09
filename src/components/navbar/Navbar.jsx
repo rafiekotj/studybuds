@@ -190,13 +190,29 @@ function Navbar() {
         />
       </div>
       <ul className={navbarstyle.navbarMenu}>
-        <li>Home</li>
-        <li>Study Room</li>
-        <li>My Class</li>
+        <li>
+          <Link to="/" className={navbarstyle.navbarMenuDirect}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link to="/study-room" className={navbarstyle.navbarMenuDirect}>
+            Study Room
+          </Link>
+        </li>
+        <li>
+          <Link to="/class" className={navbarstyle.navbarMenuDirect}>
+            My Class
+          </Link>
+        </li>
       </ul>
       <div className={navbarstyle.navbarButtons}>
-        <Button classStyle="buttonWhite">Sign Up</Button>
-        <Button classStyle="buttonGreen">Sign Up</Button>
+        <Link to="/login" className={navbarstyle.navbarButtonLink}>
+          <Button classStyle="buttonWhite">Sign In</Button>
+        </Link>
+        <Link to="/register" className={navbarstyle.navbarButtonLink}>
+          <Button classStyle="buttonGreen">Sign Up</Button>
+        </Link>
       </div>
       <div className={navbarstyle.navbarNotif}>
         <RiNotification2Line className={navbarstyle.navbarNotifIcon} />

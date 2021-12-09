@@ -1,0 +1,23 @@
+@use "../../base.scss";
+@import "../../breakpoints/breakpoints.scss";
+
+.detailContainer {
+  .containerDesc {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 48px 198px 184px;
+
+    .hero {
+      display: flex;
+      height: 178px;
+      margin: auto;
+    }
+
+    .containerExplain {
+      font: base.$content-20;
+      margin: auto;
+      margin-top: 16px;
+    }
+  }
+}
