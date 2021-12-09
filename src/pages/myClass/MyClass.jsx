@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import myClassStyle from "./myClass.module.scss";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
@@ -11,11 +11,6 @@ import hero from "../../assets/img/hero.svg";
 import { AiFillPlusCircle } from "react-icons/ai";
 
 function MyClass() {
-  const [joined, setJoined] = useState(false);
-  const btnJoined = (e) => {
-    e ? setJoined(true) : console.log(null);
-  };
-
   return (
     <>
       <div className={myClassStyle.detailRoom}>
@@ -49,11 +44,7 @@ function MyClass() {
             <Link className={myClassStyle.containerCreate} to="">
               Created Class
             </Link>
-            <Link
-              className={myClassStyle.containerJoin}
-              to=""
-              onClick={btnJoined}
-            >
+            <Link className={myClassStyle.containerJoin} to="">
               Joined Class
             </Link>
           </div>
@@ -70,16 +61,6 @@ function MyClass() {
         </div>
         <div className={myClassStyle.containerLine}></div>
         <CreatedClassS />
-
-        {joined && (
-          <div className={myClassStyle.detailContainer}>
-            <div className={myClassStyle.containerLine}></div>
-            <div className={myClassStyle.containerDesc}>
-              <img src={hero} alt="hero" className={myClassStyle.hero} />
-              <p className={myClassStyle.containerExplain}>Jomplang</p>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );
