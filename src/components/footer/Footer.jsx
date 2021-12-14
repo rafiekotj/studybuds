@@ -8,10 +8,21 @@ import logo from "../../assets/img/logo.png";
 import { Link } from "react-router-dom";
 import { ImFacebook, ImTwitter, ImYoutube } from "react-icons/im";
 import { BsInstagram } from "react-icons/bs";
+import { useLocation } from "react-router-dom";
 
 function Footer() {
+  const location = useLocation();
+  console.log(location);
+
   return (
-    <footer className={footerstyle.footer}>
+    <footer
+      className={`${footerstyle.footer}  ${`
+    ${
+      location.pathname === "/register" || location.pathname === "/login"
+        ? footerstyle.footerNotShow
+        : footerstyle.footerShow
+    }`}`}
+    >
       <div className={footerstyle.downloadContainer}>
         <img
           src={groupDownloadLeft}
