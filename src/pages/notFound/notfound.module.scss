@@ -1,0 +1,28 @@
+@use "../../base";
+@import "../../breakpoints/breakpoints.scss";
+
+.notFoundContainer {
+  background-image: url("../../assets/img/hero.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include media("<=phone") {
+    background-size: 75%;
+    height: 75vh;
+  }
+
+  p {
+    color: base.$black-color;
+    transform: translateY(15rem);
+    font-size: 1.25rem;
+
+    @include media("<=phone") {
+      transform: translateY(10rem);
+      font-size: 1rem;
+    }
+  }
+}
