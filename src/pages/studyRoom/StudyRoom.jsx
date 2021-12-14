@@ -5,6 +5,7 @@ import { AiFillPlusCircle } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
 import ReactPaginate from "react-paginate";
 import Button from "../../components/buttons/Button";
+import NoResult from "../../components/noresult/NoResult";
 
 function StudyRoom() {
   // Parallax
@@ -121,10 +122,10 @@ function StudyRoom() {
           nextClassName={studyroomstyle.studyRoomMainPaginationDisplayNone}
           breakClassName={studyroomstyle.studyRoomMainPaginationList}
           activeClassName={studyroomstyle.studyRoomMainPaginationActive}
-          // style={selected ? { color: "blue" } : { color: "pink" }}
         />
       </main>
     </section>
+    // <NoResult />
   );
 }
 
