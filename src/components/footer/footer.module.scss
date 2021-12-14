@@ -2,6 +2,14 @@
 @import "../../breakpoints/breakpoints.scss";
 
 .footer {
+  &NotShow {
+    display: none;
+  }
+
+  &Show {
+    display: block;
+  }
+
   .downloadContainer {
     background-color: base.$form-color;
 
