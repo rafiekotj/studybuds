@@ -12,7 +12,6 @@ import { useLocation } from "react-router-dom";
 
 function Footer() {
   const location = useLocation();
-  console.log(location);
 
   return (
     <footer

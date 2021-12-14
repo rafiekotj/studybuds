@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import navbarstyle from "./navbar.module.scss";
 import brandLogo from "../../assets/img/brandLogo.png";
 import Button from "../buttons/Button";
@@ -6,6 +6,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
 import { RiNotification2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import useOutsideClick from "../useOutsideClick";
 
 // Loop Categories
 const categories = [
@@ -109,7 +111,9 @@ const loopNav = () => {
 // End Loop Categories
 
 function Navbar() {
-  // Show hide dropdown
+  const location = useLocation();
+
+  // Show hide dropdown browse
   const [show, setShow] = useState(false);
   const [status, setStatus] = useState("All Status");
 
@@ -117,10 +121,42 @@ function Navbar() {
     setShow(!show);
   };
 
-  // End Show hide dropdown
+  // End Show hide dropdown browse
+
+  // Show hide dropdown notification
+  const [showNotif, setShowNotif] = useState(false);
+
+  const handleShowNotif = () => {
+    setShowNotif(!showNotif);
+  };
+
+  // End Show hide dropdown notification
+
+  // Outside Click Handler Notification
+  const ref = useRef();
+
+  useOutsideClick(ref, () => {
+    setShowNotif(false);
+  });
+  // End Outside Click Handler Notification
+
+  // Show hide dropdown profile
+  const [showProfile, setShowProfile] = useState(false);
+
+  const handleShowProfile = () => {
+    setShowProfile(!showProfile);
+  };
+
+  // End Show hide dropdown profile
 
   return (
-    <nav className={navbarstyle.navbar}>
+    <nav
+      className={`${navbarstyle.navbar}   ${
+        location.pathname === "/register" || location.pathname === "/login"
+          ? navbarstyle.navbarNotShow
+          : navbarstyle.navbarShow
+      }`}
+    >
       <Link to="/">
         <img
           src={brandLogo}
@@ -191,17 +227,41 @@ function Navbar() {
       </div>
       <ul className={navbarstyle.navbarMenu}>
         <li>
-          <Link to="/" className={navbarstyle.navbarMenuDirect}>
+          <Link
+            to="/"
+            className={navbarstyle.navbarMenuDirect}
+            style={
+              location.pathname === "/"
+                ? { color: "#279B24" }
+                : { color: "#9FA3A0" }
+            }
+          >
             Home
           </Link>
         </li>
         <li>
-          <Link to="/study-room" className={navbarstyle.navbarMenuDirect}>
+          <Link
+            to="/study-room"
+            className={navbarstyle.navbarMenuDirect}
+            style={
+              location.pathname === "/study-room"
+                ? { color: "#279B24" }
+                : { color: "#9FA3A0" }
+            }
+          >
             Study Room
           </Link>
         </li>
         <li>
-          <Link to="/class" className={navbarstyle.navbarMenuDirect}>
+          <Link
+            to="/class"
+            className={navbarstyle.navbarMenuDirect}
+            style={
+              location.pathname === "/class"
+                ? { color: "#279B24" }
+                : { color: "#9FA3A0" }
+            }
+          >
             My Class
           </Link>
         </li>
@@ -214,10 +274,49 @@ function Navbar() {
           <Button classStyle="buttonGreen">Sign Up</Button>
         </Link>
       </div>
-      <div className={navbarstyle.navbarNotif}>
+      <div
+        className={navbarstyle.navbarNotif}
+        onClick={() => {
+          handleShowNotif();
+        }}
+        ref={ref}
+      >
         <RiNotification2Line className={navbarstyle.navbarNotifIcon} />
       </div>
-      <div className={navbarstyle.navbarProfile}>
+      <div
+        className={navbarstyle.navbarNotifItems}
+        style={showNotif ? { display: "block" } : { display: "none" }}
+      >
+        <b>Notification</b>
+        <ul>
+          <li>
+            <div className={navbarstyle.navbarNotifItemsContainer}>
+              <p>
+                You are now can join class <strong>Advanced Biology</strong> by
+                Dr. Kusanagi
+              </p>
+              <p className={navbarstyle.navbarNotifItemsDate}>Today</p>
+            </div>
+            <div className={navbarstyle.navbarNotifItemsCircle}></div>
+          </li>
+          <li>
+            <div className={navbarstyle.navbarNotifItemsContainer}>
+              <p>
+                Your class is being reviewed by host, you can check your class
+                in My Class menu
+              </p>
+              <p className={navbarstyle.navbarNotifItemsDate}>
+                Friday, 8 October 2021 21:32
+              </p>
+            </div>
+            <div className={navbarstyle.navbarNotifItemsCircle}></div>
+          </li>
+        </ul>
+      </div>
+      <div
+        className={navbarstyle.navbarProfile}
+        onClick={() => handleShowProfile()}
+      >
         <div className={navbarstyle.navbarProfileAvatarContainer}>
           <img
             src={`https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80`}
@@ -225,7 +324,23 @@ function Navbar() {
             className={navbarstyle.navbarProfileAvatar}
           />
         </div>
-        <p>Ronaldo Jr.</p>
+        <p>name</p>
+      </div>
+      <div
+        className={navbarstyle.navbarProfileDropdown}
+        style={showProfile ? { display: "block" } : { display: "none" }}
+      >
+        <div className={navbarstyle.navbarProfileDropdownTop}>
+          <b>name</b>
+          <p>email@mail.com</p>
+        </div>
+        <ul>
+          <li>Notification</li>
+          <li>Profile</li>
+          <li>History</li>
+          <li>Change Password</li>
+          <li>Sign Out</li>
+        </ul>
       </div>
     </nav>
   );
