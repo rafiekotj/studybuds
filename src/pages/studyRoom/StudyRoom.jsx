@@ -93,7 +93,7 @@ function StudyRoom() {
                 <li>Art</li>
                 <li>Art</li>
                 <li>Art</li>
-                <li onClick={selected}>Art</li>
+                <li>Art</li>
               </ul>
             </div>
             <Button classStyle={"addClass"}>
