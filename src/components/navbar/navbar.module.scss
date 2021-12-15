@@ -11,6 +11,14 @@
   background-color: base.$white-color;
   z-index: 1000;
 
+  &NotShow {
+    display: none;
+  }
+
+  &Show {
+    display: flex;
+  }
+
   &Logo {
     height: 3.25rem;
     padding: 0.25rem 3rem 0 0;
@@ -157,13 +165,13 @@
 
     .navbarButtonLink {
       width: 50%;
-    }
 
-    button {
-      width: 100%;
-      height: 3.5rem;
-      margin: 0.5rem;
-      padding: 0.25rem;
+      button {
+        width: 100%;
+        height: 3.5rem;
+        margin: 0.5rem;
+        padding: 0.25rem;
+      }
     }
   }
 
@@ -199,6 +207,52 @@
     }
   }
 
+  &NotifItems {
+    position: absolute;
+    background-color: base.$white-color;
+    box-shadow: 0 0 10px 2px #0000001a;
+    border-radius: 20px;
+    top: 100%;
+    transform: translateX(100%);
+    max-width: 22.5rem;
+    padding: 1rem 0;
+
+    b {
+      padding: 1rem;
+    }
+
+    li {
+      list-style-type: none;
+      padding: 1rem;
+      width: 100%;
+      display: flex;
+      border-bottom: 1px solid base.$secondary-color;
+      justify-content: space-between;
+
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .navbarNotifItemsContainer {
+        width: 80%;
+
+        .navbarNotifItemsDate {
+          font: base.$content-14;
+          color: base.$secondary-color;
+        }
+      }
+
+      .navbarNotifItemsCircle {
+        border-radius: 50%;
+        background-color: base.$primary-color;
+        width: 0.75rem;
+        height: 0.75rem;
+        transform: translateY(100%);
+      }
+    }
+  }
+
   &Profile {
     display: flex;
     justify-content: center;
@@ -216,6 +270,36 @@
 
       .navbarProfileAvatar {
         @extend %avatarPicture;
+      }
+    }
+  }
+
+  &ProfileDropdown {
+    background-color: base.$white-color;
+    box-shadow: 0 0 10px 2px #0000001a;
+    padding: 1rem 0 0;
+    position: absolute;
+    width: 12.5%;
+    min-width: 13.75rem;
+    top: 100%;
+    left: 77.5%;
+
+    &Top {
+      border-bottom: 1px solid base.$secondary-color;
+      padding: 0 1rem 1rem;
+    }
+
+    li {
+      list-style-type: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+
+      &:last-child {
+        padding-bottom: 0.75rem;
+      }
+
+      &:hover {
+        background-color: base.$grey-color;
       }
     }
   }
