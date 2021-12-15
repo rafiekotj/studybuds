@@ -10,6 +10,7 @@ import DetailRoomHost from "../pages/detailRoomHost/DetailRoomHost";
 import ApproveParticipant from "../pages/approveParticipant/ApproveParticipant";
 import MyClass from "../pages/myClass/MyClass";
 import ClassForm from "../pages/classForm/ClassForm";
+import MeetingRoom from "../pages/meetingRoom/MeetingRoom";
 import NotFound from "../pages/notFound/NotFound";
 
 function createRoutes() {
@@ -26,6 +27,7 @@ function createRoutes() {
         <Route path="/approve" element={<ApproveParticipant />} />
         <Route path="/new-class" element={<ClassForm />} />
         <Route path="/class" element={<MyClass />} />
+        <Route path="/room/:id/meeting/:roomName" element={<MeetingRoom />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
