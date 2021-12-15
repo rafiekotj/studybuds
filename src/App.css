@@ -7,6 +7,10 @@
   font-family: "Source Sans Pro", sans-serif;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 ::-webkit-scrollbar {
   width: 12px;
 }
