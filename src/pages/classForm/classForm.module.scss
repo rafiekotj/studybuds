@@ -43,6 +43,7 @@
     .formBox {
       margin: 56px 46px 0;
       padding: 40px;
+      background-color: base.$white-color;
       border: 1px solid base.$light-green-color;
       border-radius: 12px;
       box-shadow: 0px 0px 10px 0px #0000001a;
@@ -63,18 +64,19 @@
           overflow: hidden;
 
           .uploadBox {
-            border: 1px dashed #dcdcdc;
+            border: 1px dashed base.$grey-color;
             border-radius: 12px;
             padding: 44.5px;
             width: 116px;
             height: 116px;
-            margin-right: 16px;
+            margin-right: 1rem;
 
             .pictBox {
               .pictIcon {
                 height: 28.5px;
                 width: 28.5px;
-                color: #9fa3a0;
+                color: base.$secondary-color;
+                cursor: pointer;
               }
             }
 
@@ -98,16 +100,21 @@
 
         .titleAct {
           width: 25%;
-          padding: 16px 0;
+          padding: 1rem 0;
           font: base.$content-16;
           font-weight: 600;
         }
 
         .titleBox {
           width: 75%;
-          padding: 16px;
-          border: 1px solid #dcdcdc;
+          padding: 1rem;
+          font: base.$content-16;
+          border: 1px solid base.$grey-color;
           border-radius: 8px;
+
+          &:focus {
+            outline: none !important;
+          }
         }
       }
 
@@ -117,36 +124,36 @@
 
         .titleAct {
           width: 25%;
-          padding: 16px 0;
+          padding: 1rem 0;
           font: base.$content-16;
           font-weight: 600;
         }
 
         .topicBox {
-          width: 41.75%;
+          width: 40%;
           display: flex;
           justify-content: center;
           height: fit-content;
-          max-height: 2.8rem;
+          font: base.$content-16;
+          max-height: 3rem;
           min-width: 10rem;
-          z-index: 2;
+
           position: relative;
 
           &Filter {
             background-color: base.$white-color;
             border: 1px solid base.$grey-color;
             border-radius: 8px;
-            padding: 16px;
+            padding: 1rem;
             width: 100%;
-            height: 50px;
+            height: 58px;
             text-align: center;
-            font: base.$content-14;
+            font: base.$content-16;
             transition: all 0.5s;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             position: relative;
-            margin-right: 1rem;
 
             &:hover {
               background-color: rgba($color: #000000, $alpha: 0.1);
@@ -154,7 +161,7 @@
 
             span:last-child {
               position: absolute;
-              right: 10%;
+              right: 4%;
               top: 50%;
               transform: translateY(-35%);
             }
@@ -166,11 +173,12 @@
             // transform: translateX(-50%);
             background-color: base.$white-color;
             box-shadow: 0 0 10px 2px #0000001a;
-            border-radius: 20px;
+            border-radius: 8px;
             width: 100%;
             font: base.$content-16;
             color: base.$black-color;
             max-height: 19rem;
+            z-index: 2;
             overflow-y: scroll;
             overflow-x: hidden;
 
@@ -184,16 +192,24 @@
               width: 100%;
 
               &:nth-of-type(1) {
-                border-radius: 20px 0px 0 0;
+                border-radius: 8px 0px 0 0;
               }
 
               &:last-child {
-                border-radius: 0 0 0px 20px;
+                border-radius: 0 0 0px 8px;
               }
 
               &:hover {
                 background-color: base.$light-green-color;
               }
+
+              input[type="radio"] {
+                display: none;
+              }
+            }
+
+            label {
+              cursor: pointer;
             }
           }
 
@@ -205,11 +221,11 @@
             -webkit-box-shadow: inset 0 0 6px base.$white-color;
             background-color: base.$white-color;
             border: 1px solid base.$grey-color;
-            border-radius: 0px 20px 20px 0;
+            border-radius: 0px 8px 8px 0;
           }
 
           ::-webkit-scrollbar-thumb {
-            border-radius: 20px;
+            border-radius: 8px;
             -webkit-box-shadow: inset 0 0 6px base.$grey-color;
             background-color: base.$grey-color;
             background-image: none;
@@ -223,16 +239,21 @@
 
         .titleAct {
           width: 25%;
-          padding: 16px 0;
+          padding: 1rem 0;
           font: base.$content-16;
           font-weight: 600;
         }
 
         .partyBox {
           width: 40%;
-          padding: 16px;
-          border: 1px solid #dcdcdc;
+          padding: 1rem;
+          font: base.$content-16;
+          border: 1px solid base.$grey-color;
           border-radius: 8px;
+
+          &:focus {
+            outline: none !important;
+          }
         }
       }
 
@@ -242,28 +263,38 @@
 
         .titleAct {
           width: 25%;
-          padding: 16px 0;
+          padding: 1rem 0;
           font: base.$content-16;
           font-weight: 600;
         }
 
         .dateBox {
+          position: relative;
+          display: flex;
+          justify-content: center;
           width: 25%;
-          padding: 16px;
-          border: 1px solid #dcdcdc;
-          border-radius: 8px;
-          cursor: pointer;
-        }
 
-        // input[type="date"]::-webkit-calendar-picker-indicator {
-        //   display: none;
-        //   -webkit-appearance: none;
-        //   width: 15px;
-        //   padding: 0px;
-        //   margin: 0px;
-        //   margin-top: 10px;
-        //   color: base.$primary-color;
-        // }
+          cursor: text;
+
+          &Picker {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid base.$grey-color;
+            border-radius: 8px;
+            font: base.$content-16;
+
+            &:focus {
+              outline: none !important;
+            }
+          }
+
+          span {
+            color: base.$primary-color;
+            position: absolute;
+            right: 5%;
+            top: 36%;
+          }
+        }
       }
 
       .classTime {
@@ -272,20 +303,41 @@
 
         .titleAct {
           width: 25%;
-          padding: 16px 0;
+          padding: 1rem 0;
           font: base.$content-16;
           font-weight: 600;
         }
 
-        .timeBox {
-          width: 11%;
-          padding: 16px;
-          border: 1px solid #dcdcdc;
+        .timeOuter {
+          width: 25%;
+          display: flex;
+          border: 1px solid base.$grey-color;
           border-radius: 8px;
-        }
+          font: base.$content-16;
 
-        p {
-          padding: 16px 8px;
+          .timeBox {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            padding: 1rem;
+            font: base.$content-16;
+            cursor: text;
+
+            &::-webkit-calendar-picker-indicator {
+              filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(70deg)
+                brightness(95%) contrast(80%);
+              cursor: pointer;
+            }
+
+            &:focus {
+              outline: none !important;
+            }
+          }
+
+          p {
+            padding: 1rem 0;
+            font: base.$content-16;
+          }
         }
       }
 
@@ -295,7 +347,7 @@
 
         .titleAct {
           width: 25%;
-          padding: 16px 0;
+          padding: 1rem 0;
           font: base.$content-16;
           font-weight: 600;
         }
@@ -304,9 +356,14 @@
           width: 75%;
           height: 200px;
           resize: none;
-          padding: 16px;
-          border: 1px solid #dcdcdc;
+          padding: 1rem;
+          border: 1px solid base.$grey-color;
           border-radius: 8px;
+          font: base.$content-16;
+
+          &:focus {
+            outline: none !important;
+          }
         }
       }
 
@@ -315,17 +372,18 @@
 
         .titleAct {
           width: 25%;
-          padding: 16px 0;
+          padding: 1rem 0;
           font: base.$content-20;
           font-weight: 600;
         }
 
         .statusBox {
-          width: 41.75%;
+          width: 40%;
           display: flex;
           justify-content: center;
           height: fit-content;
-          max-height: 2.8rem;
+          font: base.$content-16;
+          max-height: 3rem;
           min-width: 10rem;
           z-index: 10;
           position: relative;
@@ -334,17 +392,16 @@
             background-color: base.$white-color;
             border: 1px solid base.$grey-color;
             border-radius: 8px;
-            padding: 16px;
+            padding: 1rem;
             width: 100%;
-            height: 50px;
+            height: 58px;
             text-align: center;
-            font: base.$content-14;
+            font: base.$content-16;
             transition: all 0.5s;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             position: relative;
-            margin-right: 1rem;
 
             &:hover {
               background-color: rgba($color: #000000, $alpha: 0.1);
@@ -352,7 +409,7 @@
 
             span:last-child {
               position: absolute;
-              right: 10%;
+              right: 4%;
               top: 50%;
               transform: translateY(-35%);
             }
@@ -361,11 +418,10 @@
           &Options {
             position: absolute;
             top: 120%;
-
             // transform: translateX(-50%);
             background-color: base.$white-color;
             box-shadow: 0 0 10px 2px #0000001a;
-            border-radius: 20px;
+            border-radius: 8px;
             width: 100%;
             font: base.$content-16;
             color: base.$black-color;
@@ -383,16 +439,24 @@
               width: 100%;
 
               &:nth-of-type(1) {
-                border-radius: 20px 0px 0 0;
+                border-radius: 8px 0px 0 0;
               }
 
               &:last-child {
-                border-radius: 0 0 0px 20px;
+                border-radius: 0 0 0px 8px;
               }
 
               &:hover {
                 background-color: base.$light-green-color;
               }
+
+              input[type="radio"] {
+                display: none;
+              }
+            }
+
+            label {
+              cursor: pointer;
             }
           }
 
@@ -404,11 +468,11 @@
             -webkit-box-shadow: inset 0 0 6px base.$white-color;
             background-color: base.$white-color;
             border: 1px solid base.$grey-color;
-            border-radius: 0px 20px 20px 0;
+            border-radius: 0px 8px 8px 0;
           }
 
           ::-webkit-scrollbar-thumb {
-            border-radius: 20px;
+            border-radius: 8px;
             -webkit-box-shadow: inset 0 0 6px base.$grey-color;
             background-color: base.$grey-color;
             background-image: none;
@@ -427,7 +491,7 @@
         text-align: center;
         height: 42px;
         padding: 8px 64px;
-        margin-left: 16px;
+        margin-left: 1rem;
 
         .cancelBtn {
           text-decoration: none;
