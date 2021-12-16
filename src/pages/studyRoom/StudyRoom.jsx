@@ -6,6 +6,8 @@ import { IoIosArrowDown } from "react-icons/io";
 import ReactPaginate from "react-paginate";
 import Button from "../../components/buttons/Button";
 import NoResult from "../../components/noresult/NoResult";
+import { useDispatch, useSelector } from "react-redux";
+import { getRooms } from "../../redux/action/actions/studyRoomAction/studyRoomAction";
 
 function StudyRoom() {
   // Parallax
@@ -34,11 +36,40 @@ function StudyRoom() {
   // End Start at top of page
 
   // Handle Pagination
-  const [selected, setSelected] = useState("");
+  const selected = 1;
+  const limit = 8;
+
+  // const fetchStudyRooms = () => {
+  //   dispatch(
+  //     getRooms({
+  //       slug: `?page=${selected}&limit=${limit}`,
+  //     })
+  //   );
+  // };
+
   const handlePagination = (data) => {
-    setSelected(data.selected);
+    dispatch(
+      getRooms({
+        slug: `?page=${data.selected + 1}&limit=${limit}`,
+      })
+    );
   };
+
   // End Handle Pagination
+
+  const studyRooms = useSelector((store) => {
+    return store.studyRoomReducer;
+  });
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      getRooms({
+        slug: `?page=${selected}&limit=${limit}`,
+      })
+    );
+  }, []);
 
   return (
     <section className={studyroomstyle.studyRoom}>
@@ -105,27 +136,33 @@ function StudyRoom() {
           </div>
         </div>
       </div>
-      <main className={studyroomstyle.studyRoomMain}>
-        <div className={studyroomstyle.studyRoomMainCards}>
-          <Card />
-        </div>
-        <ReactPaginate
-          breakLabel={"..."}
-          pageCount={10}
-          marginPagesDisplayed={1}
-          pageRangeDisplayed={5}
-          onPageChange={handlePagination}
-          containerClassName={studyroomstyle.studyRoomMainPagination}
-          pageClassName={studyroomstyle.studyRoomMainPaginationList}
-          pageLinkClassName={studyroomstyle.studyRoomMainPaginationLink}
-          previousClassName={studyroomstyle.studyRoomMainPaginationDisplayNone}
-          nextClassName={studyroomstyle.studyRoomMainPaginationDisplayNone}
-          breakClassName={studyroomstyle.studyRoomMainPaginationList}
-          activeClassName={studyroomstyle.studyRoomMainPaginationActive}
-        />
-      </main>
+      {studyRooms.data ? (
+        <main className={studyroomstyle.studyRoomMain}>
+          <div className={studyroomstyle.studyRoomMainCards}>
+            {studyRooms.data.length > 0 &&
+              studyRooms.data.map((data) => <Card data={data} key={data.id} />)}
+          </div>
+          <ReactPaginate
+            breakLabel={"..."}
+            pageCount={Math.ceil(studyRooms.totalData / limit)}
+            marginPagesDisplayed={1}
+            pageRangeDisplayed={5}
+            onPageChange={handlePagination}
+            containerClassName={studyroomstyle.studyRoomMainPagination}
+            pageClassName={studyroomstyle.studyRoomMainPaginationList}
+            pageLinkClassName={studyroomstyle.studyRoomMainPaginationLink}
+            previousClassName={
+              studyroomstyle.studyRoomMainPaginationDisplayNone
+            }
+            nextClassName={studyroomstyle.studyRoomMainPaginationDisplayNone}
+            breakClassName={studyroomstyle.studyRoomMainPaginationList}
+            activeClassName={studyroomstyle.studyRoomMainPaginationActive}
+          />
+        </main>
+      ) : (
+        <NoResult />
+      )}
     </section>
-    // <NoResult />
   );
 }
 
