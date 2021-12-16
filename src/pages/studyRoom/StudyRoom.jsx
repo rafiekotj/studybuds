@@ -8,6 +8,7 @@ import Button from "../../components/buttons/Button";
 import NoResult from "../../components/noresult/NoResult";
 import { useDispatch, useSelector } from "react-redux";
 import { getRooms } from "../../redux/action/actions/studyRoomAction/studyRoomAction";
+import Loader from "../../components/loader/Loader";
 
 function StudyRoom() {
   // Parallax
@@ -39,14 +40,6 @@ function StudyRoom() {
   const selected = 1;
   const limit = 8;
 
-  // const fetchStudyRooms = () => {
-  //   dispatch(
-  //     getRooms({
-  //       slug: `?page=${selected}&limit=${limit}`,
-  //     })
-  //   );
-  // };
-
   const handlePagination = (data) => {
     dispatch(
       getRooms({
@@ -54,9 +47,9 @@ function StudyRoom() {
       })
     );
   };
-
   // End Handle Pagination
 
+  // Handle Showing Cards
   const studyRooms = useSelector((store) => {
     return store.studyRoomReducer;
   });
@@ -70,6 +63,9 @@ function StudyRoom() {
       })
     );
   }, []);
+
+  const isLoading = studyRooms.isLoading;
+  // End Handle Showing Cards
 
   return (
     <section className={studyroomstyle.studyRoom}>
@@ -162,6 +158,7 @@ function StudyRoom() {
       ) : (
         <NoResult />
       )}
+      {isLoading && <Loader />}
     </section>
   );
 }

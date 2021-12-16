@@ -4,6 +4,8 @@ import homestyle from "./home.module.scss";
 import Button from "../../components/buttons/Button";
 import Card from "../../components/card/Card";
 import { HiChevronDoubleRight } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import { getHomeRooms } from "../../redux/action/actions/homeRoomAction/homeRoomAction";
 
 function Home() {
   // Parallax
@@ -22,6 +24,24 @@ function Home() {
     window.scroll(0, 0);
   }, []);
   // End Start at top of page
+
+  // Handle Showing Cards
+  const studyRooms = useSelector((store) => {
+    return store.homeRoomReducer;
+  });
+
+  const dispatch = useDispatch();
+
+  const limit = 4;
+
+  useEffect(() => {
+    dispatch(
+      getHomeRooms({
+        slug: `?limit=${limit}`,
+      })
+    );
+  }, []);
+  // End of Handle Showing Cards
 
   return (
     <>
@@ -44,7 +64,9 @@ function Home() {
             available classes for you!
           </p>
           <div className={homestyle.button}>
-            <Button classStyle={`buttonGreen`}>Join Now</Button>
+            <Link to="/register">
+              <Button classStyle={`buttonGreen`}>Join Now</Button>
+            </Link>
           </div>
         </div>
         <div
@@ -75,7 +97,8 @@ function Home() {
             <li>Geography</li>
           </ul>
           <div className={homestyle.heroMainContainerCards}>
-            <Card />
+            {studyRooms.data.length > 0 &&
+              studyRooms.data.map((data) => <Card data={data} key={data.id} />)}
           </div>
           <Link to="/study-room" className={homestyle.links}>
             <Button classStyle={"heroMainContainerButton"}>
