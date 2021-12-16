@@ -61,9 +61,17 @@
       border-radius: 8px;
       font: base.$content-14;
       color: base.$white-color;
-      background-color: base.$primary-color;
+
       cursor: pointer;
       transition: all 0.5s;
+
+      &Open {
+        background-color: base.$primary-color;
+      }
+
+      &Restricted {
+        background-color: base.$warning-color;
+      }
 
       @include media("<=desktop") {
         width: 30%;
@@ -100,10 +108,13 @@
 
     &Info {
       margin: 0.5rem 0;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
       display: flex;
+
+      &Time {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
       @include media("<=desktop") {
         margin: 0.25rem 0;
@@ -123,5 +134,9 @@
       overflow: hidden;
       z-index: 3;
     }
+  }
+
+  &Link {
+    all: unset;
   }
 }
