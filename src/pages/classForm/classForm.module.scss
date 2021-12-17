@@ -48,22 +48,22 @@
       border-radius: 12px;
       box-shadow: 0px 0px 10px 0px #0000001a;
 
-      .classImg {
+      &Img {
         display: flex;
         margin-bottom: 40px;
 
-        .titleAct {
+        &Name {
           width: 25%;
           padding: 48px 0;
           font: base.$content-16;
           font-weight: 600;
         }
 
-        .uploadPlace {
+        &Upload {
           display: flex;
           overflow: hidden;
 
-          .uploadBox {
+          &Box {
             border: 1px dashed base.$grey-color;
             border-radius: 12px;
             padding: 44.5px;
@@ -71,8 +71,8 @@
             height: 116px;
             margin-right: 1rem;
 
-            .pictBox {
-              .pictIcon {
+            &Square {
+              &Icon {
                 height: 28.5px;
                 width: 28.5px;
                 color: base.$secondary-color;
@@ -80,17 +80,22 @@
               }
             }
 
-            .inputPict {
+            &Input {
               display: none;
               visibility: none;
             }
           }
 
-          .uploadWarn {
+          &Warn {
             font: base.$content-14;
             width: 150px;
             margin: auto;
           }
+        }
+
+        @include media("<=tablet") {
+          display: flex;
+          flex-direction: column;
         }
       }
 

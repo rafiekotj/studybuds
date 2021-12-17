@@ -22,7 +22,7 @@ function createRoutes() {
         <Route path="/Login" element={<Login />} />
         <Route exact path="/" element={<Home />} />
         <Route exact path="/study-room" element={<StudyRoom />} />
-        <Route path="/room" element={<DetailRoomStudents />} />
+        <Route path="/room/:id" element={<DetailRoomStudents />} />
         <Route path="/host" element={<DetailRoomHost />} />
         <Route path="/approve" element={<ApproveParticipant />} />
         <Route path="/new-class" element={<ClassForm />} />

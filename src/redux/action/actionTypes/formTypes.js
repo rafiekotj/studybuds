@@ -1,0 +1,2 @@
+export const POST_FORM_FETCH = "POST_FORM_FETCH";
+export const POST_FORM_SUCCESS = "POST_FORM_SUCCESS";

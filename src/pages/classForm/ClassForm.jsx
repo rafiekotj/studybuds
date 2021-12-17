@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import { Formik } from "formik";
-// import * as yup from "yup";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import classFormStyle from "./classForm.module.scss";
+import { postForm } from "../../redux/action/actions/formAction/formAction";
+import Button from "../../components/buttons/Button";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
 import ellipseLeft from "../../assets/img/ellipseLeft.svg";
@@ -13,7 +13,6 @@ import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 import { RiCalendar2Fill } from "react-icons/ri";
-import Button from "../../components/buttons/Button";
 
 function ClassForm() {
   useEffect(() => {
@@ -45,7 +44,29 @@ function ClassForm() {
   const [description, setDescription] = useState("");
   const [roomStatus, setRoomStatus] = useState("");
 
+  const classForms = useSelector((store) => {
+    return store.data;
+  });
+
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(postForm());
+  }, []);
+
+  // const publish = () => {
+  //   const data = {
+  //     imageClass,
+  //     title,
+  //     limitParticipant,
+  //     date,
+  //     startTime,
+  //     endTime,
+  //     description,
+  //     roomStatus,
+  //   };
+  //   dispatch(postForm(data));
+  // };
 
   return (
     <>
@@ -75,17 +96,21 @@ function ClassForm() {
           <p className={classFormStyle.titlePage}>Add New Class</p>
           <form>
             <div className={classFormStyle.formBox}>
-              <div className={classFormStyle.classImg}>
-                <div className={classFormStyle.titleAct}>Upload Photo</div>
-                <div className={classFormStyle.uploadPlace}>
-                  <div className={classFormStyle.uploadBox}>
+              <div className={classFormStyle.formBoxImg}>
+                <div className={classFormStyle.formBoxImgName}>
+                  Upload Photo
+                </div>
+                <div className={classFormStyle.formBoxImgUpload}>
+                  <div className={classFormStyle.formBoxImgUploadBox}>
                     <label
                       htmlFor="firstimg"
-                      className={classFormStyle.pictBox}
+                      className={classFormStyle.formBoxImgUploadBoxSquare}
                     >
                       <span>
                         <MdAddPhotoAlternate
-                          className={classFormStyle.pictIcon}
+                          className={
+                            classFormStyle.formBoxImgUploadBoxSquareIcon
+                          }
                         />
                       </span>
                     </label>
@@ -94,11 +119,11 @@ function ClassForm() {
                       type="file"
                       name=""
                       id="firstimg"
-                      className={classFormStyle.inputPict}
+                      className={classFormStyle.formBoxImgUploadBoxInput}
                       onChange={(e) => setImageClass(e.target.value)}
                     />
                   </div>
-                  <p className={classFormStyle.uploadWarn}>
+                  <p className={classFormStyle.formBoxImgUploadWarn}>
                     Format image .jpg .jpeg .png, maximum 3 MB
                   </p>
                 </div>
@@ -132,198 +157,14 @@ function ClassForm() {
                     style={show ? { display: "block" } : { display: "none" }}
                   >
                     <ul>
-                      <li onClick={() => setTopic("Select Topic")}>
-                        <input
-                          type="radio"
-                          name="optionsBySelectTopic"
-                          id="optionsBySelectTopic"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsBySelectTopic">
-                          Select Topic
-                        </label>
-                      </li>
-                      <li onClick={() => setTopic("Art")}>
-                        <input
-                          type="radio"
-                          name="optionsByArt"
-                          id="optionsByArt"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByArt">Art</label>
-                      </li>
-                      <li onClick={() => setTopic("Biology")}>
-                        <input
-                          type="radio"
-                          name="optionsByBiology"
-                          id="optionsByBiology"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByBiology">Biology</label>
-                      </li>
-                      <li onClick={() => setTopic("Business")}>
-                        <input
-                          type="radio"
-                          name="optionsByBusiness"
-                          id="optionsByBusiness"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByBusiness">Business</label>
-                      </li>
-                      <li onClick={() => setTopic("Cooking")}>
-                        <input
-                          type="radio"
-                          name="optionsByCooking"
-                          id="optionsByCooking"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByCooking">Cooking</label>
-                      </li>
-                      <li onClick={() => setTopic("Fashion")}>
-                        <input
-                          type="radio"
-                          name="optionsByFashion"
-                          id="optionsByFashion"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByFashion">Fashion</label>
-                      </li>
-                      <li onClick={() => setTopic("Geography")}>
-                        <input
-                          type="radio"
-                          name="optionsByGeography"
-                          id="optionsByGeography"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByGeography">Geography</label>
-                      </li>
-                      <li onClick={() => setTopic("Geology")}>
-                        <input
-                          type="radio"
-                          name="optionsByGeology"
-                          id="optionsByGeology"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByGeology">Geology</label>
-                      </li>
-                      <li onClick={() => setTopic("Health")}>
-                        <input
-                          type="radio"
-                          name="optionsByHealth"
-                          id="optionsByHealth"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByHealth">Health</label>
-                      </li>
-                      <li onClick={() => setTopic("History")}>
-                        <input
-                          type="radio"
-                          name="optionsByHistory"
-                          id="optionsByHistory"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByHistory">History</label>
-                      </li>
-                      <li onClick={() => setTopic("Hobbies")}>
-                        <input
-                          type="radio"
-                          name="optionsByHobbies"
-                          id="optionsByHobbies"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByHobbies">Hobbies</label>
-                      </li>
-                      <li onClick={() => setTopic("Literature")}>
-                        <input
-                          type="radio"
-                          name="optionsByLiterature"
-                          id="optionsByLiterature"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByLiterature">Literature</label>
-                      </li>
-                      <li onClick={() => setTopic("Love Class")}>
-                        <input
-                          type="radio"
-                          name="optionsByLoveClass"
-                          id="optionsByLoveClass"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByLoveClass">Love Class</label>
-                      </li>
-                      <li onClick={() => setTopic("Math")}>
-                        <input
-                          type="radio"
-                          name="optionsByMath"
-                          id="optionsByMath"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByMath">Math</label>
-                      </li>
-                      <li onClick={() => setTopic("Physics")}>
-                        <input
-                          type="radio"
-                          name="optionsByPhysics"
-                          id="optionsByPhysics"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByPhysics">Physics</label>
-                      </li>
-                      <li onClick={() => setTopic("Research")}>
-                        <input
-                          type="radio"
-                          name="optionsByResearch"
-                          id="optionsByResearch"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByResearch">Research</label>
-                      </li>
-                      <li onClick={() => setTopic("Romance")}>
-                        <input
-                          type="radio"
-                          name="optionsByRomance"
-                          id="optionsByRomance"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByRomance">Romance</label>
-                      </li>
-                      <li onClick={() => setTopic("Sport")}>
-                        <input
-                          type="radio"
-                          name="optionsBySport"
-                          id="optionsBySport"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsBySport">Sport</label>
-                      </li>
-                      <li onClick={() => setTopic("Tech")}>
-                        <input
-                          type="radio"
-                          name="optionsByTech"
-                          id="optionsByTech"
-                          // value={roomStatus}
-                          // onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByTech">Tech</label>
-                      </li>
+                      <li>Select Topic</li>
+                      <li>Art</li>
+                      <li>Biology</li>
+                      <li>Business</li>
+                      <li>Cooking</li>
+                      <li>Digital</li>
+                      <li>Fashion</li>
+                      <li>Geography</li>
                     </ul>
                   </div>
                 </div>
@@ -446,7 +287,7 @@ function ClassForm() {
               </Link>
             </Button>
             <Button classStyle="buttonWhite">Save as Draft</Button>
-            <Link to="/host">
+            <Link to="">
               <Button classStyle="buttonGreen">Publish</Button>
             </Link>
           </div>
