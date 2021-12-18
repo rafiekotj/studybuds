@@ -24,7 +24,7 @@ function Card({ data }) {
         />
       </div>
       <div className={cardstyle.cardText}>
-        <Link to="/room" className={cardstyle.cardLink}>
+        <Link to={`/room/${data.id}`} className={cardstyle.cardLink}>
           <p className={cardstyle.cardTextTitle}>{data.title}</p>
         </Link>
         <div className={cardstyle.cardTextInfo}>
@@ -39,7 +39,7 @@ function Card({ data }) {
             {data.countJoined}/{data.limitParticipant}
           </p>
         </div>
-        <Link to="/room" className={cardstyle.cardLink}>
+        <Link to="#" className={cardstyle.cardLink}>
           <Button classStyle="buttonGreen">Join Room</Button>
         </Link>
       </div>

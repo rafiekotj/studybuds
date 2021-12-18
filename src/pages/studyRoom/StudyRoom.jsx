@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import studyroomstyle from "./studyRoom.module.scss";
+import { Link } from "react-router-dom";
 import Card from "../../components/card/Card";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
@@ -7,13 +8,24 @@ import ReactPaginate from "react-paginate";
 import Button from "../../components/buttons/Button";
 import NoResult from "../../components/noresult/NoResult";
 import { useDispatch, useSelector } from "react-redux";
-import { getRooms } from "../../redux/action/actions/studyRoomAction/studyRoomAction";
+import {
+  getRooms,
+  getTopics,
+} from "../../redux/action/actions/studyRoomAction/studyRoomAction";
 import Loader from "../../components/loader/Loader";
 
 function StudyRoom() {
-  // Parallax
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
+  const [status, setStatus] = useState("All Status");
+  const [selected, setSelected] = useState(1);
+  const [topic, setTopic] = useState("");
+  const [chosenTopic, setChosenTopic] = useState("All Topic");
+  const limit = 8;
+  const [show, setShow] = useState(false);
+  const dispatch = useDispatch();
+
+  // Parallax
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -22,14 +34,83 @@ function StudyRoom() {
   }, []);
   // End of Parallax
 
+  const handleFetch = (latestPage, latestStatus, latestTopic) => {
+    const slugPage = latestPage
+      ? `${latestPage ? `page=${latestPage}` : `page=${selected}`}`
+      : "";
+    const slugLimit = limit ? `limit=${limit}` : "";
+    const slugStatus =
+      latestStatus && latestStatus !== "All Status"
+        ? `status=${latestStatus}`
+        : "";
+    const slugTopic = latestTopic ? `top=${latestTopic}` : "";
+
+    dispatch(
+      getRooms({
+        slug: `?${slugPage}&${slugLimit}&${slugStatus}&${slugTopic}`,
+      })
+    );
+  };
+
+  // Filter
+  // Filter by Status
+  const handleStatus = async (stats) => {
+    let latestStatus;
+    await setStatus(() => {
+      latestStatus = stats;
+      return latestStatus;
+    });
+
+    let latestPage;
+    await setSelected(() => {
+      latestPage = 1;
+      return latestPage;
+    });
+
+    let latestTopic;
+    await setTopic(() => {
+      latestTopic = topic;
+      return latestTopic;
+    });
+
+    handleFetch(latestPage, latestStatus, latestTopic);
+  };
+  // End Filter by Status
+
+  // Filter by Topics
+  const handleTopics = async (top, chosenTop) => {
+    setChosenTopic(chosenTop);
+
+    let latestStatus;
+    await setStatus(() => {
+      latestStatus = status;
+      return latestStatus;
+    });
+
+    let latestPage;
+    await setSelected(() => {
+      latestPage = 1;
+      return latestPage;
+    });
+
+    let latestTopic;
+    await setTopic(() => {
+      latestTopic = top;
+      return latestTopic;
+    });
+    console.log(latestTopic);
+
+    handleFetch(latestPage, latestStatus, latestTopic);
+  };
+  // End Filter by Topics
+
   // Show hide dropdown
-  const [show, setShow] = useState(false);
 
   const handleShow = () => {
     setShow(!show);
   };
   // End Show hide dropdown
-
+  // End Filter
   // Start at top of page
   useEffect(() => {
     window.scroll(0, 0);
@@ -37,15 +118,26 @@ function StudyRoom() {
   // End Start at top of page
 
   // Handle Pagination
-  const selected = 1;
-  const limit = 8;
+  const handlePagination = async (data) => {
+    let latestStatus;
+    await setStatus(() => {
+      latestStatus = status;
+      return latestStatus;
+    });
 
-  const handlePagination = (data) => {
-    dispatch(
-      getRooms({
-        slug: `?page=${data.selected + 1}&limit=${limit}`,
-      })
-    );
+    let latestPage;
+    await setSelected(() => {
+      latestPage = data.selected + 1;
+      return latestPage;
+    });
+
+    let latestTopic;
+    await setTopic(() => {
+      latestTopic = topic;
+      return latestTopic;
+    });
+
+    handleFetch(latestPage, latestStatus, latestTopic);
   };
   // End Handle Pagination
 
@@ -54,14 +146,14 @@ function StudyRoom() {
     return store.studyRoomReducer;
   });
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(
       getRooms({
         slug: `?page=${selected}&limit=${limit}`,
       })
     );
+
+    dispatch(getTopics());
   }, []);
 
   const isLoading = studyRooms.isLoading;
@@ -85,9 +177,36 @@ function StudyRoom() {
         <h1>Study Room</h1>
         <div className={studyroomstyle.studyRoomTopTitle}>
           <ul className={studyroomstyle.studyRoomTopTitleLeft}>
-            <li>All Status</li>
-            <li>Open</li>
-            <li>Restricted</li>
+            <li
+              onClick={() => handleStatus("All Status")}
+              className={
+                status === "All Status"
+                  ? studyroomstyle.studyRoomTopTitleLeftChosen
+                  : ""
+              }
+            >
+              All Status
+            </li>
+            <li
+              onClick={() => handleStatus("Open")}
+              className={
+                status === "Open"
+                  ? studyroomstyle.studyRoomTopTitleLeftChosen
+                  : ""
+              }
+            >
+              Open
+            </li>
+            <li
+              onClick={() => handleStatus("Restricted")}
+              className={
+                status === "Restricted"
+                  ? studyroomstyle.studyRoomTopTitleLeftChosen
+                  : ""
+              }
+            >
+              Restricted
+            </li>
           </ul>
           <div className={studyroomstyle.studyRoomTopTitleRight}>
             <div
@@ -96,7 +215,7 @@ function StudyRoom() {
                 handleShow();
               }}
             >
-              <span>All Topic</span>
+              <span>{chosenTopic}</span>
               <span>
                 <IoIosArrowDown />
               </span>
@@ -106,33 +225,28 @@ function StudyRoom() {
               style={show ? { display: "block" } : { display: "none" }}
             >
               <ul>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
-                <li>Art</li>
+                {studyRooms.topics.map((data) => (
+                  <li
+                    key={data.id}
+                    onClick={() => handleTopics(data.id, data.topic)}
+                  >
+                    {data.topic}
+                  </li>
+                ))}
               </ul>
             </div>
-            <Button classStyle={"addClass"}>
-              Add Class
-              <span className={studyroomstyle.plusIcon}>
-                <AiFillPlusCircle />
-              </span>
-            </Button>
+            <Link to="/new-class" className={studyroomstyle.link}>
+              <Button classStyle={"addClass"}>
+                Add Class
+                <span className={studyroomstyle.plusIcon}>
+                  <AiFillPlusCircle />
+                </span>
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
-      {studyRooms.data ? (
+      {studyRooms.data.length > 0 ? (
         <main className={studyroomstyle.studyRoomMain}>
           <div className={studyroomstyle.studyRoomMainCards}>
             {studyRooms.data.length > 0 &&
@@ -152,6 +266,7 @@ function StudyRoom() {
             }
             nextClassName={studyroomstyle.studyRoomMainPaginationDisplayNone}
             breakClassName={studyroomstyle.studyRoomMainPaginationList}
+            forcePage={selected - 1}
             activeClassName={studyroomstyle.studyRoomMainPaginationActive}
           />
         </main>
