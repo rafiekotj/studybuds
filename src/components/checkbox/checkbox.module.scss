@@ -1,0 +1,28 @@
+@use "../../base";
+@import "../../breakpoints/breakpoints.scss";
+
+.container {
+  &Checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    background-color: base.$light-green-color;
+    color: base.$white-color;
+  }
+
+  &Icon {
+    color: base.$white-color;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+
+  &Active {
+    background: base.$primary-color;
+  }
+}

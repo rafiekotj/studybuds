@@ -13,6 +13,8 @@ import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { IoIosArrowDown } from "react-icons/io";
 import { RiCalendar2Fill } from "react-icons/ri";
+import moment from "moment";
+import { createForm } from "../../redux/action/actions/formAction/formAction";
 
 function ClassForm() {
   useEffect(() => {
@@ -22,51 +24,42 @@ function ClassForm() {
   const [show, setShow] = useState(false);
   const [drop, setDrop] = useState(false);
 
-  const handleShow = () => {
-    setShow(!show);
-  };
-
-  const handleDrop = () => {
-    setDrop(!drop);
-  };
-
   const [startDate, setStartDate] = useState(null);
 
-  const [topic, setTopic] = useState("Select Topic");
-  const [status, setStatus] = useState("Select Class Status");
+  // const initialRoomState = {};
 
-  const [imageClass, setImageClass] = useState("");
-  const [title, setTitle] = useState("");
-  const [limitParticipant, setLimitParticipant] = useState("");
-  const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [description, setDescription] = useState("");
-  const [roomStatus, setRoomStatus] = useState("");
-
-  const classForms = useSelector((store) => {
-    return store.data;
+  const [room, setRoom] = useState({
+    id_topic: "",
+    imageClass: "",
+    title: "",
+    limitParticipant: "",
+    date: "",
+    startTime: "",
+    endTime: "",
+    description: "",
+    roomStatus: "",
   });
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(postForm());
-  }, []);
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    // let data = { [name]: value };
+    // console.log(data);
+    setRoom({ ...room, [name]: value });
+    // setRoom([...room, { title: value }]);
+  };
 
-  // const publish = () => {
-  //   const data = {
-  //     imageClass,
-  //     title,
-  //     limitParticipant,
-  //     date,
-  //     startTime,
-  //     endTime,
-  //     description,
-  //     roomStatus,
-  //   };
-  //   dispatch(postForm(data));
-  // };
+  console.log(room);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createForm(room))
+      .then((data) => {
+        room();
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <>
@@ -94,7 +87,7 @@ function ClassForm() {
         />
         <div className={classFormStyle.detailTitle}>
           <p className={classFormStyle.titlePage}>Add New Class</p>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className={classFormStyle.formBox}>
               <div className={classFormStyle.formBoxImg}>
                 <div className={classFormStyle.formBoxImgName}>
@@ -115,12 +108,12 @@ function ClassForm() {
                       </span>
                     </label>
                     <input
-                      value={imageClass}
                       type="file"
-                      name=""
                       id="firstimg"
                       className={classFormStyle.formBoxImgUploadBoxInput}
-                      onChange={(e) => setImageClass(e.target.value)}
+                      value={room.imageClass}
+                      onChange={handleInputChange}
+                      name="imageClass"
                     />
                   </div>
                   <p className={classFormStyle.formBoxImgUploadWarn}>
@@ -131,42 +124,30 @@ function ClassForm() {
               <div className={classFormStyle.classTitle}>
                 <div className={classFormStyle.titleAct}>Title</div>
                 <input
-                  value={title}
                   type="text"
                   className={classFormStyle.titleBox}
                   placeholder="Input title, e.g. Yoga Class"
-                  onChange={(e) => setTitle(e.target.value)}
+                  value={room.title}
+                  onChange={handleInputChange}
+                  name="title"
                 />
               </div>
               <div className={classFormStyle.classTopic}>
                 <div className={classFormStyle.titleAct}>Topic</div>
                 <div className={classFormStyle.topicBox}>
-                  <div
-                    className={classFormStyle.topicBoxFilter}
-                    onClick={() => {
-                      handleShow();
-                    }}
+                  <select
+                    className={classFormStyle.topicSelect}
+                    value={room.id_topic}
+                    name="id_topic"
+                    id="id_topic"
+                    onChange={handleInputChange}
                   >
-                    <span>{topic}</span>
-                    <span>
-                      <IoIosArrowDown />
-                    </span>
-                  </div>
-                  <div
-                    className={classFormStyle.topicBoxOptions}
-                    style={show ? { display: "block" } : { display: "none" }}
-                  >
-                    <ul>
-                      <li>Select Topic</li>
-                      <li>Art</li>
-                      <li>Biology</li>
-                      <li>Business</li>
-                      <li>Cooking</li>
-                      <li>Digital</li>
-                      <li>Fashion</li>
-                      <li>Geography</li>
-                    </ul>
-                  </div>
+                    <option value="" disabled selected hidden>
+                      Select Topic
+                    </option>
+                    <option value="1">Math</option>
+                    <option value="2">Art</option>
+                  </select>
                 </div>
               </div>
               <div className={classFormStyle.classParty}>
@@ -174,30 +155,31 @@ function ClassForm() {
                   Number of Participants
                 </div>
                 <input
-                  value={limitParticipant}
                   type="text"
                   className={classFormStyle.partyBox}
                   placeholder="Input number of participants, e.g. 100"
-                  onChange={(e) => setLimitParticipant(e.target.value)}
+                  value={room.limitParticipant}
+                  onChange={handleInputChange}
+                  name="limitParticipant"
                 />
               </div>
               <div className={classFormStyle.classDate}>
                 <div className={classFormStyle.titleAct}>Date</div>
-                {/* <input
-                  value={date}
-                  type="date"
-                  className={classFormStyle.dateBox}
-                  onChange={(e) => setDate(e.target.value)}
-                /> */}
                 <div className={classFormStyle.dateBox}>
                   <DatePicker
                     className={classFormStyle.dateBoxPicker}
-                    defaultValue={date}
                     placeholderText="Select Date"
                     dateFormat="EE, dd MMMM yyyy"
                     selected={startDate}
-                    onChange={(date) => setStartDate(date)}
-                    // onChange={(e) => setImageClass(e.target.value)}
+                    onChange={(value) => {
+                      setStartDate(value);
+                      setRoom({
+                        ...room,
+                        date: moment(value)
+                          .format("ddd, D MMMM YYYY")
+                          .toString(),
+                      });
+                    }}
                   />
                   <span>
                     <RiCalendar2Fill />
@@ -208,74 +190,52 @@ function ClassForm() {
                 <div className={classFormStyle.titleAct}>Time</div>
                 <div className={classFormStyle.timeOuter}>
                   <input
-                    value={startTime}
                     type="time"
                     className={classFormStyle.timeBox}
-                    onChange={(e) => setStartTime(e.target.value)}
+                    value={room.startTime}
+                    onChange={handleInputChange}
+                    name="startTime"
                   />
                   <p>to</p>
                   <input
-                    value={endTime}
                     type="time"
                     className={classFormStyle.timeBox}
-                    onChange={(e) => setEndTime(e.target.value)}
+                    value={room.endTime}
+                    onChange={handleInputChange}
+                    name="endTime"
                   />
                 </div>
               </div>
               <div className={classFormStyle.classDesc}>
                 <div className={classFormStyle.titleAct}>Description</div>
                 <textarea
-                  value={description}
                   className={classFormStyle.descBox}
                   placeholder="Input description, e.g.
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mauris sed proin ut cursus bibendum non felis in. Malesuada dignissim nunc id pharetra eget semper. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis mauris sed proin ut cursus bibendum non felis in. Malesuada dignissim nunc id pharetra eget semper.
                   Lorem Ipsum:
                   • Lorem ipsum dolor sit amet
                   • Lorem ipsum dolor sit amet"
-                  onChange={(e) => setDescription(e.target.value)}
+                  value={room.description}
+                  onChange={handleInputChange}
+                  name="description"
                 ></textarea>
               </div>
               <div className={classFormStyle.classStatus}>
                 <div className={classFormStyle.titleAct}>Class Status</div>
                 <div className={classFormStyle.statusBox}>
-                  <div
-                    className={classFormStyle.statusBoxFilter}
-                    onClick={() => {
-                      handleDrop();
-                    }}
+                  <select
+                    className={classFormStyle.statusSelect}
+                    value={room.roomStatus}
+                    name="roomStatus"
+                    id="roomStatus"
+                    onChange={handleInputChange}
                   >
-                    <span>{status}</span>
-                    <span>
-                      <IoIosArrowDown />
-                    </span>
-                  </div>
-                  <div
-                    className={classFormStyle.statusBoxOptions}
-                    style={drop ? { display: "block" } : { display: "none" }}
-                  >
-                    <ul>
-                      <li onClick={() => setStatus("Open")}>
-                        <input
-                          type="radio"
-                          name="optionsByOpen"
-                          id="optionsByOpen"
-                          value={roomStatus}
-                          onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByOpen">Open</label>
-                      </li>
-                      <li onClick={() => setStatus("Restricted")}>
-                        <input
-                          type="radio"
-                          name="optionsByRestricted"
-                          id="optionsByRestricted"
-                          value={roomStatus}
-                          onChange={(e) => setRoomStatus(e.target.value)}
-                        />
-                        <label htmlFor="optionsByRestricted">Restricted</label>
-                      </li>
-                    </ul>
-                  </div>
+                    <option value="" disabled selected hidden>
+                      Select Class Status
+                    </option>
+                    <option value="Open">Open</option>
+                    <option value="Restricted">Restricted</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -288,7 +248,9 @@ function ClassForm() {
             </Button>
             <Button classStyle="buttonWhite">Save as Draft</Button>
             <Link to="">
-              <Button classStyle="buttonGreen">Publish</Button>
+              <Button classStyle="buttonGreen" type="submit">
+                Publish
+              </Button>
             </Link>
           </div>
         </div>
