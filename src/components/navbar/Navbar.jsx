@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import navbarstyle from "./navbar.module.scss";
 import brandLogo from "../../assets/img/brandLogo.png";
 import Button from "../buttons/Button";
@@ -6,112 +6,21 @@ import { IoIosArrowDown } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
 import { RiNotification2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useOutsideClick from "../useOutsideClick";
-
-// Loop Categories
-const categories = [
-  {
-    link: "#",
-    category: "Art",
-  },
-  {
-    link: "#",
-    category: "Biology",
-  },
-  {
-    link: "#",
-    category: "Business",
-  },
-  {
-    link: "#",
-    category: "Cooking",
-  },
-  {
-    link: "#",
-    category: "Fashion",
-  },
-  {
-    link: "#",
-    category: "Geography",
-  },
-  {
-    link: "#",
-    category: "Geology",
-  },
-  {
-    link: "#",
-    category: "Health",
-  },
-  {
-    link: "#",
-    category: "History",
-  },
-  {
-    link: "#",
-    category: "Hobbies",
-  },
-  {
-    link: "#",
-    category: "Literature",
-  },
-  {
-    link: "#",
-    category: "Love Class",
-  },
-  {
-    link: "#",
-    category: "Math",
-  },
-  {
-    link: "#",
-    category: "Physics",
-  },
-  {
-    link: "#",
-    category: "Research",
-  },
-  {
-    link: "#",
-    category: "Romance",
-  },
-  {
-    link: "#",
-    category: "Sport",
-  },
-  {
-    link: "#",
-    category: "Tech",
-  },
-  {
-    link: "#",
-    category: "Uncategorized",
-  },
-];
-
-const loopNav = () => {
-  const elements = [];
-
-  for (let i = 0; i < Math.ceil(categories.length / 8); i++) {
-    elements.push(
-      <div>
-        {categories.slice(i * 8, i * 8 + 8).map((category, key) => (
-          <li key={key}>
-            <Link className={navbarstyle.links} to={category.link}>
-              {category.category}
-            </Link>
-          </li>
-        ))}
-      </div>
-    );
-  }
-
-  return <>{elements.map((element) => element)}</>;
-};
-// End Loop Categories
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getRooms,
+  getTopics,
+} from "../../redux/action/actions/studyRoomAction/studyRoomAction";
 
 function Navbar() {
+  let i = 0;
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
+  const [topic, setTopic] = useState("");
 
   // Show hide dropdown browse
   const [show, setShow] = useState(false);
@@ -120,7 +29,6 @@ function Navbar() {
   const handleShow = () => {
     setShow(!show);
   };
-
   // End Show hide dropdown browse
 
   // Show hide dropdown notification
@@ -148,6 +56,72 @@ function Navbar() {
   };
 
   // End Show hide dropdown profile
+
+  // Fetch Data
+  const studyRooms = useSelector((store) => {
+    return store.studyRoomReducer;
+  });
+
+  useEffect(() => {
+    dispatch(getTopics());
+  }, []);
+  // End Fetch Data
+
+  const handleCategory = async (data) => {
+    await dispatch(
+      getRooms({
+        slug: `?page=${1}&limit=${8}${
+          status && status !== "All Status" ? `&status=${status}` : ""
+        }&top=${data.id}`,
+      })
+    );
+
+    navigate("/study-room");
+    // setTopic(data.id);
+    // navigate("/study-room", { state: topic });
+    setShow(!show);
+    setStatus("All Status");
+    setTopic("");
+  };
+
+  const handleOnInputSearch = (value) => {
+    setSearchInput(value);
+  };
+
+  const handleEnter = (e) => {
+    e.keyCode === 13
+      ? searchInput.length > 2
+        ? navigate("/study-room", { state: searchInput })
+        : alert(
+            "The description you submitted was too short, please describe more (min. 3 char)"
+          )
+      : console.log("");
+  };
+
+  // Loop Categories
+
+  const loopNav = () => {
+    const elements = [];
+
+    for (let i = 0; i < Math.ceil(studyRooms.topics.length / 8); i++) {
+      elements.push(
+        <div>
+          {studyRooms.topics.slice(i * 8, i * 8 + 8).map((data) => (
+            <Link
+              className={navbarstyle.links}
+              onClick={() => handleCategory(data)}
+              to="#"
+            >
+              <li key={data.id}>{data.topic}</li>
+            </Link>
+          ))}
+        </div>
+      );
+    }
+
+    return <>{elements.map((element) => element)}</>;
+  };
+  // End Loop Categories
 
   return (
     <nav
@@ -223,6 +197,9 @@ function Navbar() {
           type="text"
           placeholder="Search study room"
           className={navbarstyle.navbarSearchInput}
+          value={searchInput}
+          onChange={(e) => handleOnInputSearch(e.target.value)}
+          onKeyUp={(e) => handleEnter(e)}
         />
       </div>
       <ul className={navbarstyle.navbarMenu}>
