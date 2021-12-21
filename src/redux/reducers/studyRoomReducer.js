@@ -23,7 +23,7 @@ const studyRoomReducer = (state = initialState, action) => {
     case GET_TOPICS_SUCCESS:
       return {
         ...state,
-        topics: [...state.topics, ...payload.data],
+        topics: [...payload.data],
       };
     default:
       return state;
