@@ -10,7 +10,7 @@ const detailRoomReducer = (state = initialState, action) => {
     case GET_DETAIL_ROOM_SUCCESS:
       return {
         ...state,
-        data: payload.data.rows,
+        data: payload,
       };
     default:
       return state;

@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import classFormStyle from "./classForm.module.scss";
-import { postForm } from "../../redux/action/actions/formAction/formAction";
 import Button from "../../components/buttons/Button";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
 import ellipseLeft from "../../assets/img/ellipseLeft.svg";
 import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
 import { MdAddPhotoAlternate } from "react-icons/md";
-import { IoIosArrowDown } from "react-icons/io";
 import { RiCalendar2Fill } from "react-icons/ri";
 import moment from "moment";
 import { createForm } from "../../redux/action/actions/formAction/formAction";
@@ -21,12 +19,9 @@ function ClassForm() {
     window.scroll(0, 0);
   }, []);
 
-  const [show, setShow] = useState(false);
-  const [drop, setDrop] = useState(false);
+  const [img, setImg] = useState();
 
   const [startDate, setStartDate] = useState(null);
-
-  // const initialRoomState = {};
 
   const [room, setRoom] = useState({
     id_topic: "",
@@ -50,15 +45,10 @@ function ClassForm() {
     // setRoom([...room, { title: value }]);
   };
 
-  console.log(room);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createForm(room))
-      .then((data) => {
-        room();
-      })
-      .catch((err) => console.log(err));
+    console.log(room);
+    dispatch(createForm(room));
   };
 
   return (
@@ -96,7 +86,7 @@ function ClassForm() {
                 <div className={classFormStyle.formBoxImgUpload}>
                   <div className={classFormStyle.formBoxImgUploadBox}>
                     <label
-                      htmlFor="firstimg"
+                      htmlFor="firstImg"
                       className={classFormStyle.formBoxImgUploadBoxSquare}
                     >
                       <span>
@@ -109,13 +99,22 @@ function ClassForm() {
                     </label>
                     <input
                       type="file"
-                      id="firstimg"
+                      id="firstImg"
                       className={classFormStyle.formBoxImgUploadBoxInput}
-                      value={room.imageClass}
-                      onChange={handleInputChange}
                       name="imageClass"
+                      onChange={(e) => {
+                        const imgUrl = URL.createObjectURL(e.target.files[0]);
+                        console.log(e.target.files[0]);
+                        setImg(imgUrl);
+                        setRoom({ ...room, imageClass: e.target.files[0] });
+                      }}
                     />
                   </div>
+                  {img && (
+                    <div className={classFormStyle.formBoxImgUploadPreview}>
+                      <img src={img} alt="preview" width="112" height="112" />
+                    </div>
+                  )}
                   <p className={classFormStyle.formBoxImgUploadWarn}>
                     Format image .jpg .jpeg .png, maximum 3 MB
                   </p>
@@ -147,6 +146,23 @@ function ClassForm() {
                     </option>
                     <option value="1">Math</option>
                     <option value="2">Art</option>
+                    <option value="3">Biology</option>
+                    <option value="4">Business</option>
+                    <option value="5">Cooking</option>
+                    <option value="6">Fashion</option>
+                    <option value="7">Geography</option>
+                    <option value="8">Geology</option>
+                    <option value="9">Health</option>
+                    <option value="10">History</option>
+                    <option value="11">Hobbies</option>
+                    <option value="12">Literature</option>
+                    <option value="13">Love Class</option>
+                    <option value="14">Physics</option>
+                    <option value="15">Research</option>
+                    <option value="16">Romance</option>
+                    <option value="17">Sport</option>
+                    <option value="18">Tech</option>
+                    <option value="19">Uncategorized</option>
                   </select>
                 </div>
               </div>
@@ -233,26 +249,34 @@ function ClassForm() {
                     <option value="" disabled selected hidden>
                       Select Class Status
                     </option>
-                    <option value="Open">Open</option>
-                    <option value="Restricted">Restricted</option>
+                    <option
+                      className={classFormStyle.statusOption}
+                      value="Open"
+                    >
+                      Open
+                    </option>
+                    <option
+                      className={classFormStyle.statusOption}
+                      value="Restricted"
+                    >
+                      Restricted
+                    </option>
                   </select>
                 </div>
               </div>
             </div>
-          </form>
-          <div className={classFormStyle.buttonBox}>
-            <Button classStyle="buttonWhite">
-              <Link to="/class" className={classFormStyle.cancelBtn}>
-                Cancel
-              </Link>
-            </Button>
-            <Button classStyle="buttonWhite">Save as Draft</Button>
-            <Link to="">
+            <div className={classFormStyle.buttonBox}>
+              <Button classStyle="buttonWhite">
+                <Link to="/class" className={classFormStyle.cancelBtn}>
+                  Cancel
+                </Link>
+              </Button>
+              <Button classStyle="buttonWhite">Save as Draft</Button>
               <Button classStyle="buttonGreen" type="submit">
                 Publish
               </Button>
-            </Link>
-          </div>
+            </div>
+          </form>
         </div>
       </div>
     </>
