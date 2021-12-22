@@ -5,9 +5,14 @@ import Button from "../../components/buttons/Button";
 import Card from "../../components/card/Card";
 import { HiChevronDoubleRight } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { getHomeRooms } from "../../redux/action/actions/homeRoomAction/homeRoomAction";
+import {
+  getHomeRooms,
+  getHomeTopics,
+} from "../../redux/action/actions/homeRoomAction/homeRoomAction";
 
 function Home() {
+  const [topic, setTopic] = useState(1);
+
   // Parallax
   const [offsetY, setOffsetY] = useState(0);
   const handleScroll = () => setOffsetY(window.pageYOffset);
@@ -35,12 +40,30 @@ function Home() {
   const limit = 4;
 
   useEffect(() => {
+    const slugTopic = topic ? `top=${topic}` : "";
     dispatch(
       getHomeRooms({
-        slug: `?limit=${limit}`,
+        slug: `?limit=${limit}&${slugTopic}`,
       })
     );
-  }, []);
+
+    dispatch(getHomeTopics());
+  }, [dispatch, topic]);
+
+  const handleTopic = async (id) => {
+    let latestTopic;
+    await setTopic(() => {
+      latestTopic = id;
+      return latestTopic;
+    });
+
+    const slugTopic = latestTopic ? `top=${latestTopic}` : "";
+    dispatch(
+      getHomeRooms({
+        slug: `?limit=${limit}&${slugTopic}`,
+      })
+    );
+  };
   // End of Handle Showing Cards
 
   return (
@@ -87,20 +110,21 @@ function Home() {
         <div className={homestyle.heroMainContainer}>
           <h2>Join Available Class</h2>
           <ul className={homestyle.heroMainContainerMenu}>
-            <li>All Topics</li>
-            <li>Art</li>
-            <li>Biology</li>
-            <li>Business</li>
-            <li>Cooking</li>
-            <li>Digital</li>
-            <li>Fashion</li>
-            <li>Geography</li>
+            {studyRooms.topics.slice(0, 7).map((data) => (
+              <li
+                onClick={() => handleTopic(data.id)}
+                className={topic === data.id ? homestyle.chosenTopic : ""}
+                key={data.id}
+              >
+                {data.topic}
+              </li>
+            ))}
           </ul>
           <div className={homestyle.heroMainContainerCards}>
             {studyRooms.data.length > 0 &&
               studyRooms.data.map((data) => <Card data={data} key={data.id} />)}
           </div>
-          <Link to="/study-room" className={homestyle.links}>
+          <Link to={`/study-room`} className={homestyle.links}>
             <Button classStyle={"heroMainContainerButton"}>
               See All Available Study Room
               <span className={homestyle.arrows}>

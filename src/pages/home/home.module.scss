@@ -168,7 +168,13 @@
           &:hover {
             color: base.$primary-color;
             border-bottom: 5px solid base.$primary-color;
+            opacity: 0.5;
           }
+        }
+
+        .chosenTopic {
+          color: base.$primary-color;
+          border-bottom: 5px solid base.$primary-color;
         }
       }
 

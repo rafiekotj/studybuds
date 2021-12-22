@@ -39,7 +39,10 @@ function Card({ data }) {
             {data.countJoined}/{data.limitParticipant}
           </p>
         </div>
-        <Link to="#" className={cardstyle.cardLink}>
+        <Link
+          to={`/room/${data.id}/meeting/${data.roomName}`}
+          className={cardstyle.cardLink}
+        >
           <Button classStyle="buttonGreen">Join Room</Button>
         </Link>
       </div>

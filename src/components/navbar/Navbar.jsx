@@ -15,12 +15,10 @@ import {
 } from "../../redux/action/actions/studyRoomAction/studyRoomAction";
 
 function Navbar() {
-  let i = 0;
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchInput, setSearchInput] = useState("");
-  const [topic, setTopic] = useState("");
 
   // Show hide dropdown browse
   const [show, setShow] = useState(false);
@@ -64,7 +62,7 @@ function Navbar() {
 
   useEffect(() => {
     dispatch(getTopics());
-  }, []);
+  }, [dispatch]);
   // End Fetch Data
 
   const handleCategory = async (data) => {
@@ -77,11 +75,8 @@ function Navbar() {
     );
 
     navigate("/study-room");
-    // setTopic(data.id);
-    // navigate("/study-room", { state: topic });
     setShow(!show);
     setStatus("All Status");
-    setTopic("");
   };
 
   const handleOnInputSearch = (value) => {
