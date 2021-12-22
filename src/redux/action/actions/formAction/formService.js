@@ -1,7 +1,7 @@
 import http from "../../../http-common";
 
-const create = () => {
-  return http.post("/myclass/createdclass");
+const create = (data) => {
+  return http.post("/myclass/createdclass", data);
 };
 
 const FormService = {

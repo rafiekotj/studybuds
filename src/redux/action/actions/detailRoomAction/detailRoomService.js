@@ -1,11 +1,11 @@
 import http from "../../../http-common";
 
-const get = () => {
-  return http.get("/studyroom/:id");
+const getDetail = (id) => {
+  return http.get(`/studyroom/${id}`);
 };
 
 const DetailRoomService = {
-  get,
+  getDetail,
 };
 
 export default DetailRoomService;
