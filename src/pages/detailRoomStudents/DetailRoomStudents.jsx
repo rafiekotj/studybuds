@@ -7,10 +7,28 @@ import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
 import Button from "../../components/buttons/Button";
 import { RiCalendar2Fill } from "react-icons/ri";
 import { BsPeopleFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Avatar from "react-avatar";
+import { useDispatch, useSelector } from "react-redux";
+import { getDetailRoom } from "../../redux/action/actions/detailRoomAction/detailRoomAction";
 
 function DetailRoomStudents() {
+  const dispatch = useDispatch();
+
+  const params = useParams();
+
+  const studyRooms = useSelector((store) => {
+    return store.detailRoomReducer.data;
+  });
+
+  const location = useLocation();
+  console.log(studyRooms);
+
+  useEffect(() => {
+    dispatch(getDetailRoom(params.id));
+    // console.log(params.id);
+  }, [dispatch, params.id]);
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
@@ -38,28 +56,37 @@ function DetailRoomStudents() {
           src={groupDownloadRight}
           alt="ellipse"
           className={detailRoomStyle.groupDownloadRight}
+          onChange={location}
         />
 
         <div className={detailRoomStyle.roomTitle}>
           <div className={detailRoomStyle.roomTitleTop}>
             <p className={detailRoomStyle.roomTitleTopName}>
-              Basic Math Decimal 1
+              {studyRooms.title}
             </p>
             <div className={detailRoomStyle.roomTitleTopStory}>
               <div className={detailRoomStyle.roomTitleTopStoryDate}>
                 <RiCalendar2Fill className={detailRoomStyle.icon} />
                 <p className={detailRoomStyle.info}>
-                  4 October 2021 | 12:00 - 13:00
+                  {studyRooms.date} | {studyRooms.startTime} -{" "}
+                  {studyRooms.endTime}
                 </p>
               </div>
               <div className={detailRoomStyle.roomTitleTopStoryNumber}>
                 <BsPeopleFill className={detailRoomStyle.icon} />
-                <p className={detailRoomStyle.info}>15/50</p>
+                <p className={detailRoomStyle.info}>
+                  0/{studyRooms.limitParticipant}
+                </p>
               </div>
             </div>
           </div>
           <div className={detailRoomStyle.roomTitleBtn}>
-            <Button classStyle="buttonGreen">Join Room</Button>
+            <Link
+              className={detailRoomStyle.roomTitleBtnLink}
+              to={`/room/${studyRooms.id}/meeting/${studyRooms.roomName}`}
+            >
+              <Button classStyle={`buttonGreen`}>Join Room</Button>
+            </Link>
           </div>
         </div>
 
@@ -78,40 +105,13 @@ function DetailRoomStudents() {
             <div className={detailRoomStyle.containerMaterialDescriptionName}>
               Description
             </div>
-            <img
-              src={`https://s3-alpha-sig.figma.com/img/1e06/85b9/639c3e6dd91aa6fbaa3fa83553182dd8?Expires=1639958400&Signature=WMzY6Gf2n28YT9JqM-MHXkKdiOB~Cw7Yll0R9xnZBVzOLl3bigx7repAjgDzkmUKn0nNDwSoxhZs6X92WLUrr9AOOWLWaGcuJ0kV0M~YBevASoeTJ9SEWqMXVF~tsbose8O8uSlJxgLr2TR7X8ayiGihLMYHYtyMWNKpKGJfRbUyjc~7Zd3k2BZD6MefCGYz1aipkDcZzHAWh~4UiC3o~1Z43UbIGkgb7wgSIAsnDYWRJafGtIPIo-~VurNTv9MCJaKh-lAlTU8r7kJXgHpyE68N-1MjkRAW-C8APuQGzxo5JP0cyllaZzbKz~cqeNJg4nVr3lyL5WSQyvZsVSvmuw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA`}
-              alt={`Math`}
-            />
+            <img src={studyRooms.imageClass} alt={`Math`} />
             <div
               className={detailRoomStyle.containerMaterialDescriptionNarration}
             >
-              <h5>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                mauris sed proin ut cursus bibendum non felis in. Malesuada
-                dignissim nunc id pharetra eget semper. Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. Duis mauris sed proin ut
-                cursus bibendum non felis in. Malesuada dignissim nunc id
-                pharetra eget semper.
-                <br />
-                <br />
-                <span>Lorem Ipsum:</span>
-                <ul>
-                  <li>Lorem ipsum dolor sit amet</li>
-                  <li>Lorem ipsum dolor sit amet</li>
-                  <li>Lorem ipsum dolor sit amet</li>
-                  <li>Lorem ipsum dolor sit amet</li>
-                </ul>
-                <br />
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                mauris sed proin ut cursus bibendum non felis in. Malesuada
-                dignissim nunc id pharetra eget semper. Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. Duis mauris sed proin ut
-                cursus bibendum non felis in. Malesuada dignissim nunc id
-                pharetra eget semper.
-              </h5>
+              <h5>{studyRooms.description}</h5>
             </div>
           </div>
-
           <div className={detailRoomStyle.containerMaterialHost}>
             <div className={detailRoomStyle.containerMaterialHostName}>
               Host
@@ -119,24 +119,23 @@ function DetailRoomStudents() {
             <div className={detailRoomStyle.containerMaterialHostProfile}>
               <Avatar
                 className={detailRoomStyle.containerMaterialHostProfileAvatar}
-                color={Avatar.getRandomColor("sitebase", [
-                  "red",
-                  "green",
-                  "blue",
-                ])}
+                color={Avatar.getRandomColor("sitebase", ["green"])}
                 maxInitials="2"
                 round={true}
                 size="48"
-                name="J. Walker Denny Walter"
+                name={studyRooms.User?.fullname}
+                src={studyRooms.User?.imageUser}
               />
               <div className={detailRoomStyle.containerMaterialHostProfileName}>
-                J. Walker Denny Walter
+                {studyRooms.User?.fullname}
               </div>
             </div>
             <div className={detailRoomStyle.containerMaterialHostStatus}>
               Class Status
             </div>
-            <div className={detailRoomStyle.containerMaterialHostExp}>Open</div>
+            <div className={detailRoomStyle.containerMaterialHostExp}>
+              {studyRooms.roomStatus}
+            </div>
           </div>
         </div>
       </div>
