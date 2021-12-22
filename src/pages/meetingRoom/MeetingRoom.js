@@ -11,6 +11,12 @@ const MeetingRoom = () => {
   const [knockingParticipants, updateKnockingParticipants] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Start at top of page
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+  // End Start at top of page
+
   const printEventOutput = (payload) => {
     updateLog((items) => [...items, JSON.stringify(payload)]);
   };

@@ -1,7 +1,11 @@
-import { GET_HOME_ROOMS_SUCCESS } from "../action/actionTypes/homeRoomTypes";
+import {
+  GET_HOME_ROOMS_SUCCESS,
+  GET_HOME_TOPICS_SUCCESS,
+} from "../action/actionTypes/homeRoomTypes";
 
 const initialState = {
   data: [],
+  topics: [],
 };
 
 const homeRoomReducer = (state = initialState, action) => {
@@ -11,6 +15,11 @@ const homeRoomReducer = (state = initialState, action) => {
       return {
         ...state,
         data: payload.data.rows,
+      };
+    case GET_HOME_TOPICS_SUCCESS:
+      return {
+        ...state,
+        topics: [...payload.data],
       };
     default:
       return state;
