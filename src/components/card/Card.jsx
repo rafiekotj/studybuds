@@ -30,7 +30,7 @@ function Card({ data }) {
         <div className={cardstyle.cardTextInfo}>
           <RiCalendar2Fill className={cardstyle.cardIcon} />
           <p className={cardstyle.cardTextInfoTime}>
-            {data.title} | {data.startTime} - {data.endTime}
+            {data.date} | {data.startTime} - {data.endTime}
           </p>
         </div>
         <div className={cardstyle.cardTextInfo}>

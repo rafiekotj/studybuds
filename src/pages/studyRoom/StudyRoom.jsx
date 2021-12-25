@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import studyroomstyle from "./studyRoom.module.scss";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Card from "../../components/card/Card";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { IoIosArrowDown } from "react-icons/io";
@@ -23,11 +23,11 @@ function StudyRoom() {
   const [topic, setTopic] = useState("");
   const [chosenTopic, setChosenTopic] = useState("All Topic");
   const [searchInput, setSearchInput] = useState("");
+
   const { state } = useLocation();
   const limit = 8;
   const [show, setShow] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // Handle Showing Cards
   const studyRooms = useSelector((store) => {
@@ -37,11 +37,6 @@ function StudyRoom() {
   useEffect(() => {
     if (studyRooms.data.length === 0) {
       handleFetch();
-      // dispatch(
-      //   getRooms({
-      //     slug: `?page=${selected}&limit=${limit}&top=${topic}`,
-      //   })
-      // );
     } else {
       getRooms({});
     }
@@ -52,23 +47,7 @@ function StudyRoom() {
   const isLoading = studyRooms.isLoading;
 
   useEffect(async () => {
-    // let latestStatus;
-    // await setStatus(() => {
-    //   latestStatus = status;
-    //   return latestStatus;
-    // });
-
-    // let latestPage;
-    // await setSelected(() => {
-    //   latestPage = 1;
-    //   return latestPage;
-    // });
-
-    // let latestTopic;
-    // await setTopic(() => {
-    //   latestTopic = topic;
-    //   return latestTopic;
-    // });
+    // async function fetchData() {
     if (state) {
       let latestSearch;
       await setSearchInput(() => {
@@ -78,6 +57,8 @@ function StudyRoom() {
 
       handleFetch(null, null, null, latestSearch);
     }
+    // }
+    // fetchData();
   }, [state]);
 
   // End Handle Showing Cards
