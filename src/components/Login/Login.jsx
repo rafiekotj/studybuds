@@ -36,20 +36,18 @@ function Login() {
 
     setLoading(true);
 
-    dispatch(
-      login(email, password)
-      // .then(() => {
-      //   navigate("/");
-      //   window.location.reload();
-      // })
-      // .catch(() => {
-      //   setLoading(false);
-      // })
-    );
-    // navigate("/");
+    dispatch(login(email, password))
+      .then(() => {
+        navigate("/");
+        window.location.reload();
+      })
+      .catch(() => {
+        setLoading(false);
+        alert("Please input valid Email or Password");
+      });
   };
 
-  if (isLoggedIn) {
+  if (isLoggedIn === true) {
     navigate("/");
   }
   // Start at top of page
@@ -123,6 +121,7 @@ function Login() {
               <button
                 className={loginStyle.eye}
                 onClick={(e) => handlePasswordShown(e)}
+                type="button"
               >
                 {passwordShown ? <FiEye /> : <FiEyeOff />}
               </button>

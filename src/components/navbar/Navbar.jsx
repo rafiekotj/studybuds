@@ -13,8 +13,12 @@ import {
   getRooms,
   getTopics,
 } from "../../redux/action/actions/studyRoomAction/studyRoomAction";
+import { getProfile } from "../../redux/action/actions/profileAction/profileAction";
+import { logout } from "../../redux/action/actions/authAction/authAction";
+import Avatar from "react-avatar";
 
 function Navbar() {
+  const { isLoggedIn } = useSelector((state) => state.authReducer);
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,9 +64,16 @@ function Navbar() {
     return store.studyRoomReducer;
   });
 
+  const profile = useSelector((store) => {
+    return store.profileReducer;
+  });
+
+  console.log(profile);
+
   useEffect(() => {
     dispatch(getTopics());
-  }, [dispatch]);
+    dispatch(getProfile());
+  }, []);
   // End Fetch Data
 
   const handleCategory = async (data) => {
@@ -92,6 +103,14 @@ function Navbar() {
           )
       : console.log("");
   };
+
+  // handle logout
+  const handleLogout = () => {
+    dispatch(logout());
+    setShowProfile(false);
+    navigate("/");
+  };
+  // End handle logout
 
   // Loop Categories
 
@@ -238,7 +257,10 @@ function Navbar() {
           </Link>
         </li>
       </ul>
-      <div className={navbarstyle.navbarButtons}>
+      <div
+        className={navbarstyle.navbarButtons}
+        style={isLoggedIn ? { display: "none" } : { display: "flex" }}
+      >
         <Link to="/login" className={navbarstyle.navbarButtonLink}>
           <Button classStyle="buttonWhite">Sign In</Button>
         </Link>
@@ -252,6 +274,7 @@ function Navbar() {
           handleShowNotif();
         }}
         ref={ref}
+        style={isLoggedIn ? { display: "flex" } : { display: "none" }}
       >
         <RiNotification2Line className={navbarstyle.navbarNotifIcon} />
       </div>
@@ -261,7 +284,7 @@ function Navbar() {
       >
         <b>Notification</b>
         <ul>
-          <li>
+          {/* <li>
             <div className={navbarstyle.navbarNotifItemsContainer}>
               <p>
                 You are now can join class <strong>Advanced Biology</strong> by
@@ -270,16 +293,11 @@ function Navbar() {
               <p className={navbarstyle.navbarNotifItemsDate}>Today</p>
             </div>
             <div className={navbarstyle.navbarNotifItemsCircle}></div>
-          </li>
+          </li> */}
           <li>
             <div className={navbarstyle.navbarNotifItemsContainer}>
-              <p>
-                Your class is being reviewed by host, you can check your class
-                in My Class menu
-              </p>
-              <p className={navbarstyle.navbarNotifItemsDate}>
-                Friday, 8 October 2021 21:32
-              </p>
+              <p>You currently have no new notifications.</p>
+              <p className={navbarstyle.navbarNotifItemsDate}>Today</p>
             </div>
             <div className={navbarstyle.navbarNotifItemsCircle}></div>
           </li>
@@ -288,30 +306,35 @@ function Navbar() {
       <div
         className={navbarstyle.navbarProfile}
         onClick={() => handleShowProfile()}
+        style={isLoggedIn ? { display: "flex" } : { display: "none" }}
       >
         <div className={navbarstyle.navbarProfileAvatarContainer}>
-          <img
-            src={`https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80`}
-            alt="avatar"
-            className={navbarstyle.navbarProfileAvatar}
+          <Avatar
+            alt={profile.data.fullname}
+            // className={navbarstyle.navbarProfileAvatar}
+            maxInitials="2"
+            round={true}
+            size="32"
+            name={profile.data?.fullname}
+            src={profile.data?.imageUser}
           />
         </div>
-        <p>name</p>
+        <p>{profile.data.fullname}</p>
       </div>
       <div
         className={navbarstyle.navbarProfileDropdown}
         style={showProfile ? { display: "block" } : { display: "none" }}
       >
         <div className={navbarstyle.navbarProfileDropdownTop}>
-          <b>name</b>
-          <p>email@mail.com</p>
+          <b>{profile.data.fullname}</b>
+          <p>{profile.data.email}</p>
         </div>
         <ul>
           <li>Notification</li>
           <li>Profile</li>
           <li>History</li>
           <li>Change Password</li>
-          <li>Sign Out</li>
+          <li onClick={() => handleLogout()}>Sign Out</li>
         </ul>
       </div>
     </nav>

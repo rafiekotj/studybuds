@@ -4,6 +4,7 @@ import homeRoomReducer from "./homeRoomReducer";
 import formReducer from "./formReducer";
 import authReducer from "./authReducer";
 import detailRoomReducer from "./detailRoom";
+import profileReducer from "./profileReducer";
 
 const rootReducer = combineReducers({
   reducers: "",
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   formReducer,
   authReducer,
   detailRoomReducer,
+  profileReducer,
 });
 
 export default rootReducer;

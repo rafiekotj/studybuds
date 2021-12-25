@@ -23,12 +23,12 @@ const login = (email, password) => {
     });
 };
 
-// const logout = () => {
-//   localStorage.removeItem("user");
-// };
+const logout = () => {
+  localStorage.removeItem("user");
+};
 
 export default {
   //   register,
   login,
-  //   logout,
+  logout,
 };

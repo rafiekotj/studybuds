@@ -3,7 +3,7 @@ import {
   // REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-  // LOGOUT,
+  LOGOUT,
   // SET_MESSAGE,
 } from "../../actionTypes/authTypes";
 
@@ -78,10 +78,10 @@ export const login = (email, password) => (dispatch) => {
   );
 };
 
-//   export const logout = () => (dispatch) => {
-//     AuthService.logout();
+export const logout = () => (dispatch) => {
+  AuthService.logout();
 
-//     dispatch({
-//       type: LOGOUT,
-//     });
-//   };
+  dispatch({
+    type: LOGOUT,
+  });
+};
