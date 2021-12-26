@@ -68,8 +68,6 @@ function Navbar() {
     return store.profileReducer;
   });
 
-  console.log(profile);
-
   useEffect(() => {
     dispatch(getTopics());
     dispatch(getProfile());

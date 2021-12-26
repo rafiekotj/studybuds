@@ -5,6 +5,7 @@ import formReducer from "./formReducer";
 import authReducer from "./authReducer";
 import detailRoomReducer from "./detailRoom";
 import profileReducer from "./profileReducer";
+import messagesReducer from "./messages";
 
 const rootReducer = combineReducers({
   reducers: "",
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   authReducer,
   detailRoomReducer,
   profileReducer,
+  messagesReducer,
 });
 
 export default rootReducer;
