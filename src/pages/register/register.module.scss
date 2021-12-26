@@ -8,6 +8,7 @@
   overflow: hidden;
   padding: 10rem;
   position: relative;
+
   &::before {
     content: "";
     position: absolute;
@@ -32,20 +33,24 @@
     background-position: right top;
     z-index: -1;
   }
+
   .registerButtonContainer {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
     margin-top: 1rem;
+
     .registerButton {
       color: #395185;
       font-size: 1.25rem;
       margin-right: 0.5rem;
     }
   }
+
   .registerFormLink {
     text-align: center;
     margin-top: 1rem;
+
     .registerLink {
       font-weight: 700;
       color: base.$primary-color;
@@ -59,6 +64,7 @@
       width: 100%;
       height: 80%;
     }
+
     .imageLeftLoad {
       position: absolute;
       top: 0;
@@ -76,6 +82,7 @@
       top: 0%;
       transform: translate(50%, 100%);
     }
+
     .imageRightLoad {
       position: absolute;
       top: 0;
@@ -87,48 +94,70 @@
       z-index: -1;
     }
   }
+
   .register {
     width: 419px;
     height: 697px;
-    top: 105px;
-    left: 845px;
+    margin-top: 1rem;
+    margin-left: 2rem;
 
     &Form {
       float: initial;
+
       &Label {
         display: block;
         font: base.$content-16;
         font-weight: 600;
         margin-bottom: 0.5rem;
       }
+
       &Input {
-        margin-bottom: 2rem;
         border: 1px solid base.$primary-color;
         border-radius: 8px;
         padding: 1rem;
         width: 417px;
         height: 52px;
-        top: 614px;
-        left: 847px;
         font: base.$content-16;
+        position: relative;
+
+        input {
+          all: unset;
+          width: 100%;
+        }
+
+        .eye {
+          all: unset;
+          cursor: pointer;
+          position: absolute;
+          right: 15px;
+          color: base.$secondary-color;
+        }
       }
+
+      .errorMessage {
+        font: base.$content-14;
+        color: base.$danger-color;
+        margin-bottom: 2rem;
+      }
+
       button {
         width: 100%;
         margin: 0.5rem 0;
         position: relative;
         overflow: hidden;
       }
-      &Sign {
-        width: 417px;
-        height: 40px;
-        top: 698px;
-        left: 847px;
-        border: none;
-        background-color: base.$primary-color;
-        border-radius: 40px;
-        text-align: center;
-        padding: 10px 0;
-      }
+
+      // &Sign {
+      //   width: 417px;
+      //   height: 40px;
+      //   top: 698px;
+      //   left: 847px;
+      //   border: none;
+      //   background-color: base.$primary-color;
+      //   border-radius: 40px;
+      //   text-align: center;
+      //   padding: 10px 0;
+      // }
     }
   }
 }

@@ -16,7 +16,6 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
   const { isLoggedIn } = useSelector((state) => state.authReducer);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,7 +42,7 @@ function Login() {
       })
       .catch(() => {
         setLoading(false);
-        alert("Please input valid Email or Password");
+        alert("Invalid Email or Password");
       });
   };
 
