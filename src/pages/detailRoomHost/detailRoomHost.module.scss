@@ -108,16 +108,33 @@
       display: flex;
       flex-direction: column;
       width: 25%;
+
+      button {
+        width: 100%;
+        height: 57px;
+        margin-bottom: 16px;
+        font: base.$content-20;
+        font-weight: 600;
+        justify-content: center;
+        text-align: center;
+      }
     }
 
-    button {
-      width: 100%;
-      height: 57px;
-      margin-bottom: 16px;
-      font: base.$content-20;
-      font-weight: 600;
-      justify-content: center;
-      text-align: center;
+    &Join {
+      display: flex;
+      flex-direction: column;
+      width: 25%;
+      padding: 56px 0;
+
+      button {
+        width: 100%;
+        height: 57px;
+        margin-bottom: 16px;
+        font: base.$content-20;
+        font-weight: 600;
+        justify-content: center;
+        text-align: center;
+      }
     }
   }
 
@@ -229,13 +246,14 @@
         }
       }
 
-      &Btn {
+      .HostBtn {
         display: flex;
         justify-content: center;
         text-align: center;
         width: 100%;
 
         button {
+          padding: 0 140px;
           width: 100%;
           height: 57px;
           font: base.$content-20;

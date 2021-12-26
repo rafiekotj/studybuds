@@ -1,10 +1,25 @@
 import {
-  POST_FORM_SUCCESS,
+  PUT_FORM_SUCCESS,
   GET_TOPICS_SUCCESS,
-} from "../../actionTypes/formTypes";
-import FormService from "./formService";
+  GET_DETAIL_ROOM_SUCCESS,
+} from "../../actionTypes/formEditTypes";
+import FormEditService from "./formEditService";
 
-export const createForm = (data) => async (dispatch) => {
+export const getDetailRoom = (id) => async (dispatch) => {
+  try {
+    const res = await FormEditService.getDetail(id);
+    // console.log(res.data.data);
+
+    dispatch({
+      type: GET_DETAIL_ROOM_SUCCESS,
+      payload: res.data.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateForm = (data) => async (dispatch) => {
   try {
     const formData = new FormData();
     formData.set("date", data.date);
@@ -16,11 +31,11 @@ export const createForm = (data) => async (dispatch) => {
     formData.set("startTime", data.startTime);
     formData.set("title", data.title);
     formData.append("imageClass", data.imageClass);
-    const res = await FormService.create(formData);
+    const res = await FormEditService.update(formData);
     console.log(res);
 
     dispatch({
-      type: POST_FORM_SUCCESS,
+      type: PUT_FORM_SUCCESS,
       payload: res.data,
     });
   } catch (err) {
@@ -30,7 +45,7 @@ export const createForm = (data) => async (dispatch) => {
 
 export const getTopics = () => async (dispatch) => {
   try {
-    const res = await FormService.getAllTopics();
+    const res = await FormEditService.getAllTopics();
 
     dispatch({
       type: GET_TOPICS_SUCCESS,

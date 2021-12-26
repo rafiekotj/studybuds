@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import classFormStyle from "./classForm.module.scss";
+import classFormStyle from "./classFormEdit.module.scss";
 import Button from "../../components/buttons/Button";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
@@ -13,15 +13,18 @@ import { MdAddPhotoAlternate } from "react-icons/md";
 import { RiCalendar2Fill } from "react-icons/ri";
 import moment from "moment";
 import {
-  createForm,
+  getDetailRoom,
+  updateForm,
   getTopics,
-} from "../../redux/action/actions/formAction/formAction";
+} from "../../redux/action/actions/formEditAction/formEditAction";
+import FormEditService from "../../redux/action/actions/formEditAction/formEditService";
 
-function ClassForm() {
+function ClassFormEdit() {
   useEffect(() => {
     window.scroll(0, 0);
-    dispatch(getTopics());
   }, []);
+
+  const dispatch = useDispatch();
 
   const [img, setImg] = useState();
 
@@ -39,32 +42,27 @@ function ClassForm() {
     roomStatus: "",
   });
 
+  useEffect(() => {
+    dispatch(getTopics());
+  }, []);
+
   const studyRoom = useSelector((store) => {
-    return store.formReducer;
+    return store.formEditReducer;
   });
 
   console.log(studyRoom);
-
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // let data = { [name]: value };
-    // console.log(data);
     setRoom({ ...room, [name]: value });
-    // setRoom([...room, { title: value }]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(room);
-    dispatch(createForm(room));
-    navigate("/study-room");
+    dispatch(getDetailRoom(room));
   };
-
-  console.log(room.id_topic);
 
   return (
     <>
@@ -282,4 +280,4 @@ function ClassForm() {
   );
 }
 
-export default ClassForm;
+export default ClassFormEdit;

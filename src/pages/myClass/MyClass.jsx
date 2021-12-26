@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import myClassStyle from "./myClass.module.scss";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
@@ -9,8 +9,35 @@ import CreatedClassS from "../createdClassS/CreatedClassS";
 import Button from "../../components/buttons/Button";
 // import hero from "../../assets/img/hero.svg";
 import { AiFillPlusCircle } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCreatedRooms } from "../../redux/action/actions/myClassAction/myClassAction";
+import { getAllJoinedRooms } from "../../redux/action/actions/myClassAction/myClassAction";
+import Card from "../../components/card/Card";
 
 function MyClass() {
+  const [section, setSection] = useState("Created Class");
+
+  const dispatch = useDispatch();
+
+  const studyRooms = useSelector((store) => {
+    return store.myClassReducer;
+  });
+
+  console.log(studyRooms);
+
+  const handleSection = (section) => {
+    setSection(section);
+  };
+
+  useEffect(() => {
+    if (section === "Created Class") {
+      dispatch(getAllCreatedRooms());
+      if (section === "Joined Class") {
+        dispatch(getAllJoinedRooms());
+      }
+    }
+  }, []);
+
   return (
     <>
       <div className={myClassStyle.detailRoom}>
@@ -41,12 +68,22 @@ function MyClass() {
         </div>
         <div className={myClassStyle.containerMenu}>
           <div className={myClassStyle.containerTitle}>
-            <Link className={myClassStyle.containerCreate} to="">
+            <p
+              onClick={() => handleSection("Created Class")}
+              className={
+                section === "Created Class" ? myClassStyle.containerCreate : ""
+              }
+            >
               Created Class
-            </Link>
-            <Link className={myClassStyle.containerJoin} to="">
+            </p>
+            <p
+              onClick={() => handleSection("Joined Class")}
+              className={
+                section === "Joined Class" ? myClassStyle.containerJoin : ""
+              }
+            >
               Joined Class
-            </Link>
+            </p>
           </div>
           <div className={myClassStyle.addClassBtn}>
             <Button classStyle={"addClass"}>
@@ -60,7 +97,14 @@ function MyClass() {
           </div>
         </div>
         <div className={myClassStyle.containerLine}></div>
-        <CreatedClassS />
+        <div className={myClassStyle.containerCards}>
+          {studyRooms.data.map((data) => (
+            <Card
+              data={section === "Created Class" ? data : data.RoomClass}
+              key={data.id}
+            />
+          ))}
+        </div>
       </div>
     </>
   );
