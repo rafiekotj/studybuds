@@ -5,7 +5,7 @@ const getDetail = (id) => {
 };
 
 const update = (id, data) => {
-  return http.put(`/studyroom/${id}`, data);
+  return http.put(`/myclass/createdclass/${id}`, data);
 };
 
 const getAllTopics = () => {

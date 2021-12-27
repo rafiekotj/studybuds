@@ -32,12 +32,13 @@ function MyClass() {
   useEffect(() => {
     if (section === "Created Class") {
       dispatch(getAllCreatedRooms());
-      if (section === "Joined Class") {
-        dispatch(getAllJoinedRooms());
-      }
     }
-  }, []);
+    if (section === "Joined Class") {
+      dispatch(getAllJoinedRooms());
+    }
+  }, [section]);
 
+  console.log(studyRooms);
   return (
     <>
       <div className={myClassStyle.detailRoom}>
@@ -98,12 +99,13 @@ function MyClass() {
         </div>
         <div className={myClassStyle.containerLine}></div>
         <div className={myClassStyle.containerCards}>
-          {studyRooms.data.map((data) => (
-            <Card
-              data={section === "Created Class" ? data : data.RoomClass}
-              key={data.id}
-            />
-          ))}
+          {studyRooms.data.map((data) =>
+            section === "Joined Class" && data.RoomClass ? (
+              <Card data={data.RoomClass} key={data.id} />
+            ) : (
+              <Card data={data} key={data.id} />
+            )
+          )}
         </div>
       </div>
     </>
