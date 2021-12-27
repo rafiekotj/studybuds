@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import classFormStyle from "./classFormEdit.module.scss";
@@ -17,7 +17,6 @@ import {
   updateForm,
   getTopics,
 } from "../../redux/action/actions/formEditAction/formEditAction";
-import FormEditService from "../../redux/action/actions/formEditAction/formEditService";
 
 function ClassFormEdit() {
   useEffect(() => {
@@ -25,9 +24,21 @@ function ClassFormEdit() {
   }, []);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const params = useParams();
 
+  const studyRoom = useSelector((store) => {
+    return store.formEditReducer;
+  });
+
+  // ↓↓↓ Get Data ↓↓↓
+  useEffect(() => {
+    dispatch(getDetailRoom(params.id));
+  }, []);
+  // ↑↑↑ Get Data ↑↑↑
+
+  // ↓↓↓ Update Form ↓↓↓
   const [img, setImg] = useState();
-
   const [startDate, setStartDate] = useState(null);
 
   const [room, setRoom] = useState({
@@ -46,14 +57,6 @@ function ClassFormEdit() {
     dispatch(getTopics());
   }, []);
 
-  const studyRoom = useSelector((store) => {
-    return store.formEditReducer;
-  });
-
-  console.log(studyRoom);
-
-  const navigate = useNavigate();
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setRoom({ ...room, [name]: value });
@@ -61,8 +64,11 @@ function ClassFormEdit() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(getDetailRoom(room));
+    dispatch(updateForm(room));
   };
+  // ↑↑↑ Form ↑↑↑
+
+  console.log(studyRoom);
 
   return (
     <>

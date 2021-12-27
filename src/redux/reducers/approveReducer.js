@@ -17,4 +17,4 @@ const approveReducer = (state = initialState, action) => {
   }
 };
 
-export default detailRoomReducer;
+export default approveReducer;
