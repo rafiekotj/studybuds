@@ -1,17 +1,24 @@
 import {
-  POST_FORM_SUCCESS,
+  PUT_FORM_SUCCESS,
   GET_TOPICS_SUCCESS,
-} from "../action/actionTypes/formTypes";
+  GET_DETAIL_ROOM_SUCCESS,
+} from "../action/actionTypes/formEditTypes";
 
 const initialState = {
   data: [],
   topics: [],
 };
 
-const formReducer = (state = initialState, action) => {
+const formEditReducer = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
-    case POST_FORM_SUCCESS:
+    case GET_DETAIL_ROOM_SUCCESS:
+      return {
+        ...state,
+        data: payload,
+      };
+    case PUT_FORM_SUCCESS:
+      console.log(payload);
       return {
         ...state,
         data: payload.data.rows,
@@ -26,4 +33,4 @@ const formReducer = (state = initialState, action) => {
   }
 };
 
-export default formReducer;
+export default formEditReducer;

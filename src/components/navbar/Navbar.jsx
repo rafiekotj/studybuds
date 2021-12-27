@@ -68,8 +68,6 @@ function Navbar() {
     return store.profileReducer;
   });
 
-  console.log(profile);
-
   useEffect(() => {
     dispatch(getTopics());
     dispatch(getProfile());
@@ -310,7 +308,7 @@ function Navbar() {
       >
         <div className={navbarstyle.navbarProfileAvatarContainer}>
           <Avatar
-            alt={profile.data.fullname}
+            alt={profile.data?.fullname}
             // className={navbarstyle.navbarProfileAvatar}
             maxInitials="2"
             round={true}
@@ -331,7 +329,9 @@ function Navbar() {
         </div>
         <ul>
           <li>Notification</li>
-          <li>Profile</li>
+          <Link to="/account" className={navbarstyle.links}>
+            <li>Profile</li>
+          </Link>
           <li>History</li>
           <li>Change Password</li>
           <li onClick={() => handleLogout()}>Sign Out</li>

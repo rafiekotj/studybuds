@@ -1,12 +1,19 @@
 import http from "../../../http-common";
 
-// const register = (username, email, password) => {
-//   return axios.post(API_URL + "signup", {
-//     username,
-//     email,
-//     password,
-//   });
-// };
+const register = (fullname, email, password) => {
+  return http
+    .post(`/user/register`, {
+      fullname,
+      email,
+      password,
+    })
+    .then((res) => {
+      return res;
+    })
+    .catch((err) => {
+      return err.response.data;
+    });
+};
 
 const login = (email, password) => {
   return http
@@ -28,7 +35,7 @@ const logout = () => {
 };
 
 export default {
-  //   register,
+  register,
   login,
   logout,
 };
