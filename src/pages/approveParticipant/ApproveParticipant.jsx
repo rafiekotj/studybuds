@@ -17,81 +17,17 @@ function ApproveParticipant() {
   const [cars, setCars] = useState([
     {
       id: 1,
-      name: "Yugi Muto",
+      name: "Jack Avery",
       active: false,
     },
     {
       id: 2,
-      name: "Nobitakun",
-      active: false,
-    },
-    {
-      id: 3,
-      name: "Nobitakun Desu Ne",
-      active: false,
-    },
-    {
-      id: 4,
-      name: "Doraemon to Nani",
-      active: false,
-    },
-    {
-      id: 5,
-      name: "Sugoi Desu",
-      active: false,
-    },
-    {
-      id: 6,
-      name: "Yugi Muto",
-      active: false,
-    },
-    {
-      id: 7,
-      name: "Nobitakun",
-      active: false,
-    },
-    {
-      id: 8,
-      name: "Nobitakun Desu Ne",
-      active: false,
-    },
-    {
-      id: 9,
-      name: "Nobitakun",
-      active: false,
-    },
-    {
-      id: 10,
-      name: "Doraemon to Nani",
-      active: false,
-    },
-    {
-      id: 11,
-      name: "Sugoi Desu",
-      active: false,
-    },
-    {
-      id: 12,
-      name: "Nobitakun Desu Ne",
-      active: false,
-    },
-    {
-      id: 13,
-      name: "Nobitakun",
-      active: false,
-    },
-    {
-      id: 14,
-      name: "Doraemon to Nani",
-      active: false,
-    },
-    {
-      id: 15,
-      name: "Sugoi Desu",
+      name: "Christina Smith",
       active: false,
     },
   ]);
 
+  // ↓↓↓ Select Function ↓↓↓
   const [selectAll, setSelectAll] = useState(false);
 
   const handleCarClick = (id) => {
@@ -117,6 +53,7 @@ function ApproveParticipant() {
     setSelectAll((prevState) => !prevState);
     setCars(cars.map((car) => ({ ...car, active: !selectAll })));
   };
+  // ↑↑↑ Select Function ↑↑↑
 
   return (
     <>
@@ -213,10 +150,10 @@ function ApproveParticipant() {
             <div
               className={approveParticipantStyle.approveContainerLimitButton}
             >
-              <Link to="/host">
+              <Link to={`/room/{}`}>
                 <Button classStyle="buttonWhite">Cancel</Button>
               </Link>
-              <Link to="/host">
+              <Link to={`/room/{}`}>
                 <Button classStyle="buttonGreen">Approve</Button>
               </Link>
             </div>

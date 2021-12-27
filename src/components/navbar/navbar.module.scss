@@ -98,11 +98,6 @@
               background-color: base.$grey-color;
             }
           }
-
-          .links {
-            text-decoration: none;
-            color: base.$black-color;
-          }
         }
       }
     }
@@ -301,5 +296,10 @@
         background-color: base.$grey-color;
       }
     }
+  }
+
+  .links {
+    text-decoration: none;
+    color: base.$black-color;
   }
 }

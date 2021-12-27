@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import classFormStyle from "./classForm.module.scss";
+import classFormStyle from "./classFormEdit.module.scss";
 import Button from "../../components/buttons/Button";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
@@ -13,18 +13,32 @@ import { MdAddPhotoAlternate } from "react-icons/md";
 import { RiCalendar2Fill } from "react-icons/ri";
 import moment from "moment";
 import {
-  createForm,
+  getDetailRoom,
+  updateForm,
   getTopics,
-} from "../../redux/action/actions/formAction/formAction";
+} from "../../redux/action/actions/formEditAction/formEditAction";
 
-function ClassForm() {
+function ClassFormEdit() {
   useEffect(() => {
     window.scroll(0, 0);
-    dispatch(getTopics());
   }, []);
 
-  const [img, setImg] = useState();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const params = useParams();
 
+  const studyRoom = useSelector((store) => {
+    return store.formEditReducer;
+  });
+
+  // ↓↓↓ Get Data ↓↓↓
+  useEffect(() => {
+    dispatch(getDetailRoom(params.id));
+  }, []);
+  // ↑↑↑ Get Data ↑↑↑
+
+  // ↓↓↓ Update Form ↓↓↓
+  const [img, setImg] = useState();
   const [startDate, setStartDate] = useState(null);
 
   const [room, setRoom] = useState({
@@ -39,32 +53,22 @@ function ClassForm() {
     roomStatus: "",
   });
 
-  const studyRoom = useSelector((store) => {
-    return store.formReducer;
-  });
-
-  console.log(studyRoom);
-
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(getTopics());
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // let data = { [name]: value };
-    // console.log(data);
     setRoom({ ...room, [name]: value });
-    // setRoom([...room, { title: value }]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(room);
-    dispatch(createForm(room));
-    navigate("/study-room");
+    dispatch(updateForm(room));
   };
+  // ↑↑↑ Form ↑↑↑
 
-  console.log(room.id_topic);
+  console.log(studyRoom);
 
   return (
     <>
@@ -282,4 +286,4 @@ function ClassForm() {
   );
 }
 
-export default ClassForm;
+export default ClassFormEdit;

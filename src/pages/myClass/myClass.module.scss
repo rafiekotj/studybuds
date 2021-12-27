@@ -52,44 +52,33 @@
     justify-content: space-between;
 
     .containerTitle {
-      padding: 20px 198px 20px;
+      margin: 20px 198px 0;
+      display: flex;
+      font: base.$content-20;
+      font-weight: 600;
 
       .containerCreate {
-        text-decoration: none;
-        color: base.$secondary-color;
-        font: base.$content-20;
-        font-weight: 600;
-        padding-bottom: 16px;
+        color: base.$primary-color;
+        border-bottom: 3px solid base.$primary-color;
         margin-right: 48px;
-        border-bottom: 3px solid transparent;
-
-        &:hover {
-          color: base.$primary-color;
-          border-bottom: 4px solid base.$primary-color;
-        }
-
-        &:focus {
-          color: base.$primary-color;
-          border-bottom: 4px solid base.$primary-color;
-        }
       }
 
       .containerJoin {
-        text-decoration: none;
-        color: base.$secondary-color;
-        font: base.$content-20;
-        font-weight: 600;
+        color: base.$primary-color;
+        border-bottom: 3px solid base.$primary-color;
+        margin-left: 48px;
+      }
+
+      p {
         padding-bottom: 16px;
+        cursor: pointer;
         border-bottom: 3px solid transparent;
+        color: base.$secondary-color;
 
         &:hover {
           color: base.$primary-color;
-          border-bottom: 4px solid base.$primary-color;
-        }
-
-        &:focus {
-          color: base.$primary-color;
-          border-bottom: 4px solid base.$primary-color;
+          border-bottom: 3px solid base.$primary-color;
+          opacity: 0.5;
         }
       }
     }
@@ -117,24 +106,29 @@
     height: 1px;
   }
 
-  .detailContainer {
-    .containerDesc {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      padding: 48px 198px 184px;
-
-      .hero {
-        display: flex;
-        height: 178px;
-        margin: auto;
-      }
-
-      .containerExplain {
-        font: base.$content-20;
-        margin: auto;
-        margin-top: 16px;
-      }
-    }
+  .containerCards {
+    margin: 56px 150px;
+    // width: 100%;
   }
+
+  // .detailContainer {
+  //   .containerDesc {
+  //     position: relative;
+  //     display: flex;
+  //     flex-direction: column;
+  //     padding: 48px 198px 184px;
+
+  //     .hero {
+  //       display: flex;
+  //       height: 178px;
+  //       margin: auto;
+  //     }
+
+  //     .containerExplain {
+  //       font: base.$content-20;
+  //       margin: auto;
+  //       margin-top: 16px;
+  //     }
+  //   }
+  // }
 }
