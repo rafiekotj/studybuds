@@ -8,6 +8,7 @@ import myClassReducer from "./myClassReducer";
 import profileReducer from "./profileReducer";
 import messagesReducer from "./messages";
 import formEditReducer from "./formEditReducer";
+import approveReducer from "./approveReducer";
 
 const rootReducer = combineReducers({
   reducers: "",
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   authReducer,
   detailRoomReducer,
   myClassReducer,
+  approveReducer,
   profileReducer,
   messagesReducer,
 });

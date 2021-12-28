@@ -1,11 +1,11 @@
-import http from "../../../http-common";
+// import http from "../../../http-common";
 
-const getApprove = (id) => {
-  return http.get(`/participant/${id}`);
-};
+// const getParticipant = (id) => {
+//   return http.get(`/participant/${id}`);
+// };
 
-const ApproveService = {
-  getApprove,
-};
+// const ApproveService = {
+//   getParticipant,
+// };
 
-export default ApproveService;
+// export default ApproveService;

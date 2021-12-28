@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import myClassStyle from "./myClass.module.scss";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
 import ellipseLeft from "../../assets/img/ellipseLeft.svg";
 import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
-import CreatedClassS from "../createdClassS/CreatedClassS";
+import hero from "../../assets/img/hero.svg";
 import Button from "../../components/buttons/Button";
-// import hero from "../../assets/img/hero.svg";
+import Card from "../../components/card/Card";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
 import { getAllCreatedRooms } from "../../redux/action/actions/myClassAction/myClassAction";
 import { getAllJoinedRooms } from "../../redux/action/actions/myClassAction/myClassAction";
-import Card from "../../components/card/Card";
 
 function MyClass() {
-  const [section, setSection] = useState("Created Class");
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
   const dispatch = useDispatch();
 
@@ -23,7 +24,12 @@ function MyClass() {
     return store.myClassReducer;
   });
 
-  console.log(studyRooms);
+  const profile = useSelector((store) => {
+    return store.profileReducer;
+  });
+
+  // ↓↓↓ Get Created & Joined Class ↓↓↓
+  const [section, setSection] = useState("Created Class");
 
   const handleSection = (section) => {
     setSection(section);
@@ -37,8 +43,8 @@ function MyClass() {
       dispatch(getAllJoinedRooms());
     }
   }, [section]);
+  // ↑↑↑ Get Created & Joined Class ↑↑↑
 
-  console.log(studyRooms);
   return (
     <>
       <div className={myClassStyle.detailRoom}>
@@ -98,15 +104,34 @@ function MyClass() {
           </div>
         </div>
         <div className={myClassStyle.containerLine}></div>
-        <div className={myClassStyle.containerCards}>
-          {studyRooms.data.map((data) =>
-            section === "Joined Class" && data.RoomClass ? (
-              <Card data={data.RoomClass} key={data.id} />
+        {profile.data.length !== 0 ? (
+          <div className={myClassStyle.containerCards}>
+            {studyRooms.data.length !== 0 ? (
+              studyRooms.data.map((data) =>
+                section === "Joined Class" && data.RoomClass ? (
+                  <Card data={data.RoomClass} key={data.id} />
+                ) : (
+                  <Card data={data} key={data.id} />
+                )
+              )
             ) : (
-              <Card data={data} key={data.id} />
-            )
-          )}
-        </div>
+              <div className={myClassStyle.containerDesc}>
+                <img src={hero} alt="hero" className={myClassStyle.hero} />
+                <p className={myClassStyle.containerExplain}>
+                  You don't have any class available, you can search class in
+                  Study Room Menu or add class to start new study room
+                </p>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className={myClassStyle.containerDesc}>
+            <img src={hero} alt="hero" className={myClassStyle.hero} />
+            <p className={myClassStyle.containerExplain}>
+              Please sign in to join or create your own class
+            </p>
+          </div>
+        )}
       </div>
     </>
   );
