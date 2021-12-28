@@ -6,6 +6,7 @@ function ButtonGreen(props) {
     <button
       className={`${buttonstyle.button} ${buttonstyle[props.classStyle]}`}
       type={props.type}
+      onClick={props.onClick}
     >
       {props.children}
     </button>

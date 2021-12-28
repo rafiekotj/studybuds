@@ -5,15 +5,16 @@ import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
 import ellipseLeft from "../../assets/img/ellipseLeft.svg";
 import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
-import { BsSearch } from "react-icons/bs";
 import Button from "../../components/buttons/Button";
 import Checkbox from "../../components/checkbox/checkbox";
+import { BsSearch } from "react-icons/bs";
 
 function ApproveParticipant() {
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
 
+  // ↓↓↓ Select Function ↓↓↓
   const [cars, setCars] = useState([
     {
       id: 1,
@@ -27,7 +28,6 @@ function ApproveParticipant() {
     },
   ]);
 
-  // ↓↓↓ Select Function ↓↓↓
   const [selectAll, setSelectAll] = useState(false);
 
   const handleCarClick = (id) => {
@@ -54,6 +54,12 @@ function ApproveParticipant() {
     setCars(cars.map((car) => ({ ...car, active: !selectAll })));
   };
   // ↑↑↑ Select Function ↑↑↑
+
+  // ↓↓↓ Handle Error ↓↓↓
+  const handleErrorA = () => {
+    alert("The approve participant feature is still on development process");
+  };
+  // ↑↑↑ Handle Error ↑↑↑
 
   return (
     <>
@@ -150,11 +156,18 @@ function ApproveParticipant() {
             <div
               className={approveParticipantStyle.approveContainerLimitButton}
             >
-              <Link to={`/room/{}`}>
+              <Link to="">
                 <Button classStyle="buttonWhite">Cancel</Button>
               </Link>
-              <Link to={`/room/{}`}>
-                <Button classStyle="buttonGreen">Approve</Button>
+              <Link to="">
+                <Button
+                  onClick={() => {
+                    handleErrorA();
+                  }}
+                  classStyle="buttonGreen"
+                >
+                  Approve
+                </Button>
               </Link>
             </div>
           </div>

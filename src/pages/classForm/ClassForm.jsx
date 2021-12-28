@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import moment from "moment";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import classFormStyle from "./classForm.module.scss";
-import Button from "../../components/buttons/Button";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
 import ellipseLeft from "../../assets/img/ellipseLeft.svg";
 import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
+import Button from "../../components/buttons/Button";
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { RiCalendar2Fill } from "react-icons/ri";
-import moment from "moment";
 import {
   createForm,
   getTopics,
@@ -20,13 +20,18 @@ import {
 function ClassForm() {
   useEffect(() => {
     window.scroll(0, 0);
+  }, []);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // ↓↓↓ Post Form ↓↓↓
+  useEffect(() => {
     dispatch(getTopics());
   }, []);
 
   const [img, setImg] = useState();
-
   const [startDate, setStartDate] = useState(null);
-
   const [room, setRoom] = useState({
     id_topic: "",
     imageClass: "",
@@ -43,28 +48,18 @@ function ClassForm() {
     return store.formReducer;
   });
 
-  console.log(studyRoom);
-
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // let data = { [name]: value };
-    // console.log(data);
     setRoom({ ...room, [name]: value });
-    // setRoom([...room, { title: value }]);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(room);
     dispatch(createForm(room));
-    navigate("/study-room");
+    navigate("/class");
   };
-
-  console.log(room.id_topic);
+  // ↑↑↑ Post Form ↑↑↑
 
   return (
     <>

@@ -5,7 +5,6 @@ import Navbar from "../components/navbar/Navbar";
 import Footer from "../components/footer/Footer";
 import Home from "../pages/home/Home";
 import StudyRoom from "../pages/studyRoom/StudyRoom";
-// import DetailRoomStudents from "../pages/detailRoomStudents/DetailRoomStudents";
 import DetailRoomHost from "../pages/detailRoomHost/DetailRoomHost";
 import ApproveParticipant from "../pages/approveParticipant/ApproveParticipant";
 import MyClass from "../pages/myClass/MyClass";
@@ -24,7 +23,6 @@ function createRoutes() {
         <Route path="/Login" element={<Login />} />
         <Route exact path="/" element={<Home />} />
         <Route exact path="/study-room" element={<StudyRoom />} />
-        {/* <Route path="/room/:id" element={<DetailRoomStudents />} /> */}
         <Route path="/room/:id" element={<DetailRoomHost />} />
         <Route path="/participant/:id" element={<ApproveParticipant />} />
         <Route path="/new-class" element={<ClassForm />} />

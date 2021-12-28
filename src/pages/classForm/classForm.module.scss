@@ -35,6 +35,14 @@
   .detailTitle {
     padding: 177px 150px 80px;
 
+    @include media("<=tablet") {
+      padding: 177px 96px 80px;
+    }
+
+    @include media("<=phone") {
+      padding: 177px 44px 80px;
+    }
+
     .titlePage {
       font: base.$content-40;
       font-weight: 700;
@@ -47,6 +55,14 @@
       border: 1px solid base.$light-green-color;
       border-radius: 12px;
       box-shadow: 0px 0px 10px 0px #0000001a;
+
+      @include media("<=tablet") {
+        margin: 56px 23px 0;
+      }
+
+      @include media("<=phone") {
+        margin: 23px 0;
+      }
 
       &Img {
         display: flex;
@@ -63,68 +79,6 @@
           position: relative;
           display: flex;
           overflow: hidden;
-
-          // &Box {
-          //   margin-right: 16px;
-
-          //   &Wrapper {
-          //     position: relative;
-          //     width: 116px;
-          //     height: 116px;
-          //     border-radius: 12px;
-          //   }
-
-          //   .uploadButton {
-          //     position: absolute;
-          //     width: 116px;
-          //     height: 116px;
-          //     background-color: base.$white-color;
-          //     border: 1px dashed base.$grey-color;
-          //     border-radius: 12px;
-          //     cursor: pointer;
-
-          //     .uploadIcon {
-          //       height: 28.5px;
-          //       width: 28.5px;
-          //       color: base.$secondary-color;
-          //     }
-          //   }
-
-          //   .wrapperItem {
-          //     position: absolute;
-          //     text-align: center;
-
-          //     .itemDisplay {
-          //       position: relative;
-
-          //       Img {
-          //         position: relative;
-          //         justify-content: center;
-          //         text-align: center;
-          //         margin-left: 1px;
-          //         margin-top: 1px;
-          //         display: block;
-          //         height: 114px;
-          //         border-radius: 11px;
-          //       }
-
-          //       Button {
-          //         position: absolute;
-          //         right: 5px;
-          //         bottom: 2px;
-          //         border: none;
-          //         outline: none;
-          //         background: none;
-
-          //         span {
-          //           color: base.$white-color;
-          //           cursor: pointer;
-          //           font-weight: bold;
-          //         }
-          //       }
-          //     }
-          //   }
-          // }
 
           &Box {
             position: relative;
@@ -382,108 +336,6 @@
             }
           }
         }
-
-        // .statusBox {
-        //   width: 40%;
-        //   display: flex;
-        //   justify-content: center;
-        //   height: fit-content;
-        //   font: base.$content-16;
-        //   max-height: 3rem;
-        //   min-width: 10rem;
-        //   z-index: 10;
-        //   position: relative;
-
-        //   &Filter {
-        //     background-color: base.$white-color;
-        //     border: 1px solid base.$grey-color;
-        //     border-radius: 8px;
-        //     padding: 1rem;
-        //     width: 100%;
-        //     height: 58px;
-        //     text-align: center;
-        //     font: base.$content-16;
-        //     transition: all 0.5s;
-        //     cursor: pointer;
-        //     display: flex;
-        //     justify-content: space-between;
-        //     position: relative;
-
-        //     &:hover {
-        //       background-color: rgba($color: #000000, $alpha: 0.1);
-        //     }
-
-        //     span:last-child {
-        //       position: absolute;
-        //       right: 4%;
-        //       top: 50%;
-        //       transform: translateY(-35%);
-        //     }
-        //   }
-
-        //   &Options {
-        //     position: absolute;
-        //     top: 120%;
-        //     // transform: translateX(-50%);
-        //     background-color: base.$white-color;
-        //     box-shadow: 0 0 10px 2px #0000001a;
-        //     border-radius: 8px;
-        //     width: 100%;
-        //     font: base.$content-16;
-        //     color: base.$black-color;
-        //     max-height: 19rem;
-        //     overflow-y: scroll;
-        //     overflow-x: hidden;
-
-        //     ul {
-        //       list-style-type: none;
-        //     }
-
-        //     li {
-        //       cursor: pointer;
-        //       padding: 0.75rem 1rem;
-        //       width: 100%;
-
-        //       &:nth-of-type(1) {
-        //         border-radius: 8px 0px 0 0;
-        //       }
-
-        //       &:last-child {
-        //         border-radius: 0 0 0px 8px;
-        //       }
-
-        //       &:hover {
-        //         background-color: base.$light-green-color;
-        //       }
-
-        //       input[type="radio"] {
-        //         display: none;
-        //       }
-        //     }
-
-        //     label {
-        //       cursor: pointer;
-        //     }
-        //   }
-
-        //   ::-webkit-scrollbar {
-        //     width: 12px;
-        //   }
-
-        //   ::-webkit-scrollbar-track {
-        //     -webkit-box-shadow: inset 0 0 6px base.$white-color;
-        //     background-color: base.$white-color;
-        //     border: 1px solid base.$grey-color;
-        //     border-radius: 0px 8px 8px 0;
-        //   }
-
-        //   ::-webkit-scrollbar-thumb {
-        //     border-radius: 8px;
-        //     -webkit-box-shadow: inset 0 0 6px base.$grey-color;
-        //     background-color: base.$grey-color;
-        //     background-image: none;
-        //   }
-        // }
       }
     }
 
@@ -492,12 +344,32 @@
       justify-content: flex-end;
       margin: 0 46px;
       padding-top: 10px;
+      text-align: center;
+
+      @include media("<=tablet") {
+        margin: 0 23px;
+      }
+
+      @include media("<=phone") {
+        padding-top: 0;
+        margin: 0;
+      }
 
       button {
         text-align: center;
         height: 42px;
         padding: 8px 64px;
         margin-left: 1rem;
+
+        @include media("<=tablet") {
+          padding: 8px 32px;
+        }
+
+        @include media("<=phone") {
+          font: base.$content-14;
+          font-weight: 600;
+          padding: 8px 12px;
+        }
 
         .cancelBtn {
           text-decoration: none;

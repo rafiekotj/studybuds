@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import Avatar from "react-avatar";
 import detailRoomHostStyle from "./detailRoomHost.module.scss";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
@@ -7,16 +10,20 @@ import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
 import Button from "../../components/buttons/Button";
 import { RiCalendar2Fill } from "react-icons/ri";
 import { BsPeopleFill } from "react-icons/bs";
-// import { ImCross } from "react-icons/im";
-import { Link, useLocation, useParams } from "react-router-dom";
-import Avatar from "react-avatar";
-import { useDispatch, useSelector } from "react-redux";
-import { getDetailRoom } from "../../redux/action/actions/detailRoomAction/detailRoomAction";
+import {
+  getDetailRoom,
+  deleteRoom,
+  createChosen,
+} from "../../redux/action/actions/detailRoomAction/detailRoomAction";
 
 function DetailRoomHost() {
-  const dispatch = useDispatch();
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
 
+  const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
 
   const studyRooms = useSelector((store) => {
     return store.detailRoomReducer.data;
@@ -26,20 +33,41 @@ function DetailRoomHost() {
     return store.profileReducer;
   });
 
-  console.log(profile);
-
-  const location = useLocation();
-  console.log(studyRooms);
-
+  // ↓↓↓ Get Detail Room ↓↓↓
   useEffect(() => {
     dispatch(getDetailRoom(params.id));
-    // dispatch(getUserData());
-    // console.log(params.id);
   }, [dispatch, params.id]);
+  // ↑↑↑ Get Detail Room ↑↑↑
 
-  useEffect(() => {
-    window.scroll(0, 0);
-  }, []);
+  // ↓↓↓ Delete Detail Room ↓↓↓
+  const handleDelete = (id) => {
+    if (
+      window.confirm("Are You Sure You Want to Delete This Class?") === true
+    ) {
+      dispatch(deleteRoom(id));
+      navigate("/class");
+      alert("Class has been successfully deleted");
+    } else {
+      <div></div>;
+    }
+  };
+  // ↑↑↑ Delete Detail Room ↑↑↑
+
+  // ↓↓↓ Create Join Room ↓↓↓
+  const handleJoin = (id) => {
+    dispatch(createChosen(id));
+  };
+  // ↑↑↑ Create Join Room ↑↑↑
+
+  // ↓↓↓ Handle Error ↓↓↓
+  const handleError = () => {
+    alert("The edit class feature is still on development process");
+  };
+
+  const handleErrorA = () => {
+    alert("The approve participant feature is still on development process");
+  };
+  // ↑↑↑ Handle Error ↑↑↑
 
   return (
     <>
@@ -100,6 +128,9 @@ function DetailRoomHost() {
                     <input
                       type="button"
                       value="Approve Participant"
+                      onClick={() => {
+                        handleErrorA();
+                      }}
                       className={
                         detailRoomHostStyle.roomTitleTopStoryNumberApproveBtn
                       }
@@ -113,15 +144,32 @@ function DetailRoomHost() {
           </div>
           {studyRooms.User?.id === profile.data.id ? (
             <div className={detailRoomHostStyle.roomTitleBtn}>
-              <Link to={`/edit-class/${studyRooms.id}`}>
-                <Button classStyle="buttonWhite">Edit Class</Button>
-              </Link>
-              <Link to="">
-                <Button classStyle="buttonWhite">Delete Class</Button>
-              </Link>
+              <div>
+                <Link to={`/edit-class/${studyRooms.id}`}>
+                  <Button
+                    onClick={() => {
+                      handleError();
+                    }}
+                    classStyle="buttonWhite"
+                  >
+                    Edit Class
+                  </Button>
+                </Link>
+              </div>
+              <Button
+                classStyle="buttonWhite"
+                onClick={() => {
+                  handleDelete(studyRooms.id);
+                }}
+              >
+                Delete Class
+              </Button>
             </div>
           ) : (
-            <div className={detailRoomHostStyle.roomTitleJoin}>
+            <div
+              onClick={() => handleJoin(studyRooms.id)}
+              className={detailRoomHostStyle.roomTitleJoin}
+            >
               <Link
                 to={`/room/${studyRooms.id}/meeting/${studyRooms.roomName}`}
               >
@@ -178,9 +226,9 @@ function DetailRoomHost() {
                     detailRoomHostStyle.containerMaterialHostSquareProfileAvatar
                   }
                   color={Avatar.getRandomColor("sitebase", [])}
-                  maxInitials="2"
+                  maxInitials={2}
                   round={true}
-                  size="48"
+                  size={40}
                   name={studyRooms.User?.fullname}
                   src={studyRooms.User?.imageUser}
                 />
@@ -212,7 +260,9 @@ function DetailRoomHost() {
             </div>
             {studyRooms.User?.id === profile.data.id ? (
               <div className={detailRoomHostStyle.HostBtn}>
-                <Link to="">
+                <Link
+                  to={`/room/${studyRooms.id}/meeting/${studyRooms.roomName}`}
+                >
                   <Button classStyle="buttonGreen">Start Class</Button>
                 </Link>
               </div>
@@ -227,31 +277,3 @@ function DetailRoomHost() {
 }
 
 export default DetailRoomHost;
-
-// MISCELLANEOUS
-
-// Alert Add Participant
-// {
-//   /* <div className={detailRoomHostStyle.openAlert}>
-//   <div className={detailRoomHostStyle.proceedsAlert}>
-//     <ImCross className={detailRoomHostStyle.cross} />
-//     <p className={detailRoomHostStyle.alertText}>Add Participants Success</p>
-//     <div className={detailRoomHostStyle.okayBtn}>
-//       <ButtonGreen name="ㅤ" />
-//     </div>
-//   </div>
-// </div> */
-// }
-
-// Alert Class Not Started
-// {
-//   /* <div className={detailRoomHostStyle.openAlert}>
-//   <div className={detailRoomHostStyle.proceedsAlert}>
-//     <ImCross className={detailRoomHostStyle.cross} />
-//     <p className={detailRoomHostStyle.alertText}>The class has not yet started</p>
-//     <div className={detailRoomHostStyle.okayBtn}>
-//       <ButtonGreen name="ㅤ" />
-//     </div>
-//   </div>
-// </div> */
-// }

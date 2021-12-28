@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import moment from "moment";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import classFormStyle from "./classFormEdit.module.scss";
-import Button from "../../components/buttons/Button";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
 import ellipseLeft from "../../assets/img/ellipseLeft.svg";
 import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
+import Button from "../../components/buttons/Button";
 import { MdAddPhotoAlternate } from "react-icons/md";
 import { RiCalendar2Fill } from "react-icons/ri";
-import moment from "moment";
 import {
   getDetailRoom,
   updateForm,
@@ -68,7 +68,11 @@ function ClassFormEdit() {
   };
   // ↑↑↑ Form ↑↑↑
 
-  console.log(studyRoom);
+  // ↓↓↓ Handle Error ↓↓↓
+  const handleError = () => {
+    alert("The edit class feature is still on development process");
+  };
+  // ↑↑↑ Handle Error ↑↑↑
 
   return (
     <>
@@ -270,12 +274,18 @@ function ClassFormEdit() {
             </div>
             <div className={classFormStyle.buttonBox}>
               <Button classStyle="buttonWhite">
-                <Link to="/class" className={classFormStyle.cancelBtn}>
+                <Link to="" className={classFormStyle.cancelBtn}>
                   Cancel
                 </Link>
               </Button>
               <Button classStyle="buttonWhite">Save as Draft</Button>
-              <Button classStyle="buttonGreen" type="submit">
+              <Button
+                classStyle="buttonGreen"
+                // type="submit"
+                onClick={() => {
+                  handleError();
+                }}
+              >
                 Publish
               </Button>
             </div>

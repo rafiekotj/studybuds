@@ -1,15 +1,15 @@
-import { GET_APPROVE_PARTICIPANT_SUCCESS } from "../../actionTypes/approveTypes";
+// import { GET_APPROVE_PARTICIPANT_SUCCESS } from "../../actionTypes/approveTypes";
+// import ApproveService from "./approveService";
 
-export const getApprovePart = (id) => async (dispatch) => {
-  try {
-    const res = await DetailRoomService.getApprove(id);
-    // console.log(res.data.data);
+// export const getApprove = (id) => async (dispatch) => {
+//   try {
+//     const res = await ApproveService.getParticipant(id);
 
-    dispatch({
-      type: GET_APPROVE_PARTICIPANT_SUCCESS,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+//     dispatch({
+//       type: GET_APPROVE_PARTICIPANT_SUCCESS,
+//       payload: res.data.data,
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };

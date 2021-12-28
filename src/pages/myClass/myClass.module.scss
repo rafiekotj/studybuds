@@ -38,6 +38,14 @@
     flex-direction: row;
     justify-content: space-between;
 
+    @include media("<=tablet") {
+      padding: 176px 96px 20px;
+    }
+
+    @include media("<=phone") {
+      padding: 176px 44px 20px;
+    }
+
     .titleHead {
       .titleName {
         font: base.$content-40;
@@ -56,17 +64,44 @@
       display: flex;
       font: base.$content-20;
       font-weight: 600;
+      text-align: center;
+
+      @include media("<=tablet") {
+        margin: 20px 96px 0;
+      }
+
+      @include media("<=phone") {
+        margin: 20px 0 0 44px;
+        font: base.$content-16;
+        font-weight: 600;
+      }
 
       .containerCreate {
         color: base.$primary-color;
         border-bottom: 3px solid base.$primary-color;
         margin-right: 48px;
+
+        @include media("<=tablet") {
+          margin-right: 28px;
+        }
+
+        @include media("<=phone") {
+          margin-right: 16px;
+        }
       }
 
       .containerJoin {
         color: base.$primary-color;
         border-bottom: 3px solid base.$primary-color;
         margin-left: 48px;
+
+        @include media("<=tablet") {
+          margin-left: 28px;
+        }
+
+        @include media("<=phone") {
+          margin-left: 16px;
+        }
       }
 
       p {
@@ -85,6 +120,14 @@
 
     .addClassBtn {
       width: 20%;
+
+      @include media("<=tablet") {
+        margin-right: 96px;
+      }
+
+      // @include media("<=phone") {
+      //   // margin-right: 48px;
+      // }
 
       button {
         .addBtn {
@@ -109,26 +152,42 @@
   .containerCards {
     margin: 56px 150px;
     // width: 100%;
+
+    @include media("<=tablet") {
+      margin: 56px 128px;
+    }
+
+    @include media("<=phone") {
+      margin: 56px 86px;
+    }
   }
 
-  // .detailContainer {
-  //   .containerDesc {
-  //     position: relative;
-  //     display: flex;
-  //     flex-direction: column;
-  //     padding: 48px 198px 184px;
+  .containerDesc {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 48px auto 184px;
 
-  //     .hero {
-  //       display: flex;
-  //       height: 178px;
-  //       margin: auto;
-  //     }
+    .hero {
+      display: flex;
+      height: 267px;
+      margin: auto;
 
-  //     .containerExplain {
-  //       font: base.$content-20;
-  //       margin: auto;
-  //       margin-top: 16px;
-  //     }
-  //   }
-  // }
+      @include media("<=phone") {
+        height: 160px;
+      }
+    }
+
+    .containerExplain {
+      font: base.$content-20;
+      width: 60%;
+      margin: auto;
+      margin-top: 16px;
+      text-align: center;
+
+      @include media("<=phone") {
+        font: base.$content-16;
+      }
+    }
+  }
 }
