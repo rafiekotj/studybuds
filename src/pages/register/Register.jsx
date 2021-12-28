@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import hero from "../../assets/img/hero.svg";
 import logo from "../../assets/img/logo.png";
 import registerStyle from "./register.module.scss";
@@ -9,7 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { register } from "../../redux/action/actions/authAction/authAction";
-import Loader from "../../components/loader/Loader";
+// import Loader from "../../components/loader/Loader";
 
 export default function Register() {
   const [fullName, setFullName] = useState("");
@@ -25,6 +25,12 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const confirmPasswordMessage =
     "Your password and confirmation password do not match";
+
+  // Start at top of page
+  useEffect(() => {
+    window.scroll(0, 0);
+  }, []);
+  // End Start at top of page
 
   console.log(message.message);
   // Password shown
@@ -75,13 +81,9 @@ export default function Register() {
 
     if (confirmPassword === password) {
       dispatch(register(fullName, email, password))
-        .then(() => {
-          console.log("then", message);
-          if (
-            message?.message?.data?.message === "Success create an account!"
-          ) {
+        .then((res) => {
+          if (res === 201) {
             navigate("/login");
-            // window.location.reload();
           }
         })
         .catch(() => {
@@ -194,9 +196,9 @@ export default function Register() {
             <p className={registerStyle.errorMessage}>
               {message.message?.success === false
                 ? message.message.errors.includes(
-                    "Please fill in the password with a length of 8-12 characters, consisting of a combination of uppercase letters, lowercase letters, and number"
+                    "Please fill in the password with a length of 8-12 characters, consisting of a combination of uppercase letters, lowercase letters, symbol, and number"
                   )
-                  ? "Please fill in the password with a length of 8-12 characters, consisting of a combination of uppercase letters, lowercase letters, and number"
+                  ? "Please fill in the password with a length of 8-12 characters, consisting of a combination of uppercase letters, lowercase letters, symbol, and number"
                   : ""
                 : ""}
             </p>

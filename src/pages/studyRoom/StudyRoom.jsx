@@ -263,6 +263,9 @@ function StudyRoom() {
               style={show ? { display: "block" } : { display: "none" }}
             >
               <ul>
+                <li onClick={() => handleTopics(null, "All Topic")}>
+                  All Topic
+                </li>
                 {studyRooms.topics.map((data) => (
                   <li
                     key={data.id}

@@ -11,6 +11,7 @@ import ApproveParticipant from "../pages/approveParticipant/ApproveParticipant";
 import MyClass from "../pages/myClass/MyClass";
 import ClassForm from "../pages/classForm/ClassForm";
 import MeetingRoom from "../pages/meetingRoom/MeetingRoom";
+import Account from "../pages/account/Account";
 import NotFound from "../pages/notFound/NotFound";
 import ClassFormEdit from "../pages/classFormEdit/ClassFormEdit";
 
@@ -30,6 +31,7 @@ function createRoutes() {
         <Route path="/edit-class/:id" element={<ClassFormEdit />} />
         <Route path="/class" element={<MyClass />} />
         <Route path="/room/:id/meeting/:roomName" element={<MeetingRoom />} />
+        <Route path="/account/:menu" element={<Account />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

@@ -1,0 +1,129 @@
+@use "../../base";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  //   align-items: center;
+  justify-content: center;
+  padding: 10rem 7rem;
+
+  .imageLeftLoad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/groupDownloadLeft.svg") no-repeat;
+    background-position: 85% left;
+    z-index: -1;
+  }
+
+  .imageRightLoad {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("../../assets/img/groupDownloadLeft.svg") no-repeat;
+    background-position: bottom right;
+    z-index: -1;
+  }
+
+  h1 {
+    font: base.$content-40;
+    font-weight: 700;
+  }
+
+  .menus {
+    display: flex;
+    // justify-content: space-between;
+    box-shadow: 4px 2px 10px 0px base.$grey-color;
+    align-self: center;
+    font-weight: 600;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 2.5rem;
+    // padding: 1rem 3rem;
+
+    .selectedMenu {
+      background-color: base.$primary-color;
+      color: base.$white-color;
+    }
+
+    ul {
+      width: 20rem;
+      border-right: 1px solid base.$secondary-color;
+      padding-top: 2rem;
+
+      li {
+        list-style-type: none;
+        font: base.$content-20;
+        font-weight: 600;
+        padding: 1rem 2rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: base.$primary-color;
+          opacity: 50%;
+        }
+      }
+    }
+
+    &Profile {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0 3rem 0 5rem;
+      padding: 2rem 0 5rem;
+      font-weight: 600;
+      width: 45rem;
+      min-height: 30.47rem;
+
+      &PictureContainer {
+        border-radius: 12px;
+        width: 10rem;
+        display: flex;
+
+        .menusProfilePicture {
+          border-radius: inherit;
+          width: 100%;
+        }
+      }
+
+      input {
+        border: 1px solid base.$grey-color;
+        background-color: inherit;
+        border-radius: 8px;
+        padding: 1rem;
+        width: 100%;
+        height: 3.25rem;
+        font: base.$content-16;
+      }
+
+      .inputImage {
+        display: none;
+        visibility: none;
+      }
+
+      .warn {
+        font: base.$content-14;
+        margin: auto;
+      }
+
+      h2 {
+        font: base.$content-20;
+        font-weight: 600;
+      }
+
+      .buttons {
+        width: 100%;
+        display: flex;
+        justify-content: right;
+
+        button:not(:last-child) {
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+}
