@@ -21,7 +21,7 @@ export const register = (fullname, email, password) => (dispatch) => {
         payload: res,
       });
 
-      return Promise.resolve();
+      return Promise.resolve(res.data.status);
     }
     // (err) => {
     //   console.log("fail", err);

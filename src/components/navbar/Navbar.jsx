@@ -308,7 +308,7 @@ function Navbar() {
       >
         <div className={navbarstyle.navbarProfileAvatarContainer}>
           <Avatar
-            alt={profile.data.fullname}
+            alt={profile.data?.fullname}
             // className={navbarstyle.navbarProfileAvatar}
             maxInitials="2"
             round={true}
@@ -328,10 +328,18 @@ function Navbar() {
           <p>{profile.data.email}</p>
         </div>
         <ul>
-          <li>Notification</li>
-          <li>Profile</li>
-          <li>History</li>
-          <li>Change Password</li>
+          <Link to="/account/notification" className={navbarstyle.links}>
+            <li>Notification</li>{" "}
+          </Link>
+          <Link to="/account/profile" className={navbarstyle.links}>
+            <li>Profile</li>
+          </Link>
+          <Link to="/account/history" className={navbarstyle.links}>
+            <li>History</li>
+          </Link>
+          <Link to="/account/change-password" className={navbarstyle.links}>
+            <li>Change Password</li>
+          </Link>
           <li onClick={() => handleLogout()}>Sign Out</li>
         </ul>
       </div>
