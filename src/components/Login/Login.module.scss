@@ -6,8 +6,9 @@
   z-index: 5;
   justify-content: space-evenly;
   overflow: hidden;
-  padding: 10rem;
+  padding: 10rem 7rem;
   position: relative;
+
   &::before {
     content: "";
     position: absolute;
@@ -32,11 +33,13 @@
     background-position: right top;
     z-index: -1;
   }
+
   .loginButtonContainer {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
     margin-top: 1rem;
+
     .loginButton {
       color: #395185;
       font-size: 1.25rem;
@@ -51,6 +54,27 @@
       color: base.$primary-color;
       cursor: pointer;
       z-index: 100;
+    }
+  }
+
+  .loginOr {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+
+    span {
+      width: 45%;
+      height: 1rem;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: base.$light-green-color;
+        top: 50%;
+      }
     }
   }
 
@@ -90,17 +114,19 @@
   .login {
     width: 419px;
     height: 697px;
-    top: 105px;
-    left: 845px;
+    margin-top: 1rem;
+    margin-left: 2rem;
 
     &Form {
       float: initial;
+
       &Label {
         display: block;
         font: base.$content-16;
         font-weight: 600;
         margin-bottom: 0.5rem;
       }
+
       &Input {
         margin-bottom: 2rem;
         border: 1px solid base.$primary-color;
@@ -108,27 +134,41 @@
         padding: 1rem;
         width: 417px;
         height: 52px;
-        top: 614px;
-        left: 847px;
         font: base.$content-16;
+        position: relative;
+
+        input {
+          all: unset;
+          width: 100%;
+        }
+
+        .eye {
+          all: unset;
+          cursor: pointer;
+          position: absolute;
+          right: 15px;
+          color: base.$secondary-color;
+        }
       }
+
       button {
         width: 100%;
         margin: 0.5rem 0;
         position: relative;
         overflow: hidden;
       }
-      &Sign {
-        width: 417px;
-        height: 40px;
-        top: 698px;
-        left: 847px;
-        border: none;
-        background-color: base.$primary-color;
-        border-radius: 40px;
-        text-align: center;
-        padding: 10px 0;
-      }
+
+      // &Sign {
+      //   width: 417px;
+      //   height: 40px;
+      //   top: 698px;
+      //   left: 847px;
+      //   border: none;
+      //   background-color: base.$primary-color;
+      //   border-radius: 40px;
+      //   text-align: center;
+      //   padding: 10px 0;
+      // }
     }
   }
 }

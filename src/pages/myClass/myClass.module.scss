@@ -38,6 +38,14 @@
     flex-direction: row;
     justify-content: space-between;
 
+    @include media("<=tablet") {
+      padding: 176px 96px 20px;
+    }
+
+    @include media("<=phone") {
+      padding: 176px 44px 20px;
+    }
+
     .titleHead {
       .titleName {
         font: base.$content-40;
@@ -52,50 +60,74 @@
     justify-content: space-between;
 
     .containerTitle {
-      padding: 20px 198px 20px;
+      margin: 20px 198px 0;
+      display: flex;
+      font: base.$content-20;
+      font-weight: 600;
+      text-align: center;
+
+      @include media("<=tablet") {
+        margin: 20px 96px 0;
+      }
+
+      @include media("<=phone") {
+        margin: 20px 0 0 44px;
+        font: base.$content-16;
+        font-weight: 600;
+      }
 
       .containerCreate {
-        text-decoration: none;
-        color: base.$secondary-color;
-        font: base.$content-20;
-        font-weight: 600;
-        padding-bottom: 16px;
+        color: base.$primary-color;
+        border-bottom: 3px solid base.$primary-color;
         margin-right: 48px;
-        border-bottom: 3px solid transparent;
 
-        &:hover {
-          color: base.$primary-color;
-          border-bottom: 4px solid base.$primary-color;
+        @include media("<=tablet") {
+          margin-right: 28px;
         }
 
-        &:focus {
-          color: base.$primary-color;
-          border-bottom: 4px solid base.$primary-color;
+        @include media("<=phone") {
+          margin-right: 16px;
         }
       }
 
       .containerJoin {
-        text-decoration: none;
-        color: base.$secondary-color;
-        font: base.$content-20;
-        font-weight: 600;
+        color: base.$primary-color;
+        border-bottom: 3px solid base.$primary-color;
+        margin-left: 48px;
+
+        @include media("<=tablet") {
+          margin-left: 28px;
+        }
+
+        @include media("<=phone") {
+          margin-left: 16px;
+        }
+      }
+
+      p {
         padding-bottom: 16px;
+        cursor: pointer;
         border-bottom: 3px solid transparent;
+        color: base.$secondary-color;
 
         &:hover {
           color: base.$primary-color;
-          border-bottom: 4px solid base.$primary-color;
-        }
-
-        &:focus {
-          color: base.$primary-color;
-          border-bottom: 4px solid base.$primary-color;
+          border-bottom: 3px solid base.$primary-color;
+          opacity: 0.5;
         }
       }
     }
 
     .addClassBtn {
       width: 20%;
+
+      @include media("<=tablet") {
+        margin-right: 96px;
+      }
+
+      // @include media("<=phone") {
+      //   // margin-right: 48px;
+      // }
 
       button {
         .addBtn {
@@ -117,24 +149,66 @@
     height: 1px;
   }
 
-  .detailContainer {
-    .containerDesc {
-      position: relative;
+  .containerCards {
+    margin: 56px 150px;
+    // width: 100%;
+
+    @include media("<=tablet") {
+      margin: 56px 128px;
+    }
+
+    @include media("<=phone") {
+      margin: 56px 86px;
+    }
+  }
+
+  .containerDesc {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    margin: 48px auto 184px;
+
+    .hero {
       display: flex;
-      flex-direction: column;
-      padding: 48px 198px 184px;
+      height: 267px;
+      margin: auto;
 
-      .hero {
-        display: flex;
-        height: 178px;
-        margin: auto;
+      @include media("<=phone") {
+        height: 160px;
       }
+    }
 
-      .containerExplain {
-        font: base.$content-20;
-        margin: auto;
-        margin-top: 16px;
+    .containerExplain {
+      font: base.$content-20;
+      width: 60%;
+      margin: auto;
+      margin-top: 16px;
+      text-align: center;
+
+      @include media("<=phone") {
+        font: base.$content-16;
       }
     }
   }
+
+  // .detailContainer {
+  //   .containerDesc {
+  //     position: relative;
+  //     display: flex;
+  //     flex-direction: column;
+  //     padding: 48px 198px 184px;
+
+  //     .hero {
+  //       display: flex;
+  //       height: 178px;
+  //       margin: auto;
+  //     }
+
+  //     .containerExplain {
+  //       font: base.$content-20;
+  //       margin: auto;
+  //       margin-top: 16px;
+  //     }
+  //   }
+  // }
 }

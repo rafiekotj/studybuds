@@ -5,94 +5,62 @@ import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
 import ellipseLeft from "../../assets/img/ellipseLeft.svg";
 import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
-import { FiCheck } from "react-icons/fi";
-import { BsSearch } from "react-icons/bs";
 import Button from "../../components/buttons/Button";
+import Checkbox from "../../components/checkbox/checkbox";
+import { BsSearch } from "react-icons/bs";
 
 function ApproveParticipant() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      title: "Yugi Muto",
-      completed: false,
-    },
-    {
-      id: 2,
-      title: "Nobitakun",
-      completed: false,
-    },
-    {
-      id: 3,
-      title: "Nobitakun Desu Ne",
-      completed: false,
-    },
-    {
-      id: 4,
-      title: "Doraemon to Nani",
-      completed: false,
-    },
-    {
-      id: 5,
-      title: "Sugoi Desu",
-      completed: false,
-    },
-    {
-      id: 6,
-      title: "Yugi Muto",
-      completed: false,
-    },
-    {
-      id: 7,
-      title: "Nobitakun",
-      completed: false,
-    },
-    {
-      id: 8,
-      title: "Nobitakun Desu Ne",
-      completed: false,
-    },
-    {
-      id: 9,
-      title: "Nobitakun",
-      completed: false,
-    },
-    {
-      id: 10,
-      title: "Doraemon to Nani",
-      completed: false,
-    },
-    {
-      id: 11,
-      title: "Sugoi Desu",
-      completed: false,
-    },
-    {
-      id: 8,
-      title: "Nobitakun Desu Ne",
-      completed: false,
-    },
-    {
-      id: 9,
-      title: "Nobitakun",
-      completed: false,
-    },
-    {
-      id: 10,
-      title: "Doraemon to Nani",
-      completed: false,
-    },
-    {
-      id: 11,
-      title: "Sugoi Desu",
-      completed: false,
-    },
-  ]);
-
-  const [selectAll, setSelectAll] = useState(false);
-
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
+  // ↓↓↓ Select Function ↓↓↓
+  const [cars, setCars] = useState([
+    {
+      id: 1,
+      name: "Jack Avery",
+      active: false,
+    },
+    {
+      id: 2,
+      name: "Christina Smith",
+      active: false,
+    },
+  ]);
+
+  // ↓↓↓ Select Function ↓↓↓
+  const [selectAll, setSelectAll] = useState(false);
+
+  const handleCarClick = (id) => {
+    const carsCopy = [...cars];
+    const carToUpdate = carsCopy.find((car) => car.id === id);
+    carToUpdate.active = !carToUpdate.active;
+
+    if (!carToUpdate.active && selectAll) {
+      handleSelectAll();
+    }
+    setCars(carsCopy);
+
+    let flag = true;
+    for (let i = 0; i < cars.length; i++) {
+      flag = flag && cars[i].active;
+    }
+    if (flag && !selectAll) {
+      handleSelectAll();
+    }
+  };
+
+  const handleSelectAll = () => {
+    setSelectAll((prevState) => !prevState);
+    setCars(cars.map((car) => ({ ...car, active: !selectAll })));
+  };
+  // ↑↑↑ Select Function ↑↑↑
+
+  // ↓↓↓ Handle Error ↓↓↓
+  const handleErrorA = () => {
+    alert("The approve participant feature is still on development process");
+  };
+  // ↑↑↑ Handle Error ↑↑↑
 
   return (
     <>
@@ -118,104 +86,89 @@ function ApproveParticipant() {
           className={approveParticipantStyle.groupDownloadRight}
         />
         <div className={approveParticipantStyle.approveContainer}>
-          <div className={approveParticipantStyle.approveTitle}>
-            <p>Approve Participant</p>
+          <div className={approveParticipantStyle.approveContainerTitle}>
+            Approve Participant
           </div>
-          <div className={approveParticipantStyle.limitContainer}>
-            <div className={approveParticipantStyle.limitTitle}>
-              <p>Limit Participants (0/50)</p>
+          <div className={approveParticipantStyle.approveContainerLimit}>
+            <div className={approveParticipantStyle.approveContainerLimitTitle}>
+              Limit Participants (0/50)
             </div>
-
-            <div className={approveParticipantStyle.limitBox}>
-              <div className={approveParticipantStyle.limitHeader}>
-                <div className={approveParticipantStyle.participantSearch}>
+            <div className={approveParticipantStyle.approveContainerLimitBox}>
+              <div
+                className={
+                  approveParticipantStyle.approveContainerLimitBoxHeader
+                }
+              >
+                <div
+                  className={
+                    approveParticipantStyle.approveContainerLimitBoxHeaderSearch
+                  }
+                >
                   <BsSearch
-                    className={approveParticipantStyle.participantSearchIcon}
+                    className={
+                      approveParticipantStyle.approveContainerLimitBoxHeaderSearchIcon
+                    }
                   />
                   <input
                     type="text"
-                    placeholder="Search study room"
-                    className={approveParticipantStyle.participantSearchInput}
+                    placeholder="Search participants"
+                    className={
+                      approveParticipantStyle.approveContainerLimitBoxHeaderSearchInput
+                    }
                   />
                 </div>
-                <div className={approveParticipantStyle.participantSelAll}>
-                  <div className={approveParticipantStyle.checkboxContainer}>
-                    <h3>Select All</h3>
-                    <div className={approveParticipantStyle.customCheckbox}>
-                      <input
-                        onChange={() => {
-                          setSelectAll(!selectAll);
-                          setTodos([
-                            ...todos.map((item) => ({
-                              ...item,
-                              completed: !item.completed,
-                            })),
-                          ]);
-                        }}
-                        type="checkbox"
-                        id="check"
-                        className="check"
-                      />
-                      <label
-                        htmlFor="check"
-                        className={
-                          selectAll
-                            ? approveParticipantStyle.checked
-                            : undefined
-                        }
-                      >
-                        <FiCheck className={approveParticipantStyle.icon} />
-                      </label>
-                    </div>
-                  </div>
+                <div
+                  className={
+                    approveParticipantStyle.approveContainerLimitBoxHeaderSelect
+                  }
+                >
+                  <p>Select All</p>
+                  <Checkbox
+                    className={
+                      approveParticipantStyle.approveContainerLimitBoxHeaderSelectCheckbox
+                    }
+                    checked={selectAll}
+                    onChange={handleSelectAll}
+                  />
                 </div>
               </div>
-              <div className={approveParticipantStyle.limitLine}></div>
-              <div className={approveParticipantStyle.limitBody}>
-                {todos.map((todo) => (
-                  <div className={approveParticipantStyle.checkboxContainer}>
-                    <h3>{todo.title}</h3>
-                    <div
-                      key={todo.id}
-                      className={approveParticipantStyle.customCheckbox}
-                    >
-                      <input
-                        checked={todo.completed}
-                        onChange={() => {
-                          console.log(todo.id);
-                          setTodos([
-                            ...todos.map((item) =>
-                              item.id === todo.id
-                                ? { ...item, completed: !item.completed }
-                                : item
-                            ),
-                          ]);
-                        }}
-                        type="checkbox"
-                        id={`check${todo.id}`}
-                        className="check"
-                      />
-                      <label
-                        htmlFor={`check${todo.id}`}
-                        className={
-                          todo.completed
-                            ? approveParticipantStyle.checked
-                            : undefined
-                        }
-                      >
-                        <FiCheck className="icon" />
-                      </label>
-                    </div>
+              <div
+                className={approveParticipantStyle.approveContainerLimitBoxLine}
+              ></div>
+              <div
+                className={approveParticipantStyle.approveContainerLimitBoxBody}
+              >
+                {cars.map((car) => (
+                  <div
+                    className={
+                      approveParticipantStyle.approveContainerLimitBoxBodyCheck
+                    }
+                    key={car.id}
+                  >
+                    <p>{car.name}</p>
+                    <Checkbox
+                      checked={car.active}
+                      onChange={() => handleCarClick(car.id)}
+                    />
                   </div>
                 ))}
               </div>
             </div>
-            <div className={approveParticipantStyle.buttonBox}>
-              <Link to="/host">
+            <div
+              className={approveParticipantStyle.approveContainerLimitButton}
+            >
+              <Link to="">
                 <Button classStyle="buttonWhite">Cancel</Button>
               </Link>
-              <Link to="/host">
-                <Button classStyle="buttonGreen">Approve</Button>
+              <Link to="">
+                <Button
+                  onClick={() => {
+                    handleErrorA();
+                  }}
+                  classStyle="buttonGreen"
+                >
+                  Approve
+                </Button>
               </Link>
             </div>
           </div>

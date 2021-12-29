@@ -1,4 +1,7 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import Avatar from "react-avatar";
 import detailRoomHostStyle from "./detailRoomHost.module.scss";
 import groupDownloadLeft from "../../assets/img/groupDownloadLeft.svg";
 import ellipseRight from "../../assets/img/ellipseRight.svg";
@@ -7,14 +10,87 @@ import groupDownloadRight from "../../assets/img/groupDownloadRight2.svg";
 import Button from "../../components/buttons/Button";
 import { RiCalendar2Fill } from "react-icons/ri";
 import { BsPeopleFill } from "react-icons/bs";
-// import { ImCross } from "react-icons/im";
-import { Link } from "react-router-dom";
-import Avatar from "react-avatar";
+import {
+  getDetailRoom,
+  deleteRoom,
+  createChosen,
+} from "../../redux/action/actions/detailRoomAction/detailRoomAction";
 
 function DetailRoomHost() {
+  const dispatch = useDispatch();
+
+  const params = useParams();
+
+  const studyRooms = useSelector((store) => {
+    return store.detailRoomReducer.data;
+  });
+
+  const profile = useSelector((store) => {
+    return store.profileReducer;
+  });
+
+  console.log(profile);
+
+  const location = useLocation();
+  console.log(studyRooms);
+
+  useEffect(() => {
+    dispatch(getDetailRoom(params.id));
+    // dispatch(getUserData());
+    // console.log(params.id);
+  }, [dispatch, params.id]);
+
   useEffect(() => {
     window.scroll(0, 0);
   }, []);
+
+  const dispatch = useDispatch();
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const studyRooms = useSelector((store) => {
+    return store.detailRoomReducer.data;
+  });
+
+  const profile = useSelector((store) => {
+    return store.profileReducer;
+  });
+
+  // ↓↓↓ Get Detail Room ↓↓↓
+  useEffect(() => {
+    dispatch(getDetailRoom(params.id));
+  }, [dispatch, params.id]);
+  // ↑↑↑ Get Detail Room ↑↑↑
+
+  // ↓↓↓ Delete Detail Room ↓↓↓
+  const handleDelete = (id) => {
+    if (
+      window.confirm("Are You Sure You Want to Delete This Class?") === true
+    ) {
+      dispatch(deleteRoom(id));
+      navigate("/class");
+      alert("Class has been successfully deleted");
+    } else {
+      <div></div>;
+    }
+  };
+  // ↑↑↑ Delete Detail Room ↑↑↑
+
+  // ↓↓↓ Create Join Room ↓↓↓
+  const handleJoin = (id) => {
+    dispatch(createChosen(id));
+  };
+  // ↑↑↑ Create Join Room ↑↑↑
+
+  // ↓↓↓ Handle Error ↓↓↓
+  const handleError = () => {
+    alert("The edit class feature is still on development process");
+  };
+
+  const handleErrorA = () => {
+    alert("The approve participant feature is still on development process");
+  };
+  // ↑↑↑ Handle Error ↑↑↑
 
   return (
     <>
@@ -43,39 +119,87 @@ function DetailRoomHost() {
         <div className={detailRoomHostStyle.roomTitle}>
           <div className={detailRoomHostStyle.roomTitleTop}>
             <p className={detailRoomHostStyle.roomTitleTopName}>
-              Advanced Biology by Dr. Kusanagi
+              {studyRooms.title}
             </p>
             <div className={detailRoomHostStyle.roomTitleTopStory}>
               <div className={detailRoomHostStyle.roomTitleTopStoryDate}>
                 <RiCalendar2Fill className={detailRoomHostStyle.icon} />
                 <p className={detailRoomHostStyle.info}>
-                  4 October 2021 | 12:00 - 13:00
+                  {studyRooms.date} | {studyRooms.startTime} -{" "}
+                  {studyRooms.endTime}
                 </p>
               </div>
               <div className={detailRoomHostStyle.roomTitleTopStoryNumber}>
                 <BsPeopleFill className={detailRoomHostStyle.icon} />
                 <p className={detailRoomHostStyle.info}>
-                  0/50 <span>(1.000 people interested to join)</span>
+                  {studyRooms.countJoined}/{studyRooms.limitParticipant}{" "}
+                  <span>
+                    {studyRooms.User?.id === profile.data.id &&
+                    studyRooms.roomStatus === "Restricted"
+                      ? `(1.000 people interested to join)`
+                      : ""}
+                  </span>
                 </p>
-                <Link
-                  to="/approve"
-                  className={detailRoomHostStyle.roomTitleTopStoryNumberApprove}
-                >
-                  <input
-                    type="button"
-                    value="Approve Participant"
+                {studyRooms.User?.id === profile.data.id &&
+                studyRooms.roomStatus === "Restricted" ? (
+                  <Link
+                    to={`/participant/${studyRooms.id}`}
                     className={
-                      detailRoomHostStyle.roomTitleTopStoryNumberApproveBtn
+                      detailRoomHostStyle.roomTitleTopStoryNumberApprove
                     }
-                  />
-                </Link>
+                  >
+                    <input
+                      type="button"
+                      value="Approve Participant"
+                      onClick={() => {
+                        handleErrorA();
+                      }}
+                      className={
+                        detailRoomHostStyle.roomTitleTopStoryNumberApproveBtn
+                      }
+                    />
+                  </Link>
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
-          <div className={detailRoomHostStyle.roomTitleBtn}>
-            <Button classStyle="buttonWhite">Edit Class</Button>
-            <Button classStyle="buttonWhite">Delete Class</Button>
-          </div>
+          {studyRooms.User?.id === profile.data.id ? (
+            <div className={detailRoomHostStyle.roomTitleBtn}>
+              <div>
+                <Link to={`/edit-class/${studyRooms.id}`}>
+                  <Button
+                    onClick={() => {
+                      handleError();
+                    }}
+                    classStyle="buttonWhite"
+                  >
+                    Edit Class
+                  </Button>
+                </Link>
+              </div>
+              <Button
+                classStyle="buttonWhite"
+                onClick={() => {
+                  handleDelete(studyRooms.id);
+                }}
+              >
+                Delete Class
+              </Button>
+            </div>
+          ) : (
+            <div
+              onClick={() => handleJoin(studyRooms.id)}
+              className={detailRoomHostStyle.roomTitleJoin}
+            >
+              <Link
+                to={`/room/${studyRooms.id}/meeting/${studyRooms.roomName}`}
+              >
+                <Button classStyle={`buttonGreen`}>Join Room</Button>
+              </Link>
+            </div>
+          )}
         </div>
 
         <div className={detailRoomHostStyle.detailContainer}>
@@ -98,39 +222,13 @@ function DetailRoomHost() {
             >
               Description
             </div>
-            <img
-              src={`https://s3-alpha-sig.figma.com/img/1e06/85b9/639c3e6dd91aa6fbaa3fa83553182dd8?Expires=1639958400&Signature=WMzY6Gf2n28YT9JqM-MHXkKdiOB~Cw7Yll0R9xnZBVzOLl3bigx7repAjgDzkmUKn0nNDwSoxhZs6X92WLUrr9AOOWLWaGcuJ0kV0M~YBevASoeTJ9SEWqMXVF~tsbose8O8uSlJxgLr2TR7X8ayiGihLMYHYtyMWNKpKGJfRbUyjc~7Zd3k2BZD6MefCGYz1aipkDcZzHAWh~4UiC3o~1Z43UbIGkgb7wgSIAsnDYWRJafGtIPIo-~VurNTv9MCJaKh-lAlTU8r7kJXgHpyE68N-1MjkRAW-C8APuQGzxo5JP0cyllaZzbKz~cqeNJg4nVr3lyL5WSQyvZsVSvmuw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA`}
-              alt={`Math`}
-            />
+            <img src={studyRooms.imageClass} alt={`StudyBuds`} />
             <div
               className={
                 detailRoomHostStyle.containerMaterialDescriptionNarration
               }
             >
-              <h5>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                mauris sed proin ut cursus bibendum non felis in. Malesuada
-                dignissim nunc id pharetra eget semper. Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. Duis mauris sed proin ut
-                cursus bibendum non felis in. Malesuada dignissim nunc id
-                pharetra eget semper.
-                <br />
-                <br />
-                <span>Lorem Ipsum:</span>
-                <ul>
-                  <li>Lorem ipsum dolor sit amet</li>
-                  <li>Lorem ipsum dolor sit amet</li>
-                  <li>Lorem ipsum dolor sit amet</li>
-                  <li>Lorem ipsum dolor sit amet</li>
-                </ul>
-                <br />
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-                mauris sed proin ut cursus bibendum non felis in. Malesuada
-                dignissim nunc id pharetra eget semper. Lorem ipsum dolor sit
-                amet, consectetur adipiscing elit. Duis mauris sed proin ut
-                cursus bibendum non felis in. Malesuada dignissim nunc id
-                pharetra eget semper.
-              </h5>
+              <h5>{studyRooms.description}</h5>
             </div>
           </div>
 
@@ -150,22 +248,19 @@ function DetailRoomHost() {
                   className={
                     detailRoomHostStyle.containerMaterialHostSquareProfileAvatar
                   }
-                  color={Avatar.getRandomColor("sitebase", [
-                    "red",
-                    "green",
-                    "blue",
-                  ])}
+                  color={Avatar.getRandomColor("sitebase", [])}
                   maxInitials={2}
                   round={true}
-                  size="44"
-                  name="J. Walker Denny Walter"
+                  size={40}
+                  name={studyRooms.User?.fullname}
+                  src={studyRooms.User?.imageUser}
                 />
                 <div
                   className={
                     detailRoomHostStyle.containerMaterialHostSquareProfileName
                   }
                 >
-                  J. Walker Denny Walter
+                  {studyRooms.User?.fullname}
                 </div>
               </div>
               <div
@@ -177,13 +272,26 @@ function DetailRoomHost() {
               </div>
               <div
                 className={detailRoomHostStyle.containerMaterialHostSquareExp}
+                style={
+                  studyRooms.roomStatus === "Open"
+                    ? { color: "#279B24" }
+                    : { color: "#EEB218" }
+                }
               >
-                Restricted
+                {studyRooms.roomStatus}
               </div>
             </div>
-            <div className={detailRoomHostStyle.containerMaterialHostBtn}>
-              <Button classStyle="buttonGreen">Start Class</Button>
-            </div>
+            {studyRooms.User?.id === profile.data.id ? (
+              <div className={detailRoomHostStyle.HostBtn}>
+                <Link
+                  to={`/room/${studyRooms.id}/meeting/${studyRooms.roomName}`}
+                >
+                  <Button classStyle="buttonGreen">Start Class</Button>
+                </Link>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>
@@ -192,31 +300,3 @@ function DetailRoomHost() {
 }
 
 export default DetailRoomHost;
-
-// MISCELLANEOUS
-
-// Alert Add Participant
-// {
-//   /* <div className={detailRoomHostStyle.openAlert}>
-//   <div className={detailRoomHostStyle.proceedsAlert}>
-//     <ImCross className={detailRoomHostStyle.cross} />
-//     <p className={detailRoomHostStyle.alertText}>Add Participants Success</p>
-//     <div className={detailRoomHostStyle.okayBtn}>
-//       <ButtonGreen name="ㅤ" />
-//     </div>
-//   </div>
-// </div> */
-// }
-
-// Alert Class Not Started
-// {
-//   /* <div className={detailRoomHostStyle.openAlert}>
-//   <div className={detailRoomHostStyle.proceedsAlert}>
-//     <ImCross className={detailRoomHostStyle.cross} />
-//     <p className={detailRoomHostStyle.alertText}>The class has not yet started</p>
-//     <div className={detailRoomHostStyle.okayBtn}>
-//       <ButtonGreen name="ㅤ" />
-//     </div>
-//   </div>
-// </div> */
-// }

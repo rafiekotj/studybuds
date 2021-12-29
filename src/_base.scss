@@ -39,15 +39,17 @@ $body-16: 400 16px "Montserrat", sans-serif;
 }
 
 %avatarContainer {
-  width: 2rem;
-  height: 2rem;
+  width: 2.15rem;
+  height: 2.15rem;
   border-radius: 50%;
   overflow: hidden;
   position: relative;
+  display: flex;
+  justify-content: center;
 }
 
 %avatarPicture {
-  width: 3rem;
-  position: absolute;
-  transform: translate(-15%, -10%);
+  // width: 3rem;
+  // position: absolute;
+  // transform: translate(-15%, -10%);
 }

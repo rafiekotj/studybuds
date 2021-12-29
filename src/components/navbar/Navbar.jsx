@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import navbarstyle from "./navbar.module.scss";
 import brandLogo from "../../assets/img/brandLogo.png";
 import Button from "../buttons/Button";
@@ -6,112 +6,23 @@ import { IoIosArrowDown } from "react-icons/io";
 import { BsSearch } from "react-icons/bs";
 import { RiNotification2Line } from "react-icons/ri";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import useOutsideClick from "../useOutsideClick";
-
-// Loop Categories
-const categories = [
-  {
-    link: "#",
-    category: "Art",
-  },
-  {
-    link: "#",
-    category: "Biology",
-  },
-  {
-    link: "#",
-    category: "Business",
-  },
-  {
-    link: "#",
-    category: "Cooking",
-  },
-  {
-    link: "#",
-    category: "Fashion",
-  },
-  {
-    link: "#",
-    category: "Geography",
-  },
-  {
-    link: "#",
-    category: "Geology",
-  },
-  {
-    link: "#",
-    category: "Health",
-  },
-  {
-    link: "#",
-    category: "History",
-  },
-  {
-    link: "#",
-    category: "Hobbies",
-  },
-  {
-    link: "#",
-    category: "Literature",
-  },
-  {
-    link: "#",
-    category: "Love Class",
-  },
-  {
-    link: "#",
-    category: "Math",
-  },
-  {
-    link: "#",
-    category: "Physics",
-  },
-  {
-    link: "#",
-    category: "Research",
-  },
-  {
-    link: "#",
-    category: "Romance",
-  },
-  {
-    link: "#",
-    category: "Sport",
-  },
-  {
-    link: "#",
-    category: "Tech",
-  },
-  {
-    link: "#",
-    category: "Uncategorized",
-  },
-];
-
-const loopNav = () => {
-  const elements = [];
-
-  for (let i = 0; i < Math.ceil(categories.length / 8); i++) {
-    elements.push(
-      <div>
-        {categories.slice(i * 8, i * 8 + 8).map((category, key) => (
-          <li key={key}>
-            <Link className={navbarstyle.links} to={category.link}>
-              {category.category}
-            </Link>
-          </li>
-        ))}
-      </div>
-    );
-  }
-
-  return <>{elements.map((element) => element)}</>;
-};
-// End Loop Categories
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getRooms,
+  getTopics,
+} from "../../redux/action/actions/studyRoomAction/studyRoomAction";
+import { getProfile } from "../../redux/action/actions/profileAction/profileAction";
+import { logout } from "../../redux/action/actions/authAction/authAction";
+import Avatar from "react-avatar";
 
 function Navbar() {
+  const { isLoggedIn } = useSelector((state) => state.authReducer);
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [searchInput, setSearchInput] = useState("");
 
   // Show hide dropdown browse
   const [show, setShow] = useState(false);
@@ -120,7 +31,6 @@ function Navbar() {
   const handleShow = () => {
     setShow(!show);
   };
-
   // End Show hide dropdown browse
 
   // Show hide dropdown notification
@@ -148,6 +58,82 @@ function Navbar() {
   };
 
   // End Show hide dropdown profile
+
+  // Fetch Data
+  const studyRooms = useSelector((store) => {
+    return store.studyRoomReducer;
+  });
+
+  const profile = useSelector((store) => {
+    return store.profileReducer;
+  });
+
+  useEffect(() => {
+    dispatch(getTopics());
+    dispatch(getProfile());
+  }, []);
+  // End Fetch Data
+
+  const handleCategory = async (data) => {
+    await dispatch(
+      getRooms({
+        slug: `?page=${1}&limit=${8}${
+          status && status !== "All Status" ? `&status=${status}` : ""
+        }&top=${data.id}`,
+      })
+    );
+
+    navigate("/study-room");
+    setShow(!show);
+    setStatus("All Status");
+  };
+
+  const handleOnInputSearch = (value) => {
+    setSearchInput(value);
+  };
+
+  const handleEnter = (e) => {
+    e.keyCode === 13
+      ? searchInput.length > 2
+        ? navigate("/study-room", { state: searchInput })
+        : alert(
+            "The description you submitted was too short, please describe more (min. 3 char)"
+          )
+      : console.log("");
+  };
+
+  // handle logout
+  const handleLogout = () => {
+    dispatch(logout());
+    setShowProfile(false);
+    navigate("/");
+  };
+  // End handle logout
+
+  // Loop Categories
+
+  const loopNav = () => {
+    const elements = [];
+
+    for (let i = 0; i < Math.ceil(studyRooms.topics.length / 8); i++) {
+      elements.push(
+        <div>
+          {studyRooms.topics.slice(i * 8, i * 8 + 8).map((data) => (
+            <Link
+              className={navbarstyle.links}
+              onClick={() => handleCategory(data)}
+              to="#"
+            >
+              <li key={data.id}>{data.topic}</li>
+            </Link>
+          ))}
+        </div>
+      );
+    }
+
+    return <>{elements.map((element) => element)}</>;
+  };
+  // End Loop Categories
 
   return (
     <nav
@@ -223,6 +209,9 @@ function Navbar() {
           type="text"
           placeholder="Search study room"
           className={navbarstyle.navbarSearchInput}
+          value={searchInput}
+          onChange={(e) => handleOnInputSearch(e.target.value)}
+          onKeyUp={(e) => handleEnter(e)}
         />
       </div>
       <ul className={navbarstyle.navbarMenu}>
@@ -266,7 +255,10 @@ function Navbar() {
           </Link>
         </li>
       </ul>
-      <div className={navbarstyle.navbarButtons}>
+      <div
+        className={navbarstyle.navbarButtons}
+        style={isLoggedIn ? { display: "none" } : { display: "flex" }}
+      >
         <Link to="/login" className={navbarstyle.navbarButtonLink}>
           <Button classStyle="buttonWhite">Sign In</Button>
         </Link>
@@ -280,6 +272,7 @@ function Navbar() {
           handleShowNotif();
         }}
         ref={ref}
+        style={isLoggedIn ? { display: "flex" } : { display: "none" }}
       >
         <RiNotification2Line className={navbarstyle.navbarNotifIcon} />
       </div>
@@ -289,7 +282,7 @@ function Navbar() {
       >
         <b>Notification</b>
         <ul>
-          <li>
+          {/* <li>
             <div className={navbarstyle.navbarNotifItemsContainer}>
               <p>
                 You are now can join class <strong>Advanced Biology</strong> by
@@ -298,16 +291,11 @@ function Navbar() {
               <p className={navbarstyle.navbarNotifItemsDate}>Today</p>
             </div>
             <div className={navbarstyle.navbarNotifItemsCircle}></div>
-          </li>
+          </li> */}
           <li>
             <div className={navbarstyle.navbarNotifItemsContainer}>
-              <p>
-                Your class is being reviewed by host, you can check your class
-                in My Class menu
-              </p>
-              <p className={navbarstyle.navbarNotifItemsDate}>
-                Friday, 8 October 2021 21:32
-              </p>
+              <p>You currently have no new notifications.</p>
+              <p className={navbarstyle.navbarNotifItemsDate}>Today</p>
             </div>
             <div className={navbarstyle.navbarNotifItemsCircle}></div>
           </li>
@@ -316,30 +304,43 @@ function Navbar() {
       <div
         className={navbarstyle.navbarProfile}
         onClick={() => handleShowProfile()}
+        style={isLoggedIn ? { display: "flex" } : { display: "none" }}
       >
         <div className={navbarstyle.navbarProfileAvatarContainer}>
-          <img
-            src={`https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80`}
-            alt="avatar"
-            className={navbarstyle.navbarProfileAvatar}
+          <Avatar
+            alt={profile.data?.fullname}
+            // className={navbarstyle.navbarProfileAvatar}
+            maxInitials="2"
+            round={true}
+            size="32"
+            name={profile.data?.fullname}
+            src={profile.data?.imageUser}
           />
         </div>
-        <p>name</p>
+        <p>{profile.data.fullname}</p>
       </div>
       <div
         className={navbarstyle.navbarProfileDropdown}
         style={showProfile ? { display: "block" } : { display: "none" }}
       >
         <div className={navbarstyle.navbarProfileDropdownTop}>
-          <b>name</b>
-          <p>email@mail.com</p>
+          <b>{profile.data.fullname}</b>
+          <p>{profile.data.email}</p>
         </div>
         <ul>
-          <li>Notification</li>
-          <li>Profile</li>
-          <li>History</li>
-          <li>Change Password</li>
-          <li>Sign Out</li>
+          <Link to="/account/notification" className={navbarstyle.links}>
+            <li>Notification</li>{" "}
+          </Link>
+          <Link to="/account/profile" className={navbarstyle.links}>
+            <li>Profile</li>
+          </Link>
+          <Link to="/account/history" className={navbarstyle.links}>
+            <li>History</li>
+          </Link>
+          <Link to="/account/change-password" className={navbarstyle.links}>
+            <li>Change Password</li>
+          </Link>
+          <li onClick={() => handleLogout()}>Sign Out</li>
         </ul>
       </div>
     </nav>

@@ -98,11 +98,6 @@
               background-color: base.$grey-color;
             }
           }
-
-          .links {
-            text-decoration: none;
-            color: base.$black-color;
-          }
         }
       }
     }
@@ -158,7 +153,6 @@
   }
 
   &Buttons {
-    // display: none;
     display: flex;
     width: 18%;
     gap: 0.5rem;
@@ -302,5 +296,10 @@
         background-color: base.$grey-color;
       }
     }
+  }
+
+  .links {
+    text-decoration: none;
+    color: base.$black-color;
   }
 }

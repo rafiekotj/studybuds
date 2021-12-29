@@ -38,6 +38,14 @@
     flex-direction: row;
     justify-content: space-between;
 
+    @include media("<=tablet") {
+      padding: 176px 96px 20px;
+    }
+
+    @include media("<=phone") {
+      padding: 176px 44px 20px;
+    }
+
     &Top {
       &Name {
         font: base.$content-40;
@@ -108,21 +116,48 @@
       display: flex;
       flex-direction: column;
       width: 25%;
+
+      button {
+        width: 100%;
+        height: 57px;
+        margin-bottom: 16px;
+        font: base.$content-20;
+        font-weight: 600;
+        justify-content: center;
+        text-align: center;
+      }
     }
 
-    button {
-      width: 100%;
-      height: 57px;
-      margin-bottom: 16px;
-      font: base.$content-20;
-      font-weight: 600;
-      justify-content: center;
-      text-align: center;
+    &Join {
+      display: flex;
+      flex-direction: column;
+      width: 25%;
+      padding: 56px 0;
+
+      button {
+        width: 100%;
+        height: 57px;
+        margin-bottom: 16px;
+        font: base.$content-20;
+        font-weight: 600;
+        justify-content: center;
+        text-align: center;
+      }
     }
   }
 
   .detailContainer {
-    padding: 0 198px 19px;
+    margin: 0 198px 19px;
+
+    @include media("<=tablet") {
+      margin: 0 96px 19px;
+    }
+
+    @include media("<=phone") {
+      margin: 0 44px 19px;
+      font: base.$content-16;
+      font-weight: 600;
+    }
 
     &Name {
       &About {
@@ -147,8 +182,15 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-top: 44px;
-    padding: 0 198px 72px;
+    margin: 44px 198px 72px;
+
+    @include media("<=tablet") {
+      margin: 44px 96px 72px;
+    }
+
+    @include media("<=phone") {
+      margin: 44px 44px 72px;
+    }
 
     &Description {
       border: 1px solid base.$light-green-color;
@@ -208,11 +250,11 @@
           margin-bottom: 32px;
 
           &Name {
-            font: base.$content-14;
+            font: base.$content-16;
             margin-left: 16px;
             font-weight: 600;
-            height: 48px;
-            line-height: 48px;
+            height: 40px;
+            line-height: 40px;
           }
         }
 
@@ -229,13 +271,14 @@
         }
       }
 
-      &Btn {
+      .HostBtn {
         display: flex;
-        justify-content: center;
-        text-align: center;
         width: 100%;
+        text-align: center;
+        justify-content: center;
 
         button {
+          padding: 0 48px;
           width: 100%;
           height: 57px;
           font: base.$content-20;
@@ -243,71 +286,5 @@
         }
       }
     }
-  }
-}
-
-.openAlert {
-  .proceedsAlert {
-    padding: 20px;
-    position: absolute;
-    text-align: center;
-    top: 153px;
-    width: 30%;
-    right: 35%;
-    height: auto;
-    background-color: base.$form-color;
-    border: 1px solid base.$primary-color;
-    border-radius: 12px;
-    box-shadow: 0px 0px 10px 0px #0000001a;
-    z-index: 10;
-
-    .cross {
-      margin: 12px;
-      position: absolute;
-      font-size: 8px;
-      cursor: pointer;
-      right: 0;
-      top: 0;
-    }
-
-    .alertText {
-      font: base.$content-20;
-      font-weight: 600;
-      color: base.$primary-color;
-      margin-bottom: 20px;
-    }
-
-    .okayBtn {
-      padding: 16px auto;
-      display: flex;
-      justify-content: center;
-
-      button {
-        width: 189px;
-        height: 48px;
-        font: base.$content-14;
-
-        &:nth-of-type(1) {
-          &::after {
-            content: "OK";
-            top: 50%;
-            transform: translateY(-10px);
-            left: 0;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-          }
-        }
-      }
-    }
-  }
-
-  .openAlert:after {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    content: "";
   }
 }

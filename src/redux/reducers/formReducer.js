@@ -1,31 +1,29 @@
-import { CREATE_FORM } from "../action/actionTypes/actionTypes";
+import {
+  POST_FORM_SUCCESS,
+  GET_TOPICS_SUCCESS,
+} from "../action/actionTypes/formTypes";
 
 const initialState = {
   data: [],
-  isLoading: true,
-  error: null,
+  topics: [],
 };
 
-const userReducer = (state = initialState, action) => {
-  const { type, error } = action;
+const formReducer = (state = initialState, action) => {
+  const { type, payload } = action;
   switch (type) {
-    case `${CREATE_FORM}_LOADING`:
+    case POST_FORM_SUCCESS:
       return {
         ...state,
-        isLoading: true,
+        data: payload.data.rows,
       };
-    case `${CREATE_FORM}_FULFILLED`:
+    case GET_TOPICS_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        topics: [...payload.data],
       };
-    case `${CREATE_FORM}_ERROR`:
-      return {
-        ...state,
-        isLoading: false,
-        error: error,
-      };
+    default:
+      return state;
   }
 };
 
-export default userReducer;
+export default formReducer;
