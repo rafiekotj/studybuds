@@ -49,8 +49,6 @@ function ClassForm() {
     return store.formReducer;
   });
 
-  const navigate = useNavigate();
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setRoom({ ...room, [name]: value });
