@@ -20,6 +20,7 @@ import {
 function ClassForm() {
   useEffect(() => {
     window.scroll(0, 0);
+    dispatch(getTopics());
   }, []);
 
   const dispatch = useDispatch();
@@ -48,6 +49,8 @@ function ClassForm() {
     return store.formReducer;
   });
 
+  const navigate = useNavigate();
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setRoom({ ...room, [name]: value });
@@ -60,6 +63,8 @@ function ClassForm() {
     navigate("/class");
   };
   // ↑↑↑ Post Form ↑↑↑
+
+  console.log(room.id_topic);
 
   return (
     <>
