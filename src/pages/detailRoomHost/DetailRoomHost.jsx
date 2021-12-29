@@ -17,29 +17,6 @@ import {
 } from "../../redux/action/actions/detailRoomAction/detailRoomAction";
 
 function DetailRoomHost() {
-  const dispatch = useDispatch();
-
-  const params = useParams();
-
-  const studyRooms = useSelector((store) => {
-    return store.detailRoomReducer.data;
-  });
-
-  const profile = useSelector((store) => {
-    return store.profileReducer;
-  });
-
-  console.log(profile);
-
-  const location = useLocation();
-  console.log(studyRooms);
-
-  useEffect(() => {
-    dispatch(getDetailRoom(params.id));
-    // dispatch(getUserData());
-    // console.log(params.id);
-  }, [dispatch, params.id]);
-
   useEffect(() => {
     window.scroll(0, 0);
   }, []);

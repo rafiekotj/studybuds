@@ -62,24 +62,6 @@ function ClassForm() {
   };
   // ↑↑↑ Post Form ↑↑↑
 
-  console.log(room.id_topic);
-
-  const [startDate, setStartDate] = useState(null);
-
-  const [topic, setTopic] = useState("Select Topic");
-  const [status, setStatus] = useState("Select Class Status");
-
-  const [imageClass, setImageClass] = useState("");
-  const [title, setTitle] = useState("");
-  const [limitParticipant, setLimitParticipant] = useState("");
-  const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
-  const [description, setDescription] = useState("");
-  const [roomStatus, setRoomStatus] = useState("");
-
-  const dispatch = useDispatch();
-
   return (
     <>
       <div className={classFormStyle.detailRoom}>
