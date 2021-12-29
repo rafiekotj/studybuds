@@ -42,7 +42,7 @@ function MyClass() {
     if (section === "Joined Class") {
       dispatch(getAllJoinedRooms());
     }
-  }, [section]);
+  }, [section, dispatch]);
   // ↑↑↑ Get Created & Joined Class ↑↑↑
 
   return (

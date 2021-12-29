@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import moment from "moment";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,7 +24,6 @@ function ClassFormEdit() {
   }, []);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const params = useParams();
 
   const studyRoom = useSelector((store) => {
@@ -34,7 +33,7 @@ function ClassFormEdit() {
   // ↓↓↓ Get Data ↓↓↓
   useEffect(() => {
     dispatch(getDetailRoom(params.id));
-  }, []);
+  }, [dispatch]);
   // ↑↑↑ Get Data ↑↑↑
 
   // ↓↓↓ Update Form ↓↓↓
@@ -55,7 +54,7 @@ function ClassFormEdit() {
 
   useEffect(() => {
     dispatch(getTopics());
-  }, []);
+  }, [dispatch]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
